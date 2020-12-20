@@ -136,3 +136,17 @@ if ! shopt -oq posix; then
         . /etc/bash_completion
     fi
 fi
+
+# spicetify settings
+if [ -d "$HOME/.spicetify" ]; then
+    export SPICETIFY_INSTALL="$HOME/.spicetify"
+    export PATH="$SPICETIFY_INSTALL:$PATH"
+fi
+
+# pyenv settings
+if [ -d "$HOME/.pyenv" ]; then
+    export PATH="/home/trent/.pyenv/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+    export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+fi
