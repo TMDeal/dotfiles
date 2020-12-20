@@ -281,12 +281,14 @@ nnoremap q: <nop>
 nnoremap <Leader>- :<C-u>split<CR>
 nnoremap <Leader>\ :<C-u>vsplit<CR>
 
+" Tabs
+nnoremap [t :tabprevious
+nnoremap ]t :tabnext
+
 " Switching windows
 nnoremap <C-k> <C-w>k
 nnoremap <C-j> <C-w>j 
-" Weirdly, this is equal to 'nnoremap <C-h> <C-w>h'. idky
 nnoremap <C-h> <C-w>h
-" nnoremap <BS> <C-W>h  
 nnoremap <C-l> <C-w>l 
 
 " indent in visual mode and maintain cursor position
