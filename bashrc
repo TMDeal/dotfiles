@@ -88,7 +88,7 @@ if [ "$color_prompt" = yes ]; then
 
     _user_and_host_ps1="${info_color}\u${symbol_color}${prompt_symbol}${info_color}\h${prompt_color}"
     _pwd_ps1="${pwd_color}\w${prompt_color}"
-    _git_ps1="$(__git_ps1 -[${git_color}%s${prompt_color}])"
+    _git_ps1="\$(__git_ps1 \"-[${git_color}%s${prompt_color}]\")"
     _prompt_ps1="${info_color}\$${reset_color}"
 
     if [ -f $HOME/.git-prompt.sh ]; then
