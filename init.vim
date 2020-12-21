@@ -42,10 +42,8 @@ endfor
 "{{{ Plugins
 call plug#begin($PLUGGED_DIR)
 
-" Plug 'nanotech/jellybeans.vim'
-" let g:jellybeans_use_lowcolor_black=0
-" let g:jellybeans_use_term_italics=0
-" let g:jellybeans_use_gui_italics=0
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
 
 Plug 'arcticicestudio/nord-vim'
 
@@ -131,6 +129,32 @@ function! StatusLineMode()
 endfunction
 "}}}
 
+" {{{ LSP 
+:lua << EOF
+   local lspconfig = require('lspconfig')
+
+   local on_attach = function(client)
+       require('completion').on_attach(client)
+   end
+
+   lspconfig.pyls.setup({ on_attach=on_attach })
+
+   lspconfig.bashls.setup({ on_attach=on_attach })
+EOF
+
+nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> g[    <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <silent> g]    <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+" }}}
+
 "{{{ Settings
 let g:python_host_prog='$HOME/.pyenv/versions/neovim2/bin/python'
 let g:python3_host_prog='$HOME/.pyenv/versions/neovim3/bin/python'
@@ -146,7 +170,7 @@ set t_u7=
 set inccommand=split
 set titlestring=%t
 set mouse=a
-set completeopt-=preview
+set completeopt=menuone,noinsert,noselect
 set number
 set relativenumber
 set sidescroll=1
@@ -230,7 +254,6 @@ hi LineNr guibg=NONE
 hi Folded guibg=NONE guifg=7
 hi SpecialKey guibg=NONE
 
-
 hi Normal ctermbg=NONE
 hi SignColumn ctermbg=NONE
 hi NonText ctermbg=NONE
@@ -276,6 +299,11 @@ nnoremap <F1> <nop>
 vnoremap <F1> <nop>
 nnoremap Q <nop>
 nnoremap q: <nop>
+
+" completion-nvim 
+imap <silent> <C-Space> <Plug>(completion_trigger)
+imap <tab> <Plug>(completion_smart_tab)
+imap <s-tab> <Plug>(completion_smart_s_tab)
 
 " Window splits
 nnoremap <Leader>- :<C-u>split<CR>
@@ -328,10 +356,9 @@ let g:lightline = {
 
 "{{{ Autocmd Rules
 augroup remember_cursor_position
-  au!
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+    au!
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
-
 
 augroup cd_to_project_root
     au!
