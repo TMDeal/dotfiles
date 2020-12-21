@@ -28,6 +28,10 @@ if $( command_exists nvim ); then
    alias vim="nvim"
 fi
 
+if $( command_exists htop ); then
+    alias top="htop"
+fi
+
 alias fuck='sudo $(history -p !!)'
 alias t="tmux -2"
 alias ta="t attach"
