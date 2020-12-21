@@ -72,18 +72,31 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    git_color='\[\033[1;36m\]'
-    prompt_color='\[\033[;32m\]'
-    info_color='\[\033[1;34m\]'
-    symbol_color='\[\033[1;37m\]'
+    reset_color='\[\033[0m\]'
+    cyan_bold='\[\033[1;36m\]'
+    blue_bold='\[\033[1;34m\]'
+    white_bold='\[\033[1;37m\]'
+    green='\[\033[32m\]'
+
+    git_color=$cyan_bold
+    prompt_color=$green
+    info_color=$blue_bold
+    symbol_color=$blue_bold
+    pwd_color=$white_bold
+
     prompt_symbol=@
+
+    _user_and_host_ps1="${info_color}\u${symbol_color}${prompt_symbol}${info_color}\h${prompt_color}"
+    _pwd_ps1="${pwd_color}\w${prompt_color}"
+    _git_ps1="$(__git_ps1 -[${git_color}%s${prompt_color}])"
+    _prompt_ps1="${info_color}\$${reset_color}"
 
     if [ -f $HOME/.git-prompt.sh ]; then
         source "$HOME/.git-prompt.sh"
         export GIT_PS1_SHOWDIRTYSTATE=1
-        PS1=$prompt_color'┌──${debian_chroot:+($debian_chroot)──}('$info_color'\u'$symbol_color'${prompt_symbol}'$info_color'\h'$prompt_color')-[\[\033[0;1m\]\w'$prompt_color']$(__git_ps1 "-['$git_color'%s'$prompt_color']")\n'$prompt_color'└─'$info_color'\$\[\033[0m\] '
+        PS1="${prompt_color}┌──${debian_chroot:+$(debian_chroot──)}(${_user_and_host_ps1})─[${_pwd_ps1}]${_git_ps1}\n${prompt_color}└─${_prompt_ps1} "
     else
-        PS1=$prompt_color'┌──${debian_chroot:+($debian_chroot)──}('$info_color'\u$'$symbol_color'{prompt_symbol}'$info_color'\h'$prompt_color')-[\[\033[0;1m\]\w'$prompt_color']\n'$prompt_color'└─'$info_color'\$\[\033[0m\] '
+        PS1="${prompt_color}┌──${_chroot_ps1}(${_user_and_host_ps1})─[${_pwd_ps1}]\n${prompt_color}└─${_prompt_ps1} "
     fi
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
