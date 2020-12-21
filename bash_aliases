@@ -1,7 +1,3 @@
-command_exists(){
-    command -v "$1" > /dev/null
-}
-
 extract(){
     if [ -f $1 ] ; then
         case $1 in
@@ -24,11 +20,11 @@ extract(){
     fi
 }
 
-if $( command_exists nvim ); then
+if $( command -v nvim > /dev/null ); then
    alias vim="nvim"
 fi
 
-if $( command_exists htop ); then
+if $( command -v htop > /dev/null ); then
     alias top="htop"
 fi
 
