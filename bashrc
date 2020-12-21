@@ -1,12 +1,12 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
     *) return;;
 esac
+
+# Attach to existing tmux session if one exists
+# otherwise, create and connect to a new tmux session
+[ -z "$TMUX"  ] && { tmux attach 2> /dev/null || exec tmux new-session && exit;}
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
