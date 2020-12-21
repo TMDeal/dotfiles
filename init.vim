@@ -294,8 +294,9 @@ nnoremap <Leader>- :<C-u>split<CR>
 nnoremap <Leader>\ :<C-u>vsplit<CR>
 
 " Tabs
-nnoremap [t :tabprevious
-nnoremap ]t :tabnext
+nnoremap <silent> tn :tabnew<CR>
+nnoremap <silent> t[ :tabprevious<CR>
+nnoremap <silent> t] :tabnext<CR>
 
 " Switching windows
 nnoremap <C-k> <C-w>k
