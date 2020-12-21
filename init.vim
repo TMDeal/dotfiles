@@ -129,32 +129,6 @@ function! StatusLineMode()
 endfunction
 "}}}
 
-" {{{ LSP 
-:lua << EOF
-   local lspconfig = require('lspconfig')
-
-   local on_attach = function(client)
-       require('completion').on_attach(client)
-   end
-
-   lspconfig.pyls.setup({ on_attach=on_attach })
-
-   lspconfig.bashls.setup({ on_attach=on_attach })
-EOF
-
-nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> g[    <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <silent> g]    <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-" }}}
-
 "{{{ Settings
 let g:python_host_prog='$HOME/.pyenv/versions/neovim2/bin/python'
 let g:python3_host_prog='$HOME/.pyenv/versions/neovim3/bin/python'
@@ -273,6 +247,33 @@ highlight ColorColumn ctermbg=0 guibg=#222222
 hi statusline ctermfg=149 ctermbg=0 cterm=NONE
 hi statusline guifg=Black guibg=Grey guisp=NONE
 "}}}
+
+" {{{ LSP 
+:lua << EOF
+   local lspconfig = require('lspconfig')
+
+   local on_attach = function(client)
+       require('completion').on_attach(client)
+   end
+
+   lspconfig.pyls.setup({ on_attach=on_attach })
+
+   lspconfig.bashls.setup({ on_attach=on_attach })
+EOF
+
+nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> g[    <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <silent> g]    <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+" }}}
 
 "{{{ Mappings
 " For my sanity
