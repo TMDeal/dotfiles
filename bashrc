@@ -5,14 +5,13 @@ case $- in
 esac
 
 # Attach to existing tmux session if one exists
-# otherwise, create and connect to a new tmux session
+# otherwise, create and connect to a new tmux session.
 [ -z "$TMUX"  ] && { tmux attach 2> /dev/null || exec tmux new-session && exit;}
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -25,7 +24,7 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # Make neovim or vim the default editor
-if $( command_exists nvim ); then
+if $( command -v nvim > /dev/null ); then
     export EDITOR="nvim"
 else
     export EDITOR="vim"
@@ -73,22 +72,18 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    if [ "$EUID" -eq 0 ]; then # Change prompt colors for root user
-        prompt_color='\[\033[;94m\]'
-        info_color='\[\033[1;31m\]'
-        prompt_symbol=💀
-    else
-        prompt_color='\[\033[;32m\]'
-        info_color='\[\033[1;34m\]'
-        prompt_symbol=㉿
-    fi
+    git_color='\[\033[1;36m\]'
+    prompt_color='\[\033[;32m\]'
+    info_color='\[\033[1;34m\]'
+    symbol_color='\[\033[1;37m\]'
+    prompt_symbol=@
 
     if [ -f $HOME/.git-prompt.sh ]; then
         source "$HOME/.git-prompt.sh"
         export GIT_PS1_SHOWDIRTYSTATE=1
-        PS1=$prompt_color'┌──${debian_chroot:+($debian_chroot)──}('$info_color'\u${prompt_symbol}\h'$prompt_color')-[\[\033[0;1m\]\w'$prompt_color']$(__git_ps1 "-[%s]")\n'$prompt_color'└─'$info_color'\$\[\033[0m\] '
+        PS1=$prompt_color'┌──${debian_chroot:+($debian_chroot)──}('$info_color'\u'$symbol_color'${prompt_symbol}'$info_color'\h'$prompt_color')-[\[\033[0;1m\]\w'$prompt_color']$(__git_ps1 "-['$git_color'%s'$prompt_color']")\n'$prompt_color'└─'$info_color'\$\[\033[0m\] '
     else
-        PS1=$prompt_color'┌──${debian_chroot:+($debian_chroot)──}('$info_color'\u${prompt_symbol}\h'$prompt_color')-[\[\033[0;1m\]\w'$prompt_color']\n'$prompt_color'└─'$info_color'\$\[\033[0m\] '
+        PS1=$prompt_color'┌──${debian_chroot:+($debian_chroot)──}('$info_color'\u$'$symbol_color'{prompt_symbol}'$info_color'\h'$prompt_color')-[\[\033[0;1m\]\w'$prompt_color']\n'$prompt_color'└─'$info_color'\$\[\033[0m\] '
     fi
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
@@ -108,8 +103,6 @@ esac
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
@@ -151,12 +144,14 @@ if [ -d "$HOME/.pyenv" ]; then
     export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 fi
 
+# nvm settings
 if [ -d "$HOME/.nvm" ]; then
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
 
+# rbenv settings
 if [ -d "$HOME/.rbenv" ]; then
     export RBENV_DIR="$HOME/.rbenv"
     export PATH="$RBENV_DIR/bin:$PATH"
