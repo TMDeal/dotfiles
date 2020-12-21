@@ -96,7 +96,7 @@ if [ "$color_prompt" = yes ]; then
         export GIT_PS1_SHOWDIRTYSTATE=1
         PS1="${prompt_color}┌──${debian_chroot:+$(debian_chroot──)}(${_user_and_host_ps1})─[${_pwd_ps1}]${_git_ps1}\n${prompt_color}└─${_prompt_ps1} "
     else
-        PS1="${prompt_color}┌──${_chroot_ps1}(${_user_and_host_ps1})─[${_pwd_ps1}]\n${prompt_color}└─${_prompt_ps1} "
+        PS1="${prompt_color}┌──${debian_chroot:+$(debian_chroot──)}(${_user_and_host_ps1})─[${_pwd_ps1}]\n${prompt_color}└─${_prompt_ps1} "
     fi
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
