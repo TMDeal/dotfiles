@@ -45,6 +45,11 @@ call plug#begin($PLUGGED_DIR)
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 
+if isdirectory(expand('$HOME/.fzf'))
+    Plug '~/.fzf'
+    Plug 'junegunn/fzf.vim'
+endif
+
 Plug 'arcticicestudio/nord-vim'
 
 Plug 'dbakker/vim-projectroot'
@@ -211,6 +216,45 @@ set wildignore+=*.mp3,*.wav,*.wav
 set wildignore+=*.class,*.o,*.pyc
 "}}}
 
+"{{{ FZF
+" Enable per-command history.
+" CTRL-N and CTRL-P will be automatically bound to next-history and
+" previous-history instead of down and up. If you don't like the change,
+" explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
+let g:fzf_history_dir='$HOME/.config/nvim/.cache/fzf-history'
+
+let g:fzf_layout = {'window': { 'width': 0.8, 'height': 0.8, 'highlight': 'Comment', 'border': 'sharp' } }
+
+let $FZF_DEFAULT_OPTS='--layout=reverse --info=inline'
+let $FZF_DEFAULT_COMMAND="rg --files --hidden"
+
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+nnoremap <silent> <leader>f :Files<CR>
+nnoremap <silent> <leader>b :Buffers<CR>
+nnoremap <silent> <leader>g :Rg<CR>
+"}}}
+
 "{{{ Colors
 if !has($TMUX) && has('termguicolors')
     set termguicolors
@@ -277,7 +321,7 @@ nnoremap <silent> g]    <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 
 "{{{ Mappings
 " For my sanity
-tnoremap <ESC> <C-\><C-n><C-w><C-p>
+" tnoremap <ESC> <C-\><C-n><C-w><C-p>
 inoremap <F1> <nop>
 nnoremap <F1> <nop>
 vnoremap <F1> <nop>
@@ -348,5 +392,11 @@ augroup END
 augroup cd_to_project_root
     au!
     au BufEnter * call AutoCDtoProjectRoot()
+augroup END
+
+augroup terminal_escape
+    au!
+    au TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
+    au FileType fzf tunmap <buffer> <Esc>
 augroup END
 ""}}}

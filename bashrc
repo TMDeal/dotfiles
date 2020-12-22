@@ -170,3 +170,6 @@ if [ -d "$HOME/.rbenv" ]; then
     export PATH="$RBENV_DIR/bin:$PATH"
     eval "$(rbenv init -)"
 fi
+
+# fzf setup
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
