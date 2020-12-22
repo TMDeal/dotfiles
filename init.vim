@@ -254,7 +254,7 @@ let g:fzf_colors =
 nnoremap <silent> <leader>ff :Files<CR>
 nnoremap <silent> <leader>fb :Buffers<CR>
 nnoremap <silent> <leader>fg :Rg<CR>
-nnoremap <silent> <leader>fd
+nnoremap <silent> <leader>fd :LspDiagnosticsAll<CR>
 "}}}
 
 "{{{ Colors
