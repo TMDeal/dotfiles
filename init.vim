@@ -48,6 +48,7 @@ Plug 'nvim-lua/completion-nvim'
 if isdirectory(expand('$HOME/.fzf'))
     Plug '~/.fzf'
     Plug 'junegunn/fzf.vim'
+    Plug 'ojroques/nvim-lspfuzzy'
 endif
 
 Plug 'arcticicestudio/nord-vim'
@@ -250,9 +251,10 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
-nnoremap <silent> <leader>f :Files<CR>
-nnoremap <silent> <leader>b :Buffers<CR>
-nnoremap <silent> <leader>g :Rg<CR>
+nnoremap <silent> <leader>ff :Files<CR>
+nnoremap <silent> <leader>fb :Buffers<CR>
+nnoremap <silent> <leader>fg :Rg<CR>
+nnoremap <silent> <leader>fd
 "}}}
 
 "{{{ Colors
@@ -295,10 +297,13 @@ hi statusline guifg=Black guibg=Grey guisp=NONE
 " {{{ LSP 
 :lua << EOF
    local lspconfig = require('lspconfig')
+   local lspfuzzy = require('lspfuzzy')
 
    local on_attach = function(client)
        require('completion').on_attach(client)
    end
+
+   lspfuzzy.setup({})
 
    lspconfig.pyls.setup({ on_attach=on_attach })
 
