@@ -143,6 +143,18 @@ if ! shopt -oq posix; then
     fi
 fi
 
+# Source all files in $HOME/.bash.d if it exists
+if [ -d "$HOME/.bash.d" ]; then
+    for FILE in "$HOME/.bash.d/*.sh"; do
+        source $FILE
+    done
+fi
+
+# Add local bin directory to path for user scripts if it exists
+if [ -d "$HOME/.local/bin" ]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+
 # spicetify settings
 if [ -d "$HOME/.spicetify" ]; then
     export SPICETIFY_INSTALL="$HOME/.spicetify"
