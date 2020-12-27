@@ -8,12 +8,11 @@ esac
 # otherwise, create and connect to a new tmux session.
 [ -z "$TMUX"  ] && { tmux attach 2> /dev/null || exec tmux new-session && exit;}
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+# Source all files in $HOME/.bash.d if the directory exists
+if [ -d "$HOME/.bash.d" ]; then
+    for FILE in "$HOME/.bash.d/*.sh"; do
+        source $FILE
+    done
 fi
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -91,9 +90,11 @@ if [ "$color_prompt" = yes ]; then
     _git_ps1="\$(__git_ps1 \"-[${git_color}%s${prompt_color}]\")"
     _prompt_ps1="${info_color}\$${reset_color}"
 
-    if [ -f $HOME/.git-prompt.sh ]; then
-        source "$HOME/.git-prompt.sh"
+    if $(type -t __git_ps1 > /dev/null); then
         export GIT_PS1_SHOWDIRTYSTATE=1
+        export GIT_PS1_SHOWSTASHSTATE=1
+        export GIT_PS1_SHOWUNTRACKEDFILES=1
+
         PS1="${prompt_color}┌──${debian_chroot:+$(debian_chroot──)}(${_user_and_host_ps1})─[${_pwd_ps1}]${_git_ps1}\n${prompt_color}└─${_prompt_ps1} "
     else
         PS1="${prompt_color}┌──${debian_chroot:+$(debian_chroot──)}(${_user_and_host_ps1})─[${_pwd_ps1}]\n${prompt_color}└─${_prompt_ps1} "
@@ -141,13 +142,6 @@ if ! shopt -oq posix; then
     elif [ -f /etc/bash_completion ]; then
         . /etc/bash_completion
     fi
-fi
-
-# Source all files in $HOME/.bash.d if it exists
-if [ -d "$HOME/.bash.d" ]; then
-    for FILE in "$HOME/.bash.d/*.sh"; do
-        source $FILE
-    done
 fi
 
 # Add local bin directory to path for user scripts if it exists
