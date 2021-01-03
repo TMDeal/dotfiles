@@ -6,7 +6,7 @@ esac
 
 # Attach to existing tmux session if one exists
 # otherwise, create and connect to a new tmux session.
-[ -z "$TMUX"  ] && { tmux attach 2> /dev/null || exec tmux new-session && exit;}
+# [ -z "$TMUX"  ] && { tmux attach 2> /dev/null || exec tmux new-session && exit;}
 
 # Source all files in $HOME/.bash.d if the directory exists
 if [ -d "$HOME/.bash.d" ]; then
