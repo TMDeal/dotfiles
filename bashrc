@@ -10,7 +10,7 @@ esac
 
 # Source all files in $HOME/.bash.d if the directory exists
 if [ -d "$HOME/.bash.d" ]; then
-    for FILE in "$HOME/.bash.d/*.sh"; do
+    for FILE in $(find "$HOME/.bash.d" -iname "*.sh"); do
         source $FILE
     done
 fi
