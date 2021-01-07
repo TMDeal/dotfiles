@@ -179,7 +179,6 @@ fi
 
 if [ -d "$HOME/.poetry" ]; then
     export PATH="$HOME/.poetry/bin:$PATH"
-    eval "$(poetry completions bash)"
 fi
 
 if [ -d "$HOME/.cargo" ]; then
