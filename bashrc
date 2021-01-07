@@ -177,5 +177,14 @@ if [ -d "$HOME/.rbenv" ]; then
     eval "$(rbenv init -)"
 fi
 
+if [ -d "$HOME/.poetry" ]; then
+    export PATH="$HOME/.poetry/bin:$PATH"
+    eval "$(poetry completions bash)"
+fi
+
+if [ -d "$HOME/.cargo" ]; then
+    export PATH="$HOME/.cargo/bin:$PATH"
+fi
+
 # fzf setup
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
