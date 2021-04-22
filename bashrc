@@ -4,10 +4,6 @@ case $- in
     *) return;;
 esac
 
-# Attach to existing tmux session if one exists
-# otherwise, create and connect to a new tmux session.
-# [ -z "$TMUX"  ] && { tmux attach 2> /dev/null || exec tmux new-session && exit;}
-
 # Source all files in $HOME/.bash.d if the directory exists
 if [ -d "$HOME/.bash.d" ]; then
     for FILE in $(find "$HOME/.bash.d" -iname "*.sh"); do
@@ -71,13 +67,19 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    reset_color='\[\033[0m\]'
-    cyan_bold='\[\033[1;36m\]'
-    blue_bold='\[\033[1;34m\]'
-    white_bold='\[\033[1;37m\]'
-    green='\[\033[32m\]'
+    export VIRTUAL_ENV_DISABLE_PROMPT=1
+    export GIT_PS1_SHOWDIRTYSTATE=1
+    export GIT_PS1_SHOWSTASHSTATE=1
+    export GIT_PS1_SHOWUNTRACKEDFILES=1
+
+    reset_color='\033[0m'
+    cyan_bold='\033[1;36m'
+    blue_bold='\033[1;34m'
+    white_bold='\033[1;37m'
+    green='\033[32m'
 
     git_color=$cyan_bold
+    venv_color=$cyan_bold
     prompt_color=$green
     info_color=$blue_bold
     symbol_color=$blue_bold
@@ -86,19 +88,27 @@ if [ "$color_prompt" = yes ]; then
     prompt_symbol=@
 
     _user_and_host_ps1="${info_color}\u${symbol_color}${prompt_symbol}${info_color}\h${prompt_color}"
-    _pwd_ps1="${pwd_color}\w${prompt_color}"
-    _git_ps1="\$(__git_ps1 \"-[${git_color}%s${prompt_color}]\")"
+    _pwd_ps1="${pwd_color}\W${prompt_color}"
     _prompt_ps1="${info_color}\$${reset_color}"
 
-    if $(type -t __git_ps1 > /dev/null); then
-        export GIT_PS1_SHOWDIRTYSTATE=1
-        export GIT_PS1_SHOWSTASHSTATE=1
-        export GIT_PS1_SHOWUNTRACKEDFILES=1
+    _venv_ps1() {
+        if [[ -n $VIRTUAL_ENV ]]; then
+            venv="${VIRTUAL_ENV##*/}"
+            printf -- "[${venv_color}$venv${prompt_color}]"
+        else
+            echo ''
+        fi
+    }
 
-        PS1="${prompt_color}┌──${debian_chroot:+$(debian_chroot──)}(${_user_and_host_ps1})─[${_pwd_ps1}]${_git_ps1}\n${prompt_color}└─${_prompt_ps1} "
-    else
-        PS1="${prompt_color}┌──${debian_chroot:+$(debian_chroot──)}(${_user_and_host_ps1})─[${_pwd_ps1}]\n${prompt_color}└─${_prompt_ps1} "
-    fi
+    _git_ps1() {
+        if $(type -t __git_ps1 > /dev/null); then
+            printf "%s" "$(__git_ps1 [${git_color}%s${prompt_color}])"
+        else
+            echo ''
+        fi
+    }
+
+    PS1="${prompt_color}${debian_chroot:+$(debian_chroot)}${_user_and_host_ps1}[${_pwd_ps1}]\$(_venv_ps1)\$(_git_ps1)${prompt_color}${_prompt_ps1} "
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -183,6 +193,14 @@ fi
 
 if [ -d "$HOME/.cargo" ]; then
     export PATH="$HOME/.cargo/bin:$PATH"
+fi
+
+if [ -d "/usr/local/go" ]; then
+    export PATH="/usr/local/go/bin:$PATH"
+fi
+
+if [ -d "$HOME/opt/bin" ]; then
+    export PATH="$HOME/opt/bin:$PATH"
 fi
 
 # fzf setup
