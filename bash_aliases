@@ -20,6 +20,14 @@ extract(){
     fi
 }
 
+calc() {
+    if $( command -v bc > /dev/null ); then
+        echo $@ | bc
+    else
+        echo "install bc to use this command..."
+    fi
+}
+
 if $( command -v nvim > /dev/null ); then
    alias vim="nvim"
 fi
@@ -28,13 +36,13 @@ if $( command -v htop > /dev/null ); then
     alias top="htop"
 fi
 
-alias fuck='sudo $(history -p !!)'
 alias t="tmux -2"
 alias ta="t attach"
 alias td="t detach"
 alias tls="t ls"
 alias tn="t new"
 alias c="clear"
+alias cls="clear"
 alias q="exit"
 alias :q="exit"
 alias ..="cd .."
@@ -42,3 +50,5 @@ alias ctrlc='xclip -selection c'
 alias ctrlv='xclip -selection c -o'
 alias open="xdg-open"
 alias vimn="vim -u NONE"
+alias dmenu="rofi -dmenu"
+alias mkdir="mkdir -p"
