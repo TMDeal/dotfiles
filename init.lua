@@ -324,9 +324,14 @@ keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 -- Tree-sitter settings
 require('nvim-treesitter.configs').setup {
     ensure_installed = {
+        'c',
         'bash',
         'python',
-        'php'
+        'php',
+        'ruby',
+        'lua',
+        'json',
+        'toml'
     },
 
     highlight = {
