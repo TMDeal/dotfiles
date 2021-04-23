@@ -424,8 +424,8 @@ keymap('n', 'Q', '<nop>', { noremap = true })
 keymap('n', 'q:', '<nop>', { noremap = true })
 
 -- Windows splits
-keymap('n', '<leader>-', ':<C-u>split<cr>', { noremap = true })
-keymap('n', '<leader>\\', ':<C-u>vsplit<cr>', { noremap = true })
+keymap('n', '<leader>-', ':<C-u>split<cr>', { noremap = true, silent = true })
+keymap('n', '<leader>\\', ':<C-u>vsplit<cr>', { noremap = true, silent = true })
 
 -- Switch windows painlessly
 keymap('n', '<C-h>', '<C-w>h', { noremap = true })
