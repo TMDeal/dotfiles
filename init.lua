@@ -26,7 +26,7 @@ end
 local cache_dirs = { '/tags', '/backup', '/undo', '/swap' }
 for i = 1, #cache_dirs do
     local dir = cache_root .. cache_dirs[i]
-    if not vim.fn.isdirectory(dir) then
+    if vim.fn.isdirectory(dir) == 0 then
         vim.fn.mkdir(dir)
     end
 end
