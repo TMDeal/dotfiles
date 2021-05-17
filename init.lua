@@ -18,7 +18,7 @@ local data_path = vim.fn.stdpath('data')
 local packer_install_path = data_path .. '/site/pack/packer/start/packer.nvim'
 
 -- Install packer if it is not installed already
-if not vim.fn.isdirectory(packer_install_path) then
+if vim.fn.isdirectory(packer_install_path) == 0 then
     command('!git clone https://github.com/wbthomason/packer.nvim ' .. packer_install_path)
 end
 
