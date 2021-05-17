@@ -12,7 +12,6 @@ keymap('', '<Space>', '<Nop>', { noremap = true, silent=true})
 g.mapleader = ' '
 g.maplocalleader = ' '
 
-local nvim_root = vim.fn.stdpath('config')
 local cache_root = vim.fn.stdpath('cache')
 local data_path = vim.fn.stdpath('data')
 local packer_install_path = data_path .. '/site/pack/packer/start/packer.nvim'
