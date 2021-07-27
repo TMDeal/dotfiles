@@ -67,11 +67,6 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    export VIRTUAL_ENV_DISABLE_PROMPT=1
-    export GIT_PS1_SHOWDIRTYSTATE=1
-    export GIT_PS1_SHOWSTASHSTATE=1
-    export GIT_PS1_SHOWUNTRACKEDFILES=1
-
     reset_color='\[\033[0m\]'
     cyan_bold='\[\033[1;36m\]'
     blue_bold='\[\033[1;34m\]'
