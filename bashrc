@@ -72,11 +72,11 @@ if [ "$color_prompt" = yes ]; then
     export GIT_PS1_SHOWSTASHSTATE=1
     export GIT_PS1_SHOWUNTRACKEDFILES=1
 
-    reset_color='\033[0m'
-    cyan_bold='\033[1;36m'
-    blue_bold='\033[1;34m'
-    white_bold='\033[1;37m'
-    green='\033[32m'
+    reset_color='\[\033[0m\]'
+    cyan_bold='\[\033[1;36m\]'
+    blue_bold='\[\033[1;34m\]'
+    white_bold='\[\033[1;37m\]'
+    green='\[\033[32m\]'
 
     git_color=$cyan_bold
     venv_color=$cyan_bold
@@ -91,24 +91,7 @@ if [ "$color_prompt" = yes ]; then
     _pwd_ps1="${pwd_color}\W${prompt_color}"
     _prompt_ps1="${info_color}\$${reset_color}"
 
-    _venv_ps1() {
-        if [[ -n $VIRTUAL_ENV ]]; then
-            venv="${VIRTUAL_ENV##*/}"
-            printf -- "[${venv_color}$venv${prompt_color}]"
-        else
-            echo ''
-        fi
-    }
-
-    _git_ps1() {
-        if $(type -t __git_ps1 > /dev/null); then
-            printf "%s" "$(__git_ps1 [${git_color}%s${prompt_color}])"
-        else
-            echo ''
-        fi
-    }
-
-    PS1="${prompt_color}${debian_chroot:+$(debian_chroot)}${_user_and_host_ps1}[${_pwd_ps1}]\$(_venv_ps1)\$(_git_ps1)${prompt_color}${_prompt_ps1} "
+    PS1="${prompt_color}${debian_chroot:+$(debian_chroot)}${_user_and_host_ps1}[${_pwd_ps1}]${prompt_color}${_prompt_ps1} "
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
