@@ -66,7 +66,7 @@ require('packer').startup(function()
     -- Autocomplete plugin
     use 'hrsh7th/nvim-compe'
     -- Add indentation guides even on blank lines
-    use { 'lukas-reineke/indent-blankline.nvim', branch="lua" }
+    use { 'lukas-reineke/indent-blankline.nvim' }
     -- UI to select things (files, grep results, open buffers...)
     use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}} }
     -- Add git related info in the signs columns and popups
@@ -344,6 +344,7 @@ require('nvim-web-devicons').setup()
 require('lualine').setup {
     options = {
         theme = 'nord',
+        icons_enabled = false,
         section_separators = '',
         component_separators = ''
     }
