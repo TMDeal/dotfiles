@@ -137,15 +137,10 @@ if [ -d "$HOME/.local/bin" ]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
 
-# spicetify settings
-if [ -d "$HOME/.spicetify" ]; then
-    export SPICETIFY_INSTALL="$HOME/.spicetify"
-    export PATH="$SPICETIFY_INSTALL:$PATH"
-fi
-
 # pyenv settings
 if [ -d "$HOME/.pyenv" ]; then
-    export PATH="/home/trent/.pyenv/bin:$PATH"
+    export PATH="$HOME/.pyenv/bin:$PATH"
+    eval "$(pyenv init --path)"
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
     export PYENV_VIRTUALENV_DISABLE_PROMPT=1
@@ -179,6 +174,10 @@ fi
 
 if [ -d "$HOME/opt/bin" ]; then
     export PATH="$HOME/opt/bin:$PATH"
+fi
+
+if [ -d "$HOME/pentest/bin" ]; then
+    export PATH="$HOME/pentest/bin:$PATH"
 fi
 
 # fzf setup
