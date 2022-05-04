@@ -75,6 +75,10 @@ require('packer').startup(function()
     use 'nvim-treesitter/nvim-treesitter'
     -- Fancy statusline
     use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
+    -- pandoc/markdown support
+    use 'vim-pandoc/vim-pandoc'
+    use 'vim-pandoc/vim-pandoc-syntax'
+    use 'dhruvasagar/vim-table-mode'
 end)
 
 -- Incremental live completion
@@ -349,6 +353,9 @@ require('lualine').setup {
         component_separators = ''
     }
 }
+
+-- Pandoc settings
+g['pandoc#modules#disabled'] = {'folding', 'completion', 'spell'}
 
 -- LSP settings
 local lspconfig = require('lspconfig')
