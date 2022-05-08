@@ -171,10 +171,6 @@ if [ -d "/usr/local/go" ]; then
     export PATH="/usr/local/go/bin:$PATH"
 fi
 
-if [ -d "$HOME/opt/bin" ]; then
-    export PATH="$HOME/opt/bin:$PATH"
-fi
-
 if [ -d "$HOME/pentest/bin" ]; then
     export PATH="$HOME/pentest/bin:$PATH"
 fi
