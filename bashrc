@@ -159,10 +159,6 @@ if [ -d "$HOME/.rbenv" ]; then
     eval "$(rbenv init -)"
 fi
 
-if [ -d "$HOME/.poetry" ]; then
-    export PATH="$HOME/.poetry/bin:$PATH"
-fi
-
 if [ -d "$HOME/.cargo" ]; then
     export PATH="$HOME/.cargo/bin:$PATH"
 fi
