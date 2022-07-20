@@ -1,13 +1,11 @@
 -- Aliases
 local command = vim.api.nvim_command
 local keymap = vim.api.nvim_set_keymap
-local exec = vim.api.nvim_exec
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
 local g = vim.g
-local o = vim.o
-local wo = vim.wo
+local opt = vim.opt
 
 -- Set leader key to space
 keymap('', '<Space>', '<Nop>', { noremap = true, silent=true})
@@ -88,84 +86,84 @@ require('packer').startup(function()
 end)
 
 -- Incremental live completion
-o.inccommand = 'split'
+opt.inccommand = 'split'
 
 -- Set highlight on search
-o.hlsearch = true
-o.incsearch = true
+opt.hlsearch = true
+opt.incsearch = true
 
 -- Set relative/absolute line numbering
-wo.number = true
-wo.relativenumber = true
+opt.number = true
+opt.relativenumber = true
 
 -- Do not save when switching buffers
-o.hidden = true
+opt.hidden = true
 
 -- Enable mouse
-o.mouse = 'a'
+opt.mouse = 'a'
 
 -- Indent settings
-o.breakindent = true
-o.autoindent = true
-o.smarttab = true
-o.expandtab = true
-o.shiftround = true
-o.shiftwidth = 4
-o.softtabstop = 4
-o.tabstop = 4
+opt.breakindent = true
+opt.autoindent = true
+opt.smarttab = true
+opt.expandtab = true
+opt.shiftround = true
+opt.shiftwidth = 4
+opt.softtabstop = 4
+opt.tabstop = 4
 
 -- Enable/Disable undo/backup/swap
-vim.cmd[[set undofile]]
-o.backup = true
-o.swapfile = true
-o.undoreload = 10000
-o.undodir = cache_root .. '/undo//'
-o.backupdir = cache_root .. '/backup//'
-o.directory = cache_root .. '/swap//'
+opt.undofile = true
+opt.backup = true
+opt.swapfile = true
+opt.undoreload = 10000
+opt.undodir = cache_root .. '/undo//'
+opt.backupdir = cache_root .. '/backup//'
+opt.directory = cache_root .. '/swap//'
 
 -- Timeout settings
-o.timeout = true
-o.ttimeout = true
-o.timeoutlen = 600
-o.ttimeoutlen = 0
+opt.timeout = true
+opt.ttimeout = true
+opt.timeoutlen = 600
+opt.ttimeoutlen = 0
 
 -- Search settings
-o.ignorecase = true
-o.smartcase = true
-o.gdefault = true
-o.showmatch = true
+opt.ignorecase = true
+opt.smartcase = true
+opt.gdefault = true
+opt.showmatch = true
 
 -- Do not show mode in prompt
-o.showmode = false
+opt.showmode = false
 
 -- List character settings
-o.list = true
-o.listchars = 'extends:»,precedes:«,tab:│·,eol:¬,nbsp:.,trail:.'
+opt.list = true
+opt.listchars = 'extends:»,precedes:«,tab:│·,eol:¬,nbsp:.,trail:.'
 
 -- Wildmenu settings
-o.wildmenu = true
-o.wildignorecase = true
-o.wildmode = 'list:longest'
-o.wildignore = '*/.git/*,*/.hg/*,*/.svn/*,*.jpg,*.bmp,*.gif,*.png,*.jpeg,*.mp3,*.wav,*.wav,*.class,*.o,*.pyc'
+opt.wildmenu = true
+opt.wildignorecase = true
+opt.wildmode = 'list:longest'
+opt.wildignore = '*/.git/*,*/.hg/*,*/.svn/*,*.jpg,*.bmp,*.gif,*.png,*.jpeg,*.mp3,*.wav,*.wav,*.class,*.o,*.pyc'
 
 -- Do not display certain messages in prompt
-o.shortmess = o.shortmess .. 'c'
+opt.shortmess:append('c')
 
 -- Fold handling settings
-o.foldmethod = 'marker'
-o.foldnestmax = 10
+opt.foldmethod = 'marker'
+opt.foldnestmax = 10
 
 -- Change preview window location
-o.splitbelow = true
+opt.splitbelow = true
 
 -- Word wrap disable
-vim.cmd[[set nowrap]]
+opt.wrap = false
 
 -- Set completeopt to have a better completion experience
-o.completeopt="menuone,noinsert,noselect"
+opt.completeopt="menuone,noinsert,noselect"
 
 -- Set title of tabs
-o.titlestring = '%t'
+opt.titlestring = '%t'
 
 -- Indent blankline plugin settings
 g.indent_blankline_char = "|"
@@ -178,7 +176,7 @@ g.python_host_prog = '$HOME/.pyenv/versions/neovim2/bin/python'
 g.python3_host_prog = '$HOME/.pyenv/versions/neovim3/bin/python'
 
 -- Color settings
-o.termguicolors = true
+opt.termguicolors = true
 vim.cmd[[colorscheme nord]]
 
 -- List of files that identify a root directory
