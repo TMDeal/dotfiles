@@ -181,28 +181,6 @@ g.python3_host_prog = '$HOME/.pyenv/versions/neovim3/bin/python'
 o.termguicolors = true
 vim.cmd[[colorscheme nord]]
 
--- TODO: why no work
--- exec([[
---     hi Normal guibg=NONE ctermbg=NONE
---     hi SignColumn guibg=NONE ctermbg=NONE
---     hi NonText guibg=NONE ctermbg=NONE
---     hi LineNr guibg=NONE ctermbg=NONE
---     hi Folded guibg=NONE guifg=7 ctermbg=NONE ctermfg=7
---     hi SpecialKey guibg=NONE ctermbg=NONE
---
---     hi TabLine ctermbg=0 ctermfg=15 guibg=#373b37
---     hi TabLineFill ctermbg=0 guibg=#373b37
---     hi TabLineSel ctermbg=8 ctermfg=15 guibg=#989898 guifg=#ffffff
---
---     hi Error NONE
---     hi ErrorMsg NONE
---
---     highlight ColorColumn ctermbg=0 guibg=#222222
---
---     hi statusline ctermfg=149 ctermbg=0 cterm=NONE
---     hi statusline guifg=Black guibg=Grey guisp=NONE
--- ]], false)
-
 -- List of files that identify a root directory
 g.rootmarkers = {
     '.projectroot',
