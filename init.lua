@@ -2,6 +2,8 @@
 local command = vim.api.nvim_command
 local keymap = vim.api.nvim_set_keymap
 local exec = vim.api.nvim_exec
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
 
 local g = vim.g
 local o = vim.o
@@ -31,12 +33,14 @@ for i = 1, #cache_dirs do
 end
 
 -- Recompile packer on editing init.lua
-exec([[
-    augroup packer
-        autocmd!
-        autocmd BufWritePost init.lua PackerCompile
-    augroup end
-]], false)
+local packer_augroup = augroup("packer", { clear = true })
+autocmd("BufReadPost", {
+        group = packer_augroup,
+        pattern = vim.env.MYVIMRC,
+        callback = function()
+            require('packer').compile()
+        end
+})
 
 require('packer').startup(function()
     local use = require('packer').use
@@ -72,7 +76,9 @@ require('packer').startup(function()
     -- Add git related info in the signs columns and popups
     use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'} }
     -- Extra syntax highlighting goodness
-    use 'nvim-treesitter/nvim-treesitter'
+    use { 'nvim-treesitter/nvim-treesitter', run = function()
+        vim.cmd[[TSUpdate]]
+    end}
     -- Fancy statusline
     use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
     -- pandoc/markdown support
@@ -204,12 +210,11 @@ g.rootmarkers = {
 }
 
 -- CD to project root on buffer enter
-exec([[
-    augroup cd_to_project_root
-        autocmd!
-        autocmd BufEnter * call ProjectRootCD()
-    augroup end
-]], false)
+local cd_to_project_root_augroup = augroup("cd_to_project_root", { clear = true })
+autocmd("BufEnter", { group = cd_to_project_root_augroup, callback = function()
+    vim.cmd[[call ProjectRootCD()]]
+end
+})
 
 -- Unmap tcomment default maps
 g.tcomment_mapleader1 = ''
@@ -376,10 +381,11 @@ local on_attach = function(_client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.diagnostic.set_loclist()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
 -- Disable diagnostics. I know what I'm doing, maybe
@@ -404,29 +410,34 @@ lspconfig['bashls'].setup {
 }
 
 -- Remeber where the curser was when reopening a file
-exec([[
-    augroup remember_cursor_position
-        autocmd!
-        autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-    augroup end
-]], false)
+local remember_last_position_augroup = augroup("remember_last_position_group", { clear = true })
+autocmd("BufReadPost", {
+        group = remember_last_position_augroup,
+        callback = function()
+            local row, col = unpack(vim.api.nvim_buf_get_mark(0, "\""))
+            if {row, col} ~= {0, 0} then
+                vim.api.nvim_win_set_cursor(0, {row, 0})
+            end
+        end
+})
 
 --Remap escape to leave terminal mode
-exec([[
-    augroup terminal
-        autocmd!
-        autocmd TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
-        autocmd TermOpen * set nonu
-    augroup end
-]], false)
+local terminal_augroup = augroup("terminal", { clear = true })
+autocmd("TermOpen", {
+        group = terminal_augroup,
+        callback = function()
+            keymap("t", "<ESC>", "<c-\\><c-n>", { noremap = true })
+        end
+})
 
 -- Highlight on yank
-exec([[
-    augroup YankHighlight
-        autocmd!
-        autocmd TextYankPost * silent! lua vim.highlight.on_yank()
-    augroup end
-]], false)
+local yank_highlight_augroup = augroup("yank_highlight", { clear = true })
+autocmd("TextYankPost", {
+        group = yank_highlight_augroup,
+        callback = function()
+            vim.highlight.on_yank()
+        end
+})
 
 -- Unmap these for my sanity
 keymap('i', '<F1>', '<nop>', { noremap = true })
