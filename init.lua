@@ -66,7 +66,16 @@ require('packer').startup(function()
     -- Collection of configurations for built-in LSP client
     use 'neovim/nvim-lspconfig'
     -- Autocomplete plugin
-    use 'hrsh7th/nvim-compe'
+    use({
+        'hrsh7th/nvim-cmp',
+        requires = {
+            { 'hrsh7th/cmp-nvim-lsp' },
+            { 'hrsh7th/cmp-nvim-lua' },
+            { 'hrsh7th/cmp-buffer' },
+            { 'hrsh7th/cmp-path' },
+            { 'saadparwaiz1/cmp_luasnip' }
+        }
+    })
     -- Add indentation guides even on blank lines
     use { 'lukas-reineke/indent-blankline.nvim' }
     -- UI to select things (files, grep results, open buffers...)
@@ -83,6 +92,11 @@ require('packer').startup(function()
     use 'vim-pandoc/vim-pandoc'
     use 'vim-pandoc/vim-pandoc-syntax'
     use 'dhruvasagar/vim-table-mode'
+    -- Change surrounding pairs and html tags
+    use({ "kylechui/nvim-surround", config = function()
+        require("nvim-surround").setup()
+    end
+})
 end)
 
 -- Incremental live completion
@@ -238,72 +252,53 @@ keymap('n', '<leader>gp', [[<cmd>lua require('telescope.builtin').git_bcommits()
 -- Gitsigns settings
 require('gitsigns').setup()
 
--- Compe settings
-require('compe').setup {
-  enabled = true;
-  autocomplete = true;
-  debug = false;
-  min_length = 1;
-  preselect = 'enable';
-  throttle_time = 80;
-  source_timeout = 200;
-  incomplete_delay = 400;
-  max_abbr_width = 100;
-  max_kind_width = 100;
-  max_menu_width = 100;
-  documentation = true;
+-- Cmp settings
+local cmp = require('cmp')
 
-  source = {
-    path = true;
-    buffer = false;
-    calc = true;
-    vsnip = false;
-    nvim_lsp = true;
-    nvim_lua = true;
-    spell = true;
-    tags = false;
-    snippets_nvim = true;
-    treesitter = true;
-  };
+cmp.setup {
+    snippet = {
+        expand = function(args)
+            require('luasnip').lsp_expand(args.body)
+        end
+    },
+
+    window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered()
+    },
+
+    mapping = {
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.abort(),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        ['<Tab>'] = function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            else
+                fallback()
+            end
+        end,
+        ['<S-Tab>'] = function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            else
+                fallback()
+            end
+        end,
+    },
+
+    sources = {
+        { name = 'nvim_lsp' },
+        { name = 'nvim_lua' },
+        { name = 'luasnip' },
+        { name = 'buffer' },
+        { name = 'path' }
+    }
 }
 
-local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-local check_back_space = function()
-    local col = vim.fn.col('.') - 1
-    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-        return true
-    else
-        return false
-    end
-end
-
--- Use (s-)tab to:
---- move to prev/next item in completion menuone
---- jump to prev/next snippet's placeholder
-_G.tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-n>"
-  elseif check_back_space() then
-    return t "<Tab>"
-  else
-    return vim.fn['compe#complete']()
-  end
-end
-_G.s_tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-p>"
-  else
-    return t "<S-Tab>"
-  end
-end
-
-keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
-keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
-keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- Tree-sitter settings
 require('nvim-treesitter.configs').setup {
@@ -314,8 +309,7 @@ require('nvim-treesitter.configs').setup {
         'php',
         'ruby',
         'lua',
-        'json',
-        'toml'
+        'json'
     },
 
     highlight = {
@@ -376,12 +370,14 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
 -- Enable python lsp server
 lspconfig['pyright'].setup {
     cmd = { data_path .. '/lsp_servers/python/node_modules/.bin/pyright-langserver', '--stdio' },
+    capabilities = capabilities,
     on_attach = on_attach
 }
 
 -- Enable bash lsp server
 lspconfig['bashls'].setup {
     cmd = { data_path .. '/lsp_servers/bash/node_modules/.bin/bash-language-server', 'start' },
+    capabilities = capabilities,
     on_attach = on_attach
 }
 
