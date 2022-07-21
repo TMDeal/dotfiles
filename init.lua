@@ -202,9 +202,6 @@ g.python3_host_prog = '$HOME/.pyenv/versions/neovim3/bin/python'
 opt.termguicolors = true
 vim.cmd[[colorscheme nord]]
 
--- Change Table Mode leader prefix
-g.table_mode_map_prefix = "<leader>T"
-
 -- Unmap colorizer default maps
 g.colorizer_nomap = 1
 
@@ -231,6 +228,37 @@ wk.setup {
     triggers = { "<leader>", "`", "\"" }
 
 }
+
+-- Change Table Mode leader prefix
+g.table_mode_map_prefix = "<leader>T"
+g.table_mode_tableize_d_map = "<leader>TT"
+
+wk.register({
+    T = {
+        name = "Markdown Table Mode",
+        m = { "Toggle" },
+        t = { "Tableize Selection" },
+        T = { "Tableize Selection with Delimeter" },
+        r = { "Realign Columns" },
+        ["?"] = { "Echo Cell Representation" },
+        d = {
+            name = "Delete",
+            d = { "Delete Row" },
+            c = { "Delete Column" }
+        },
+        i = {
+            name = "Insert",
+            C = { "Insert Column Before" },
+            c = { "Insert Column After" }
+        },
+        f = {
+            name = "Formulas",
+            a = { "Add Formula" },
+            e = { "Evaluate Formula" }
+        },
+        s = { "Sort Column" }
+    }
+}, { prefix = "<leader>" })
 
 -- Comment.nvim settings
 require('Comment').setup()
