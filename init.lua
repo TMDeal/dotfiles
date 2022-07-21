@@ -101,11 +101,7 @@ require('packer').startup(function()
     use 'vim-pandoc/vim-pandoc-syntax'
     use 'dhruvasagar/vim-table-mode'
     -- Change surrounding pairs and html tags
-    use {
-        "kylechui/nvim-surround",
-        config = function()
-        end
-    }
+    use "kylechui/nvim-surround"
 end)
 
 -- Incremental live completion
@@ -308,6 +304,7 @@ keymap('n', '<leader>tgs', [[<cmd>lua require('telescope.builtin').live_grep()<c
 keymap('n', '<leader>tGc', [[<cmd>lua require('telescope.builtin').git_commits()<cr>]], { noremap = true, silent = true})
 keymap('n', '<leader>tGb', [[<cmd>lua require('telescope.builtin').git_branches()<cr>]], { noremap = true, silent = true})
 keymap('n', '<leader>tGs', [[<cmd>lua require('telescope.builtin').git_status()<cr>]], { noremap = true, silent = true})
+keymap('n', '<leader>tp', [[<cmd>lua require('telescope').extensions.projects.projects()<cr>]], { noremap = true, silent = true})
 
 wk.register({
     t = {
@@ -327,7 +324,8 @@ wk.register({
             c = { "Git Commits" },
             b = { "Git Branches" },
             s = { "Git Status" },
-        } 
+        },
+        p = { "Projects" }
     }
 }, { prefix = "<leader>" })
 
@@ -425,7 +423,7 @@ local on_attach = function(_client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ls', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lwa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lwr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lwl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
@@ -448,6 +446,7 @@ local on_attach = function(_client, bufnr)
                     r = { "Remove Workspace Folder" },
                     l = { "List Workspace Folders" }
                 },
+                s = { "Signature Help" },
                 d = { "Type Definition" },
                 r = { "Rename" },
                 c = { "Code Action" },
