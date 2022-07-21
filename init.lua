@@ -45,6 +45,8 @@ require('packer').startup(function()
 
     -- Package manager
     use 'wbthomason/packer.nvim'
+    -- Leader Guide
+    use 'folke/which-key.nvim'
     -- Colorscheme
     use 'arcticicestudio/nord-vim'
     -- Syntax highighting
@@ -66,7 +68,7 @@ require('packer').startup(function()
     -- Collection of configurations for built-in LSP client
     use 'neovim/nvim-lspconfig'
     -- Autocomplete plugin
-    use({
+    use {
         'hrsh7th/nvim-cmp',
         requires = {
             { 'hrsh7th/cmp-nvim-lsp' },
@@ -75,11 +77,17 @@ require('packer').startup(function()
             { 'hrsh7th/cmp-path' },
             { 'saadparwaiz1/cmp_luasnip' }
         }
-    })
+    }
     -- Add indentation guides even on blank lines
     use { 'lukas-reineke/indent-blankline.nvim' }
     -- UI to select things (files, grep results, open buffers...)
-    use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}} }
+    use {
+        'nvim-telescope/telescope.nvim',
+        tag = '0.1.0',
+        requires = {
+            { 'nvim-lua/plenary.nvim' }
+        }
+    }
     -- Add git related info in the signs columns and popups
     use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'} }
     -- Extra syntax highlighting goodness
@@ -93,10 +101,12 @@ require('packer').startup(function()
     use 'vim-pandoc/vim-pandoc-syntax'
     use 'dhruvasagar/vim-table-mode'
     -- Change surrounding pairs and html tags
-    use({ "kylechui/nvim-surround", config = function()
-        require("nvim-surround").setup()
-    end
-})
+    use {
+        "kylechui/nvim-surround",
+        config = function()
+            require("nvim-surround").setup()
+        end
+    }
 end)
 
 -- Incremental live completion
@@ -138,7 +148,7 @@ opt.directory = cache_root .. '/swap//'
 -- Timeout settings
 opt.timeout = true
 opt.ttimeout = true
-opt.timeoutlen = 600
+opt.timeoutlen = 300
 opt.ttimeoutlen = 0
 
 -- Search settings
@@ -206,12 +216,38 @@ autocmd("BufEnter", { group = cd_to_project_root_augroup, callback = function()
 end
 })
 
+g.table_mode_map_prefix = "<leader>T"
+
 -- Unmap tcomment default maps
 g.tcomment_mapleader1 = ''
 g.tcomment_mapleader2 = ''
 
 -- Unmap colorizer default maps
 g.colorizer_nomap = 1
+
+-- Which Key settings
+local wk = require('which-key')
+
+wk.setup {
+    plugins = {
+        presets = {
+            operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+            motions = true, -- adds help for motions
+            text_objects = true, -- help for text objects triggered after entering an operator
+            windows = true, -- default bindings on <c-w>
+            nav = true, -- misc bindings to work with windows
+            z = true, -- bindings for folds, spelling and others prefixed with z
+            g = true, -- bindings for prefixed with g
+        },
+    },
+
+    key_labels = {
+        ["<space>"] = "SPC"
+    },
+
+    triggers = { "<leader>", "`", "\"" }
+
+}
 
 -- Telescope settings
 local actions = require('telescope.actions')
@@ -236,18 +272,38 @@ require('telescope').setup {
 }
 
 --Add leader shortcuts
-keymap('n', '<leader>f', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true})
-keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], { noremap = true, silent = true})
-keymap('n', '<leader>l', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>]], { noremap = true, silent = true})
-keymap('n', '<leader>t', [[<cmd>lua require('telescope.builtin').tags()<cr>]], { noremap = true, silent = true})
-keymap('n', '<leader>?', [[<cmd>lua require('telescope.builtin').oldfiles()<cr>]], { noremap = true, silent = true})
-keymap('n', '<leader>sd', [[<cmd>lua require('telescope.builtin').grep_string()<cr>]], { noremap = true, silent = true})
-keymap('n', '<leader>sp', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], { noremap = true, silent = true})
-keymap('n', '<leader>o', [[<cmd>lua require('telescope.builtin').tags{ only_current_buffer = true }<cr>]], { noremap = true, silent = true})
-keymap('n', '<leader>gc', [[<cmd>lua require('telescope.builtin').git_commits()<cr>]], { noremap = true, silent = true})
-keymap('n', '<leader>gb', [[<cmd>lua require('telescope.builtin').git_branches()<cr>]], { noremap = true, silent = true})
-keymap('n', '<leader>gs', [[<cmd>lua require('telescope.builtin').git_status()<cr>]], { noremap = true, silent = true})
-keymap('n', '<leader>gp', [[<cmd>lua require('telescope.builtin').git_bcommits()<cr>]], { noremap = true, silent = true})
+keymap('n', '<leader>tf', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true})
+keymap('n', '<leader>t<space>', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], { noremap = true, silent = true})
+keymap('n', '<leader>tl', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>]], { noremap = true, silent = true})
+keymap('n', '<leader>tt', [[<cmd>lua require('telescope.builtin').tags()<cr>]], { noremap = true, silent = true})
+keymap('n', '<leader>t?', [[<cmd>lua require('telescope.builtin').oldfiles()<cr>]], { noremap = true, silent = true})
+keymap('n', '<leader>tgc', [[<cmd>lua require('telescope.builtin').grep_string()<cr>]], { noremap = true, silent = true})
+keymap('n', '<leader>tgs', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], { noremap = true, silent = true})
+keymap('n', '<leader>tGc', [[<cmd>lua require('telescope.builtin').git_commits()<cr>]], { noremap = true, silent = true})
+keymap('n', '<leader>tGb', [[<cmd>lua require('telescope.builtin').git_branches()<cr>]], { noremap = true, silent = true})
+keymap('n', '<leader>tGs', [[<cmd>lua require('telescope.builtin').git_status()<cr>]], { noremap = true, silent = true})
+
+wk.register({
+    t = {
+        name = "Telescope",
+        f = { "Find Files" },
+        ["<space>"] = { "List Buffers" },
+        l = { "Find in Current Buffer" },
+        t = { "Tags" },
+        ["?"] = { "Open Old Files" },
+        g = {
+            name = "Grep",
+            c = { "Grep on Cursor" },
+            s = { "Grep on Project" }
+        },
+        G = {
+            name = "Git",
+            c = { "Git Commits" },
+            b = { "Git Branches" },
+            s = { "Git Status" },
+        } 
+    }
+}, { prefix = "<leader>" })
 
 -- Gitsigns settings
 require('gitsigns').setup()
@@ -336,27 +392,47 @@ g['pandoc#modules#disabled'] = {'folding', 'completion', 'spell'}
 local lspconfig = require('lspconfig')
 
 local on_attach = function(_client, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  local opts = { noremap=true, silent=true }
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.diagnostic.set_loclist()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    local opts = { noremap=true, silent=true }
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lwa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lwr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lwl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lD', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lrn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>le', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lq', '<cmd>lua vim.diagnostic.set_loclist()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  
+    wk.register({
+            l = {
+                name = "LSP",
+                w = {
+                    name = "Workspaces",
+                    a = { "Add Workspace Folder" },
+                    r = { "Remove Workspace Folder" },
+                    l = { "List Workspace Folders" }
+                },
+                d = { "Type Definition" },
+                r = { "Rename" },
+                c = { "Code Action" },
+                e = { "Show Diagnostics Popup" },
+                q = { "Set Loclist" },
+                f = { "Format File" }
+            }
+    }, { prefix = "<leader>" })
+
 end
+
 
 -- Disable diagnostics. I know what I'm doing, maybe
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
@@ -421,6 +497,11 @@ keymap('n', 'q:', '<nop>', { noremap = true })
 -- Windows splits
 keymap('n', '<leader>-', ':<C-u>split<cr>', { noremap = true, silent = true })
 keymap('n', '<leader>\\', ':<C-u>vsplit<cr>', { noremap = true, silent = true })
+
+wk.register({
+    ["-"] = { "Split Window Horizontally" },
+    ["\\"] = { "Split Window Vertically" }
+}, { prefix = "<leader>" })
 
 -- Switch windows painlessly
 keymap('n', '<C-h>', '<C-w>h', { noremap = true })
