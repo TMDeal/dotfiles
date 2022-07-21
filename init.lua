@@ -57,8 +57,8 @@ require('packer').startup(function()
     use 'lilydjwg/colorizer'
     -- Navigate with tmux easily
     use 'christoomey/vim-tmux-navigator'
-    -- Now where the root of the project is always
-    use 'dbakker/vim-projectroot'
+    -- Know where the root of the project is always
+    use 'ahmedkhalf/project.nvim'
     -- Match pairs like "" or ()
     use 'jiangmiao/auto-pairs'
     -- Create a motion of surrounding pairs
@@ -202,19 +202,7 @@ g.python3_host_prog = '$HOME/.pyenv/versions/neovim3/bin/python'
 opt.termguicolors = true
 vim.cmd[[colorscheme nord]]
 
--- List of files that identify a root directory
-g.rootmarkers = {
-    '.projectroot',
-    '.git'
-}
-
--- CD to project root on buffer enter
-local cd_to_project_root_augroup = augroup("cd_to_project_root", { clear = true })
-autocmd("BufEnter", { group = cd_to_project_root_augroup, callback = function()
-    vim.cmd[[call ProjectRootCD()]]
-end
-})
-
+-- Change Table Mode leader prefix
 g.table_mode_map_prefix = "<leader>T"
 
 -- Unmap colorizer default maps
@@ -250,6 +238,13 @@ require('Comment').setup()
 -- nvim Surround settings
 require("nvim-surround").setup()
 
+-- Project.nvim settings
+require("project_nvim").setup {
+    manual_mode = false,
+    detection_methods = { "lsp", "pattern" },
+    patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
+}
+
 -- Telescope settings
 local actions = require('telescope.actions')
 local sorters = require('telescope.sorters')
@@ -271,6 +266,8 @@ require('telescope').setup {
     file_sorter =  sorters.get_fzy_sorter,
   }
 }
+
+require('telescope').load_extension('projects')
 
 --Add leader shortcuts
 keymap('n', '<leader>tf', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true})
