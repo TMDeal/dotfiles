@@ -52,7 +52,7 @@ require('packer').startup(function()
     -- Syntax highighting
     use 'sheerun/vim-polyglot'
     -- Make commenting easier
-    use 'tomtom/tcomment_vim'
+    use 'numToStr/Comment.nvim'
     -- Highlight hex colors with the actual color
     use 'lilydjwg/colorizer'
     -- Navigate with tmux easily
@@ -104,7 +104,6 @@ require('packer').startup(function()
     use {
         "kylechui/nvim-surround",
         config = function()
-            require("nvim-surround").setup()
         end
     }
 end)
@@ -148,7 +147,7 @@ opt.directory = cache_root .. '/swap//'
 -- Timeout settings
 opt.timeout = true
 opt.ttimeout = true
-opt.timeoutlen = 300
+opt.timeoutlen = 500
 opt.ttimeoutlen = 0
 
 -- Search settings
@@ -218,10 +217,6 @@ end
 
 g.table_mode_map_prefix = "<leader>T"
 
--- Unmap tcomment default maps
-g.tcomment_mapleader1 = ''
-g.tcomment_mapleader2 = ''
-
 -- Unmap colorizer default maps
 g.colorizer_nomap = 1
 
@@ -248,6 +243,12 @@ wk.setup {
     triggers = { "<leader>", "`", "\"" }
 
 }
+
+-- Comment.nvim settings
+require('Comment').setup()
+
+-- nvim Surround settings
+require("nvim-surround").setup()
 
 -- Telescope settings
 local actions = require('telescope.actions')
