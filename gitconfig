@@ -11,7 +11,7 @@
 [color]
     ui = true
 [credential]
-    helper = cache --timeout=3600
+	helper = /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
 [merge]
     tool = meld
 [mergetool]
