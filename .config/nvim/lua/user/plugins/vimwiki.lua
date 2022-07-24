@@ -70,3 +70,11 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.api.nvim_buf_set_keymap(0, "n", "<leader>wha", ":VimwikiAll2HTML<CR>", opts)
     end
 })
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+    group = vimwiki,
+    pattern = "*.wiki",
+    callback = function()
+        vim.cmd [[silent! Vimwiki2HTML]]
+    end
+})
