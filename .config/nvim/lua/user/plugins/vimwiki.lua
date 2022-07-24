@@ -25,8 +25,6 @@ local get_wikis = function()
     local f = io.open(path, "rb")
     if f then f:close() end
 
-    print(vim.inspect(f))
-
     if f == nil then
         return wikis
     end

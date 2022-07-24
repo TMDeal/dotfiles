@@ -36,10 +36,10 @@ autocmd("TextYankPost", {
     end
 })
 
--- enable word wrap and spellcheck for markdown files
+-- enable word wrap and spellcheck for markdown/pandoc files
 autocmd("FileType", {
     group = markdown,
-    pattern = "markdown",
+    pattern = { "pandoc", "markdown" },
     callback = function()
         vim.opt_local.wrap = true
         vim.opt_local.spell = true
