@@ -11,6 +11,12 @@ telescope.setup {
     defaults = {
         prompt_prefix = "> ",
 
+        file_ignore_patterns = {
+            "%.png",
+            "%.jpg",
+            "%.jpeg"
+        },
+
         mappings = {
             i = {
                 ["<C-n>"] = actions.cycle_history_next,
