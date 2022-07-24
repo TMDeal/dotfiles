@@ -5,6 +5,8 @@ local function wiki_config(name)
         path = "~/vimwiki/" .. name,
         path_html = "~/vimwiki/" .. name .. "/html",
         template_path = "~/vimwiki/templates",
+        template_default = "default",
+        css_name = "css/styles.css",
         syntax = "markdown",
         ext = ".wiki",
         template_ext = ".wiki",
@@ -63,7 +65,8 @@ vim.api.nvim_create_autocmd("FileType", {
         require("user.plugins.which-key").register_vimwiki()
 
         local opts = { noremap = true, silent = true }
-        vim.api.nvim_buf_set_keymap(0, "n", "<leader>whh", "<Plug>Vimwiki2HTML", opts)
-        vim.api.nvim_buf_set_keymap(0, "n", "<leader>whb", "<Plug>Vimwiki2HTMLBrowse", opts)
+        vim.api.nvim_buf_set_keymap(0, "n", "<leader>whh", ":Vimwiki2HTML<CR>", opts)
+        vim.api.nvim_buf_set_keymap(0, "n", "<leader>whb", ":Vimwiki2HTMLBrowse<CR>", opts)
+        vim.api.nvim_buf_set_keymap(0, "n", "<leader>wha", ":VimwikiAll2HTML<CR>", opts)
     end
 })
