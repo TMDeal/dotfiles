@@ -39,7 +39,7 @@ autocmd("TextYankPost", {
 -- enable word wrap and spellcheck for markdown files
 autocmd("FileType", {
     group = markdown,
-    pattern = { "*.markdown", "*.mdown", "*.mkd", "*.mkdn", "*.mdwn", "*.md" },
+    pattern = "markdown",
     callback = function()
         vim.opt_local.wrap = true
         vim.opt_local.spell = true

@@ -185,6 +185,12 @@ packer.startup(function(use)
     -- Startup menu
     use 'goolord/alpha-nvim'
 
+    -- Note taking
+    use {
+        "vimwiki/vimwiki",
+        branch = "dev"
+    }
+
     -- Automatically setup everything after cloning packer.nvim
     -- This should be after all plugins
     if PACKER_BOOTSTRAP then

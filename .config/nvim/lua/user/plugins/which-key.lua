@@ -19,7 +19,8 @@ wk.setup {
     },
 
     key_labels = {
-        ["<space>"] = "SPC"
+        ["<space>"] = "SPC",
+        ["<leader>"] = "SPC"
     },
 
     triggers = { "<leader>", "`", "\"" }, -- input triggers
@@ -94,6 +95,24 @@ wk.register({
             e = "Evaluate Formula"
         },
         s = "Sort Column"
+    },
+
+    w = {
+        name = "Vimwiki",
+
+        w = "Open Wiki",
+        t = "Open Wiki in New Tab",
+        s = "List and Select Available Wikis",
+        i = "Open Diary",
+
+        ["<leader>"] = {
+            name = "Diary",
+
+            w = "Open Diary for Today",
+            t = "Open Diary for Today in New Tab",
+            y = "Open Diary for Yesterday",
+            m = "Open Diary for Tomorrow",
+        }
     }
 
 }, { prefix = "<leader>" })
@@ -117,6 +136,32 @@ M.register_lsp = function(bufnr)
             f = "Format File"
         }
     }, { prefix = "<leader>", buffer = bufnr })
+end
+
+M.register_vimwiki = function()
+    wk.register({
+        w = {
+            name = "Vimwiki",
+
+            c = "Colorize Line/Selection",
+            n = "Goto or Create New Page",
+            d = "Delete Current Page",
+            r = "Rename Current Page",
+
+            h = {
+                name = "HTML",
+
+                h = "Convert Current Page",
+                b = "Convert and Browse Current Page"
+            },
+
+            ["<leader>"] = {
+                name = "Diary",
+
+                i = "Update Diary Section"
+            }
+        }
+    }, { prefix = "<leader>", buffer = 0 }) 
 end
 
 return M
