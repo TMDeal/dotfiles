@@ -53,6 +53,9 @@ wk.register({
 
     q = "Close current buffer",
 
+    Q = "QuickFix",
+    L = "LocList",
+
     t = {
         name = "Telescope",
 

@@ -1,3 +1,5 @@
+local M = {}
+
 local keymap = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 local term_opts = { silent = true }
@@ -42,3 +44,41 @@ keymap("t", "<ESC>", "<c-\\><c-n>", term_opts)
 
 -- Buffer mappings
 keymap("n", "<leader>q", ":Bdelete<CR>", opts)
+
+-- Loclist/QuickFix mappings
+
+M.toggle_quickfix = function()
+    local info = vim.fn.getwininfo()
+
+    for _, window in pairs(info) do
+        if window.quickfix == 1 then
+            vim.cmd [[cclose]]
+        else
+            vim.cmd [[copen]]
+        end
+    end
+
+end
+
+M.toggle_loclist = function()
+    local info = vim.fn.getwininfo()
+
+    for _, window in pairs(info) do
+        if window.loclist == 1 then
+            vim.cmd [[lclose]]
+        else
+            vim.cmd [[lopen]]
+        end
+    end
+
+end
+
+keymap("n", "<leader>Q", "<cmd>lua require('user.keymaps').toggle_quickfix()<CR>", opts)
+keymap("n", "]q", ":cnext<CR>", opts)
+keymap("n", "[q", ":cprev<CR>", opts)
+
+keymap("n", "<leader>L", "<cmd>lua require('user.keymaps').toggle_loclist()<CR>", opts)
+keymap("n", "]l", ":lnext<CR>", opts)
+keymap("n", "[l", ":lprev<CR>", opts)
+
+return M
