@@ -14,6 +14,7 @@ require 'user.keymaps'
 require 'user.autocmds'
 
 -- configs for plugins
+require 'user.plugins.colors'
 require 'user.plugins.autopairs'
 require 'user.plugins.cmp'
 require 'user.plugins.comment'

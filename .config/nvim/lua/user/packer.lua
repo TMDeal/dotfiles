@@ -65,12 +65,7 @@ packer.startup(function(use)
     use "lambdalisue/suda.vim"
 
     -- Colorschemes
-    use {
-        "arcticicestudio/nord-vim",
-        config = function()
-            vim.cmd [[colorscheme nord]]
-        end
-    }
+    use "shaunsingh/nord.nvim"
 
     -- Autocompletion
     use "hrsh7th/nvim-cmp"
