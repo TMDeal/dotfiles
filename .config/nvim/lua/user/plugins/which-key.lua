@@ -28,9 +28,54 @@ wk.setup {
     hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
 }
 
-wk.register({
-    ["`"] = "Open Terminal",
+local function gen_table(key, opts)
+    local char = string.sub(key, 0, 1)
+    local rest = string.sub(key, 2, #key)
 
+    local tbl = {}
+
+    if rest == "" then
+        tbl[char] = opts
+        return tbl
+    end
+
+    tbl[char] = gen_table(rest, opts)
+
+    return tbl
+end
+
+
+M.register_keymap = function(key, cmd, label, opts)
+    local wk_opts = {
+        mode = opts.mode or "n",
+        prefix = opts.prefix or "<leader>",
+        buffer = opts.buffer or nil,
+        silent = opts.silent or true,
+        noremap = opts.noremap or true,
+        nowait = opts.nowait or false
+    }
+
+    local wk_keymap = gen_table(key, { cmd, label })
+
+    wk.register(wk_keymap, wk_opts)
+end
+
+M.register_group = function(key, name, opts)
+    local wk_opts = {
+        mode = opts.mode or "n",
+        prefix = opts.prefix or "<leader>",
+        buffer = opts.buffer or nil,
+        silent = opts.silent or true,
+        noremap = opts.noremap or true,
+        nowait = opts.nowait or false
+    }
+
+    local wk_keymap = gen_table(key, { name = name })
+
+    wk.register(wk_keymap, wk_opts)
+end
+
+wk.register({
     ["-"] = "Split Window Horizontally",
     ["\\"] = "Split Window Vertically",
 
