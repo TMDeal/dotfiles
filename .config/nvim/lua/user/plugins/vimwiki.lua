@@ -41,7 +41,6 @@ end
 vim.g.vimwiki_list = get_wikis()
 vim.g.vimwiki_ext2syntax = vim.empty_dict()
 
-
 vim.g.vimwiki_key_mappings = {
     all_maps = 1,
     global = 1,
@@ -63,9 +62,9 @@ vim.api.nvim_create_autocmd("FileType", {
     pattern = "vimwiki",
     callback = function()
         local opts = { noremap = true, silent = true }
-        vim.api.nvim_buf_set_keymap(0, "n", "<leader>whh", ":Vimwiki2HTML<CR>", opts)
-        vim.api.nvim_buf_set_keymap(0, "n", "<leader>whb", ":Vimwiki2HTMLBrowse<CR>", opts)
-        vim.api.nvim_buf_set_keymap(0, "n", "<leader>wha", ":VimwikiAll2HTML<CR>", opts)
+        vim.api.nvim_buf_set_keymap(0, "n", "<leader>vhh", ":Vimwiki2HTML<CR>", opts)
+        vim.api.nvim_buf_set_keymap(0, "n", "<leader>vhb", ":Vimwiki2HTMLBrowse<CR>", opts)
+        vim.api.nvim_buf_set_keymap(0, "n", "<leader>vha", ":VimwikiAll2HTML<CR>", opts)
 
         local which_key_ok, wk = pcall(require, "which-key")
         if not which_key_ok then
@@ -73,7 +72,7 @@ vim.api.nvim_create_autocmd("FileType", {
         end
 
         wk.register({
-            w = {
+            v = {
                 c = "Colorize Line/Selection",
                 n = "Goto or Create New Page",
                 d = "Delete Current Page",
@@ -108,7 +107,7 @@ if not which_key_ok then
 end
 
 wk.register({
-    w = {
+    v = {
         name = "[VimWiki]",
 
         w = "Open Wiki",

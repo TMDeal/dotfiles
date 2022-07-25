@@ -180,7 +180,7 @@ packer.startup(function(use)
         tag = "v2.*",
         requires = 'kyazdani42/nvim-web-devicons'
     }
-    use "moll/vim-bbye"
+    use "kazhala/close-buffers.nvim"
 
     -- Open easy to use terminal
     use {
@@ -194,7 +194,10 @@ packer.startup(function(use)
     -- Note taking
     use {
         "vimwiki/vimwiki",
-        branch = "dev"
+        branch = "dev",
+        setup = function()
+            vim.g.vimwiki_map_prefix = "v"
+        end
     }
 
     -- Automatically setup everything after cloning packer.nvim

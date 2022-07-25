@@ -23,7 +23,3 @@ local opts = { noremap = true, silent = true }
 vim.api.nvim_set_keymap("n", "<S-h>", ":BufferLineCyclePrev<CR>", opts)
 vim.api.nvim_set_keymap("n", "<S-l>", ":BufferLineCycleNext<CR>", opts)
 
-local keymap = require("user.plugins.which-key").register_keymap
--- Buffer mappings
-keymap("bq", ":Bdelete<CR>", "Close Current Buffer")
-

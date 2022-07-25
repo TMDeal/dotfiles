@@ -35,6 +35,8 @@ vim.api.nvim_set_keymap("n", "Y", "y$", opts)
 -- Remap escape to leave terminal mode
 vim.api.nvim_set_keymap("t", "<ESC>", "<c-\\><c-n>", { silent = true })
 
+keymap("q", ":wqa!<CR>", "Save and Quit")
+
 -- Windows splits
 keymap("-", ":<C-u>split<cr>", "Split Window Horizontally")
 keymap("\\", ":<C-u>vsplit<cr>", "Split Window Vertically")
