@@ -70,6 +70,9 @@ packer.startup(function(use)
     -- Improve the % operator
     use "andymass/vim-matchup"
 
+    -- Improve Neovim UI
+    use "stevearc/dressing.nvim"
+
     -- Autocompletion
     use "hrsh7th/nvim-cmp"
     use "hrsh7th/cmp-nvim-lsp"
@@ -196,7 +199,7 @@ packer.startup(function(use)
         "vimwiki/vimwiki",
         branch = "dev",
         setup = function()
-            vim.g.vimwiki_map_prefix = "v"
+            vim.g.vimwiki_map_prefix = "<leader>v"
         end
     }
 
