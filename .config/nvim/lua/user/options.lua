@@ -69,7 +69,7 @@ opt.listchars = 'extends:»,precedes:«,tab:│·,eol:¬,nbsp:.,trail:.'
 opt.wildmenu = true
 opt.wildignorecase = true
 opt.wildmode = 'list:longest'
-opt.wildignore = '*/.git/*,*/.hg/*,*/.svn/*,*.jpg,*.bmp,*.gif,*.png,*.jpeg,*.mp3,*.wav,*.wav,*.class,*.o,*.pyc'
+opt.wildignore = '*/.git/*,*/.hg/*,*/.svn/*,*.bmp,*.gif,*.mp3,*.wav,*.wav,*.class,*.o,*.pyc'
 
 -- Do not display certain messages in prompt
 opt.shortmess:append('c')
