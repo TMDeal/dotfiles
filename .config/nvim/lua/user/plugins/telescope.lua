@@ -33,10 +33,8 @@ telescope.setup {
                 ["<C-v>"] = actions.select_vertical,
                 ["<C-t>"] = actions.select_tab,
 
-                --["<C-u>"] = actions.preview_scrolling_up,
-                --["<C-d>"] = actions.preview_scrolling_down,
-                ["<C-u>"] = false,
-                ["<C-d>"] = false,
+                ["<C-u>"] = actions.preview_scrolling_up,
+                ["<C-d>"] = actions.preview_scrolling_down,
 
                 ["<PageUp>"] = actions.results_scrolling_up,
                 ["<PageDown>"] = actions.results_scrolling_down,
@@ -47,12 +45,11 @@ telescope.setup {
                 ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
                 ["<C-l>"] = actions.complete_tag,
                 ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
-
-                ['<esc>'] = actions.close
             },
 
             n = {
                 ["<esc>"] = actions.close,
+                ["<C-c>"] = actions.close,
                 ["<CR>"] = actions.select_default,
                 ["<C-x>"] = actions.select_horizontal,
                 ["<C-v>"] = actions.select_vertical,
@@ -83,36 +80,42 @@ telescope.setup {
                 ["?"] = actions.which_key,
             },
         }
-    }
+    },
+
+    pickers = {
+        find_files = {
+            theme = "dropdown"
+        },
+        oldfiles = {
+            theme = "dropdown"
+        }
+    },
 }
 
 -- Load projects extension for project.nvim
 require('telescope').load_extension('projects')
 
 local keymap = require("user.plugins.which-key").register_keymap
-local groupmap = require("user.plugins.which-key").register_group
 
-groupmap("t", "[Telescope]")
 -- Search files
-keymap('tf', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], "Find Files")
+keymap('f', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], "Find Files")
 -- Search recently used files
-keymap('to', [[<cmd>lua require('telescope.builtin').oldfiles()<cr>]], "Recently Used Files")
+keymap('O', [[<cmd>lua require('telescope.builtin').oldfiles()<cr>]], "Recently Used Files")
 -- Search buffers
-keymap('t<space>', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], "List Buffers")
+keymap('bl', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], "List Buffers")
 -- Find in current buffer with fuzzy search
-keymap('tl', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>]], "Find in Current Buffer")
+keymap('bs', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>]], "Find in Current Buffer")
 -- Search Tags
-keymap('tt', [[<cmd>lua require('telescope.builtin').tags()<cr>]], "Tags")
+keymap('/', [[<cmd>lua require('telescope.builtin').tags()<cr>]], "Tags")
 -- Grep within current project
-keymap('tg', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], "Grep")
+keymap('s', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], "Search")
 
-groupmap("tG", "[Git]")
 -- Check git commits
-keymap('tGc', [[<cmd>lua require('telescope.builtin').git_commits()<cr>]], "Git Commits")
+keymap('gc', [[<cmd>lua require('telescope.builtin').git_commits()<cr>]], "Git Commits")
 -- Check git branches
-keymap('tGb', [[<cmd>lua require('telescope.builtin').git_branches()<cr>]], "Git Branches")
+keymap('gb', [[<cmd>lua require('telescope.builtin').git_branches()<cr>]], "Git Branches")
 -- Check git status
-keymap('tGs', [[<cmd>lua require('telescope.builtin').git_status()<cr>]], "Git Status")
+keymap('gs', [[<cmd>lua require('telescope.builtin').git_status()<cr>]], "Git Status")
 
 -- Integrate with project.nvim
-keymap('tp', [[<cmd>lua require('telescope').extensions.projects.projects()<cr>]], "Projects")
+keymap('P', [[<cmd>lua require('telescope').extensions.projects.projects()<cr>]], "Projects")

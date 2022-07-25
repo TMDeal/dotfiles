@@ -6,6 +6,9 @@ end
 toggleterm.setup {
     size = 20,
     open_mapping = [[<c-\>]],
+    shade_filetypes = {},
+    shade_terminals = true,
+    shading_factor = 2,
     hide_numbers = true,
     start_in_insert = true,
     insert_mappings = false,
@@ -15,7 +18,11 @@ toggleterm.setup {
     direction = "float",
     float_opts = {
         border = "rounded",
-        winblend = 0
+        winblend = 0,
+        highlights = {
+            border = "Normal",
+            background = "Normal"
+        }
     }
 }
 
@@ -27,4 +34,4 @@ function _LAZYGIT_TOGGLE()
 end
 
 local keymap = require("user.plugins.which-key").register_keymap
-keymap("g", ":lua _LAZYGIT_TOGGLE()<CR>", "Lazygit")
+keymap("gl", ":lua _LAZYGIT_TOGGLE()<CR>", "Lazygit")

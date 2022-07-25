@@ -128,7 +128,15 @@ packer.startup(function(use)
     }
 
     -- Visualise indent levels
-    use "lukas-reineke/indent-blankline.nvim"
+    use {
+        "lukas-reineke/indent-blankline.nvim",
+        config = function()
+            require("indent_blankline").setup {
+                show_current_context = true,
+                show_current_context_start = true,
+            }
+        end
+    }
 
     -- Fancy Statusline
     use "nvim-lualine/lualine.nvim"

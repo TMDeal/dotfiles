@@ -1,5 +1,3 @@
-local M = {}
-
 local which_key_ok, wk = pcall(require, "which-key")
 if not which_key_ok then
     return
@@ -44,7 +42,7 @@ local function gen_table(key, opts)
     return tbl
 end
 
-M.register_keymap = function(key, cmd, label, opts)
+local function register_keymap(key, cmd, label, opts)
     opts = opts or {}
 
     local wk_opts = {
@@ -61,7 +59,7 @@ M.register_keymap = function(key, cmd, label, opts)
     wk.register(wk_keymap, wk_opts)
 end
 
-M.register_group = function(key, name, opts)
+local function register_group(key, name, opts)
     opts = opts or {}
 
     local wk_opts = {
@@ -78,4 +76,11 @@ M.register_group = function(key, name, opts)
     wk.register(wk_keymap, wk_opts)
 end
 
-return M
+-- Register groups not directly related to specific plugins
+register_group("b", "[Buffers]")
+register_group("g", "[Git]")
+
+return {
+    register_group = register_group,
+    register_keymap = register_keymap
+}

@@ -39,9 +39,6 @@ vim.api.nvim_set_keymap("t", "<ESC>", "<c-\\><c-n>", { silent = true })
 keymap("-", ":<C-u>split<cr>", "Split Window Horizontally")
 keymap("\\", ":<C-u>vsplit<cr>", "Split Window Vertically")
 
--- Buffer mappings
-keymap("q", ":Bdelete<CR>", "Close Current Buffer")
-
 -- Loclist/QuickFix mappings
 keymap("Q", function()
     local info = vim.fn.getwininfo()
