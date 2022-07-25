@@ -10,8 +10,7 @@ local function wiki_config(name)
         syntax = "default",
         ext = ".wiki",
         template_ext = ".html",
-        auto_toc = 1,
-        -- custom_wiki2html = "vimwiki_markdown"
+        auto_toc = 1
     }
 end
 
@@ -61,6 +60,10 @@ vim.api.nvim_create_autocmd("FileType", {
     group = vimwiki,
     pattern = "vimwiki",
     callback = function()
+        vim.opt_local.wrap = true
+        vim.opt_local.textwidth = 80
+        vim.opt_local.spell = true
+
         local opts = { noremap = true, silent = true }
         vim.api.nvim_buf_set_keymap(0, "n", "<leader>whh", ":Vimwiki2HTML<CR>", opts)
         vim.api.nvim_buf_set_keymap(0, "n", "<leader>whb", ":Vimwiki2HTMLBrowse<CR>", opts)
