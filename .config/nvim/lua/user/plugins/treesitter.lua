@@ -35,5 +35,10 @@ configs.setup {
     indent = {
         enable = true,
         disable = { "yaml" }
+    },
+
+    matchup = {
+        enable = true,
+        disable = {}
     }
 }

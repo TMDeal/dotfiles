@@ -67,6 +67,9 @@ packer.startup(function(use)
     -- Colorschemes
     use "shaunsingh/nord.nvim"
 
+    -- Improve the % operator
+    use "andymass/vim-matchup"
+
     -- Autocompletion
     use "hrsh7th/nvim-cmp"
     use "hrsh7th/cmp-nvim-lsp"
