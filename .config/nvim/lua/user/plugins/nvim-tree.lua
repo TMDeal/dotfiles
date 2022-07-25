@@ -30,6 +30,14 @@ nvim_tree.setup {
         }
     },
 
+    actions = {
+        use_system_clipboard = true,
+
+        open_file = {
+            quit_on_open = true
+        }
+    },
+
     renderer = {
         group_empty = true
     },

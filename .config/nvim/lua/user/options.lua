@@ -80,6 +80,7 @@ opt.foldnestmax = 10
 
 -- Change preview window location
 opt.splitbelow = true
+opt.splitright = true
 
 -- Word wrap disable
 opt.wrap = false

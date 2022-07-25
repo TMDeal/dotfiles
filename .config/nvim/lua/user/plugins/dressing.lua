@@ -3,9 +3,6 @@ if not dressing_ok then
     return
 end
 
-local thing = "asdf"
-print(thing)
-
 dressing.setup({
   input = {
     -- Set to false to disable the vim.ui.input implementation

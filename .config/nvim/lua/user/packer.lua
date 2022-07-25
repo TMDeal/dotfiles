@@ -192,10 +192,7 @@ packer.startup(function(use)
     -- Note taking
     use {
         "vimwiki/vimwiki",
-        branch = "dev",
-        setup = function()
-            vim.g.vimwiki_map_prefix = "<leader>v"
-        end
+        branch = "dev"
     }
 
     -- Pretty quickfix/loclist/diagnostics windows
