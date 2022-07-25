@@ -94,8 +94,9 @@ telescope.setup {
     },
 }
 
--- Load projects extension for project.nvim
+-- Load extensions
 require('telescope').load_extension('projects')
+require("telescope").load_extension("notify")
 
 local keymap = require("user.plugins.which-key").register_keymap
 
@@ -121,3 +122,5 @@ keymap('gs', [[<cmd>lua require('telescope.builtin').git_status()<cr>]], "Git St
 
 -- Integrate with project.nvim
 keymap('P', [[<cmd>lua require('telescope').extensions.projects.projects()<cr>]], "Projects")
+-- Integrate with nvim-notify
+keymap('N', [[<cmd>lua require('telescope').extensions.notify.notify(require('telescope.themes').get_dropdown({}))<cr>]], "Projects")

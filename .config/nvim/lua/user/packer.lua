@@ -126,12 +126,7 @@ packer.startup(function(use)
     }
 
     -- Highlight colorcodes to the color they represent
-    use {
-        "norcalli/nvim-colorizer.lua",
-        config = function()
-            require("colorizer").setup()
-        end
-    }
+    use "norcalli/nvim-colorizer.lua"
 
     -- Visualise indent levels
     use {
@@ -205,6 +200,9 @@ packer.startup(function(use)
 
     -- Pretty quickfix/loclist/diagnostics windows
     use "folke/trouble.nvim"
+
+    -- Pretty notifications
+    use "rcarriga/nvim-notify"
 
     -- Automatically setup everything after cloning packer.nvim
     -- This should be after all plugins
