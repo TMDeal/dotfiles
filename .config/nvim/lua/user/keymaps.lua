@@ -42,32 +42,7 @@ keymap("-", ":<C-u>split<cr>", "Split Window Horizontally")
 keymap("\\", ":<C-u>vsplit<cr>", "Split Window Vertically")
 
 -- Loclist/QuickFix mappings
-keymap("Q", function()
-    local info = vim.fn.getwininfo()
-
-    for _, window in pairs(info) do
-        if window.quickfix == 1 then
-            vim.cmd [[cclose]]
-        else
-            vim.cmd [[copen]]
-        end
-    end
-end, "QuickFix")
-
 keymap("q", ":cnext<CR>", "Next Quickfix Item", { prefix = "]" })
 keymap("q", ":cprev<CR>", "Previous Quickfix Item", { prefix = "[" })
-
-keymap("L", function()
-    local info = vim.fn.getwininfo()
-
-    for _, window in pairs(info) do
-        if window.loclist == 1 then
-            vim.cmd [[lclose]]
-        else
-            vim.cmd [[lopen]]
-        end
-    end
-end, "LocList")
-
 keymap("l", ":lnext<CR>", "Next LocList Item", { prefix = "]" })
 keymap("l", ":lprev<CR>", "Previous LocList Item", { prefix = "[" })

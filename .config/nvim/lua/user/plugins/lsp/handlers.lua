@@ -42,12 +42,23 @@ local function lsp_keymaps(bufnr)
 
     -- Go to declaration under cursor
     keymap('D', '<Cmd>lua vim.lsp.buf.declaration()<CR>', "Goto Declaration", { prefix = "g", buffer = bufnr })
-    -- Go to definition under cursor
-    keymap('d', '<Cmd>lua vim.lsp.buf.definition()<CR>', "Goto definition", { prefix = "g", buffer = bufnr })
-    -- Go to implementation under cursor
-    keymap('i', '<cmd>lua vim.lsp.buf.implementation()<CR>', "Goto Implementation", { prefix = "g", buffer = bufnr })
-    -- List references to object under cursor
-    keymap('r', '<cmd>lua vim.lsp.buf.references()<CR>', "List References", { prefix = "g", buffer = bufnr })
+    -- Use Trouble.nvim if it is installed
+    local trouble_ok, _ = pcall(require, "trouble")
+    if trouble_ok then
+        -- List references to object under cursor
+        keymap('r', '<cmd>TroubleToggle lsp_references<CR>', "Show References", { prefix = "g", buffer = bufnr })
+        -- List references to object under cursor
+        keymap('d', '<cmd>TroubleToggle lsp_definitions<CR>', "Show Definitions", { prefix = "g", buffer = bufnr })
+        -- List references to object under cursor
+        keymap('i', '<cmd>TroubleToggle lsp_implementations<CR>', "Show Implementation", { prefix = "g", buffer = bufnr })
+    else
+        -- List references to object under cursor
+        keymap('r', '<cmd>lua vim.lsp.buf.references()<CR>', "Show References", { prefix = "g", buffer = bufnr })
+        -- Go to definition under cursor
+        keymap('d', '<Cmd>lua vim.lsp.buf.definition()<CR>', "Show definition", { prefix = "g", buffer = bufnr })
+        -- Go to implementation under cursor
+        keymap('i', '<cmd>lua vim.lsp.buf.implementation()<CR>', "Show Implementation", { prefix = "g", buffer = bufnr })
+    end
 
     -- Go to next diagnostic
     keymap('d', '<cmd>lua vim.diagnostic.goto_next()<CR>', "Next Diagnostic", { prefix = "]", buffer = bufnr })

@@ -3,6 +3,8 @@ if not telescope_ok then
     return
 end
 
+local trouble_ok, trouble = pcall(require, "trouble.providers.telescope")
+
 local actions = require "telescope.actions"
 
 telescope.setup {
@@ -31,7 +33,6 @@ telescope.setup {
                 ["<CR>"] = actions.select_default,
                 ["<C-x>"] = actions.select_horizontal,
                 ["<C-v>"] = actions.select_vertical,
-                ["<C-t>"] = actions.select_tab,
 
                 ["<C-u>"] = actions.preview_scrolling_up,
                 ["<C-d>"] = actions.preview_scrolling_down,
@@ -45,6 +46,7 @@ telescope.setup {
                 ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
                 ["<C-l>"] = actions.complete_tag,
                 ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
+                ["<C-t>"] = trouble_ok and trouble.open_with_trouble or nil
             },
 
             n = {
@@ -53,7 +55,6 @@ telescope.setup {
                 ["<CR>"] = actions.select_default,
                 ["<C-x>"] = actions.select_horizontal,
                 ["<C-v>"] = actions.select_vertical,
-                ["<C-t>"] = actions.select_tab,
 
                 ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
                 ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
@@ -78,6 +79,7 @@ telescope.setup {
                 ["<PageDown>"] = actions.results_scrolling_down,
 
                 ["?"] = actions.which_key,
+                ["<C-t>"] = trouble_ok and trouble.open_with_trouble or nil
             },
         }
     },

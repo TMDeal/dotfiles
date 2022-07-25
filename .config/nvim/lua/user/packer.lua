@@ -200,6 +200,9 @@ packer.startup(function(use)
         end
     }
 
+    -- Pretty quickfix/loclist/diagnostics windows
+    use "folke/trouble.nvim"
+
     -- Automatically setup everything after cloning packer.nvim
     -- This should be after all plugins
     if PACKER_BOOTSTRAP then
