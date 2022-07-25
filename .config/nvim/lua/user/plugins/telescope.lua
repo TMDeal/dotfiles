@@ -3,8 +3,6 @@ if not telescope_ok then
     return
 end
 
-local keymap = vim.api.nvim_set_keymap
-
 local actions = require "telescope.actions"
 
 telescope.setup {
@@ -91,25 +89,30 @@ telescope.setup {
 -- Load projects extension for project.nvim
 require('telescope').load_extension('projects')
 
-local opts = { noremap = true, silent = true }
+local keymap = require("user.plugins.which-key").register_keymap
+local groupmap = require("user.plugins.which-key").register_group
 
+groupmap("t", "[Telescope]")
 -- Search files
-keymap('n', '<leader>tf', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], opts)
+keymap('tf', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], "Find Files")
 -- Search recently used files
-keymap('n', '<leader>to', [[<cmd>lua require('telescope.builtin').oldfiles()<cr>]], opts)
+keymap('to', [[<cmd>lua require('telescope.builtin').oldfiles()<cr>]], "Recently Used Files")
 -- Search buffers
-keymap('n', '<leader>t<space>', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], opts)
+keymap('t<space>', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], "List Buffers")
 -- Find in current buffer with fuzzy search
-keymap('n', '<leader>tl', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>]], opts)
+keymap('tl', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>]], "Find in Current Buffer")
 -- Search Tags
-keymap('n', '<leader>tt', [[<cmd>lua require('telescope.builtin').tags()<cr>]], opts)
+keymap('tt', [[<cmd>lua require('telescope.builtin').tags()<cr>]], "Tags")
 -- Grep within current project
-keymap('n', '<leader>tg', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], opts)
+keymap('tg', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], "Grep")
+
+groupmap("tG", "[Git]")
 -- Check git commits
-keymap('n', '<leader>tGc', [[<cmd>lua require('telescope.builtin').git_commits()<cr>]], opts)
+keymap('tGc', [[<cmd>lua require('telescope.builtin').git_commits()<cr>]], "Git Commits")
 -- Check git branches
-keymap('n', '<leader>tGb', [[<cmd>lua require('telescope.builtin').git_branches()<cr>]], opts)
+keymap('tGb', [[<cmd>lua require('telescope.builtin').git_branches()<cr>]], "Git Branches")
 -- Check git status
-keymap('n', '<leader>tGs', [[<cmd>lua require('telescope.builtin').git_status()<cr>]], opts)
+keymap('tGs', [[<cmd>lua require('telescope.builtin').git_status()<cr>]], "Git Status")
+
 -- Integrate with project.nvim
-keymap('n', '<leader>tp', [[<cmd>lua require('telescope').extensions.projects.projects()<cr>]], opts)
+keymap('tp', [[<cmd>lua require('telescope').extensions.projects.projects()<cr>]], "Projects")

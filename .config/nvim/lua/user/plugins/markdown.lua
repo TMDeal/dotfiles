@@ -1,5 +1,3 @@
-local M = {}
-
 vim.g.table_mode_map_prefix = "<leader>T"
 vim.g.table_mode_tableize_d_map = "<leader>TT"
 
@@ -28,45 +26,58 @@ pandoc.setup {
     },
 }
 
--- Had to implement the stuff below myself from pandoc.nvim
--- May consider just forking it
-local mappings = {
-    n = {
-        ["<leader>pb"] = function()
-            pandoc.render.init()
-        end,
+local keymap = require("user.plugins.which-key").register_keymap
+local groupmap = require("user.plugins.which-key").register_group
 
-        ["<leader>p1"] = function()
-            local input = vim.api.nvim_buf_get_name(0)
+groupmap("p", "[Pandoc]")
 
-            pandoc.render.build {
-                input = input,
-                args = {
-                    { "--standalone" },
-                    { "--template", "eisvogel" },
-                    { "--listings" }
-                },
-                output = "report.pdf"
-            }
-        end
+keymap("pb", function()
+    pandoc.render.init()
+end, "Default Build")
+
+keymap("p1", function()
+    local input = vim.api.nvim_buf_get_name(0)
+
+    pandoc.render.build {
+        input = input,
+        args = {
+            { "--standalone" },
+            { "--template", "eisvogel" },
+            { "--listings" }
+        },
+        output = "report.pdf"
     }
-}
+end, "Build with eisvogel Template")
 
-local opts = { noremap = true, silent = true, nowait = true }
-for mode, keymap in pairs(mappings) do
-    for key, _ in pairs(keymap) do
-        -- This is some fuckery, key gets mangled if this is not done
-        local fmt_key = key:gsub("<", "["):gsub(">", "]")
-        local callback = string.format("<cmd>lua require('user.plugins.markdown').exec_keymap('%s', '%s')<CR>", mode, fmt_key)
-        vim.api.nvim_set_keymap(mode, key, callback, opts)
-    end
+local which_key_ok, wk = pcall(require, "which-key")
+if not which_key_ok then
+    return
 end
 
-M.exec_keymap = function(mode, key)
-    -- Undo the previous fuckery
-    local fmt_key = key:gsub("%[", "<"):gsub("%]", ">")
-    local fn = mappings[mode][fmt_key]
-    fn()
-end
+wk.register({
+    T = {
+        name = "[Markdown Table Mode]",
 
-return M
+        m = "Toggle",
+        t = "Tableize Selection",
+        T = "Tableize Selection with Delimeter",
+        r = "Realign Columns",
+        ["?"] = "Echo Cell Representation",
+        d = {
+            name = "Delete",
+            d = "Delete Row",
+            c = "Delete Column"
+        },
+        i = {
+            name = "Insert",
+            C = "Insert Column Before",
+            c = "Insert Column After"
+        },
+        f = {
+            name = "Formulas",
+            a = "Add Formula",
+            e = "Evaluate Formula"
+        },
+        s = "Sort Column"
+    },
+}, { prefix = "<leader>" })

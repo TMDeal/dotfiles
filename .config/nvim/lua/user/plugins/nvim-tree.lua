@@ -8,8 +8,6 @@ if not nvim_tree_config_ok then
     return
 end
 
-local keymap = vim.api.nvim_set_keymap
-
 nvim_tree.setup {
     -- settings for Project.nvim
     respect_buf_cwd = true,
@@ -52,7 +50,10 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end
 })
 
-local opts = { noremap = true, silent = true }
-keymap("n", "<leader>nt", ":NvimTreeToggle<CR>", opts)
-keymap("n", "<leader>nf", ":NvimTreeFocus<CR>", opts)
-keymap("n", "<leader>nc", ":NvimTreeCollapse<CR>", opts)
+local keymap = require("user.plugins.which-key").register_keymap
+local groupmap = require("user.plugins.which-key").register_group
+
+groupmap("n", "[NvimTree]")
+keymap("nt", ":NvimTreeToggle<CR>", "Toggle NvimTree")
+keymap("nf", ":NvimTreeFocus<CR>", "Focus NvimTree")
+keymap("nc", ":NvimTreeCollapse<CR>", "Collapse NvimTree")

@@ -62,12 +62,35 @@ vim.api.nvim_create_autocmd("FileType", {
     group = vimwiki,
     pattern = "vimwiki",
     callback = function()
-        require("user.plugins.which-key").register_vimwiki()
-
         local opts = { noremap = true, silent = true }
         vim.api.nvim_buf_set_keymap(0, "n", "<leader>whh", ":Vimwiki2HTML<CR>", opts)
         vim.api.nvim_buf_set_keymap(0, "n", "<leader>whb", ":Vimwiki2HTMLBrowse<CR>", opts)
         vim.api.nvim_buf_set_keymap(0, "n", "<leader>wha", ":VimwikiAll2HTML<CR>", opts)
+
+        local which_key_ok, wk = pcall(require, "which-key")
+        if not which_key_ok then
+            return
+        end
+
+        wk.register({
+            w = {
+                c = "Colorize Line/Selection",
+                n = "Goto or Create New Page",
+                d = "Delete Current Page",
+                r = "Rename Current Page",
+
+                h = {
+                    name = "[HTML]",
+
+                    h = "Convert Current Page",
+                    b = "Convert and Browse Current Page"
+                },
+
+                ["<leader>"] = {
+                    i = "Update Diary Section"
+                }
+            }
+        }, { prefix = "<leader>", buffer = 0 })
     end
 })
 
@@ -78,3 +101,28 @@ vim.api.nvim_create_autocmd("BufWritePost", {
         vim.cmd [[silent! Vimwiki2HTML]]
     end
 })
+
+local which_key_ok, wk = pcall(require, "which-key")
+if not which_key_ok then
+    return
+end
+
+wk.register({
+    w = {
+        name = "[VimWiki]",
+
+        w = "Open Wiki",
+        t = "Open Wiki in New Tab",
+        s = "List and Select Available Wikis",
+        i = "Open Diary",
+
+        ["<leader>"] = {
+            name = "[Diary]",
+
+            w = "Open Diary for Today",
+            t = "Open Diary for Today in New Tab",
+            y = "Open Diary for Yesterday",
+            m = "Open Diary for Tomorrow",
+        }
+    }
+}, { prefix = "<leader>" })
