@@ -18,13 +18,6 @@ HISTCONTROL=ignoreboth
 # append to the history file, don't overwrite it
 shopt -s histappend
 
-# Make neovim or vim the default editor
-if $( command -v nvim > /dev/null ); then
-    export EDITOR="nvim"
-else
-    export EDITOR="vim"
-fi
-
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
 HISTFILESIZE=2000
@@ -130,49 +123,6 @@ if ! shopt -oq posix; then
     elif [ -f /etc/bash_completion ]; then
         . /etc/bash_completion
     fi
-fi
-
-# Add local bin directory to path for user scripts if it exists
-if [ -d "$HOME/.local/bin" ]; then
-    export PATH="$HOME/.local/bin:$PATH"
-fi
-
-# pyenv settings
-if [ -d "$HOME/.pyenv" ]; then
-    export PATH="$HOME/.pyenv/bin:$PATH"
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
-    export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-fi
-
-# nvm settings
-if [ -d "$HOME/.nvm" ]; then
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-fi
-
-# rbenv settings
-if [ -d "$HOME/.rbenv" ]; then
-    export RBENV_DIR="$HOME/.rbenv"
-    export PATH="$RBENV_DIR/bin:$PATH"
-    eval "$(rbenv init -)"
-fi
-
-if [ -d "$HOME/.gem/bin" ]; then
-    export PATH="$HOME/.gem/bin:$PATH"
-fi
-
-if [ -d "$HOME/.cargo" ]; then
-    export PATH="$HOME/.cargo/bin:$PATH"
-fi
-
-if [ -d "/usr/local/go" ]; then
-    export PATH="/usr/local/go/bin:$PATH"
-fi
-
-if [ -d "$HOME/pentest/bin" ]; then
-    export PATH="$HOME/pentest/bin:$PATH"
 fi
 
 # fzf setup
