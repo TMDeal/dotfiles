@@ -32,9 +32,6 @@ vim.api.nvim_set_keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", expr_opts)
 -- Y yank until the end of line
 vim.api.nvim_set_keymap("n", "Y", "y$", opts)
 
--- Remap escape to leave terminal mode
-vim.api.nvim_set_keymap("t", "<ESC>", "<c-\\><c-n>", { silent = true })
-
 keymap("q", ":wqa!<CR>", "Save and Quit")
 
 -- Windows splits

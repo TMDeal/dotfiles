@@ -19,15 +19,6 @@ autocmd("BufReadPost", {
     end
 })
 
---Remap escape to leave terminal mode
-autocmd("TermOpen", {
-    group = terminal,
-    callback = function()
-        local opts = {noremap = true}
-        local_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
-    end
-})
-
 -- Highlight on yank
 autocmd("TextYankPost", {
     group = yank_highlight,
