@@ -1,43 +1,20 @@
--- Generate a vimwiki config based on the name of the wiki
-local function wiki_config(name)
-    return {
-        name = name,
-        path = "~/vimwiki/" .. name,
-        path_html = "~/vimwiki/" .. name .. "/html",
-        template_path = "~/vimwiki/templates",
-        template_default = "default",
-        css_name = "css/styles.css",
-        syntax = "default",
-        ext = ".wiki",
-        template_ext = ".html",
-        auto_toc = 1
-    }
-end
+local tmdeal_github_io = {
+    auto_export = 1,
+    automatic_nested_syntaxes = 1,
+    name = "TMDeal.github.io",
+    path = "~/Documents/vimwiki/",
+    css_name = "css/main.css",
+    path_html = "~/Documents/vimwiki/docs/",
+    template_path = "~/Documents/vimwiki/templates/",
+    template_ext = ".html",
+    syntax = "default",
+    ext = ".wiki"
+}
 
--- Create a vimwiki config for every config listed in ~/vimwiki/wikis.txt
--- May want to change this to do some more in depth checks on the file read and
--- make sure that I get the input I expect
-local get_wikis = function()
-    local path = vim.env.HOME .. "/vimwiki/wikis.txt"
-    local wikis = {
-        wiki_config("default")
-    }
-
-    local f = io.open(path, "rb")
-    if f then f:close() end
-
-    if f == nil then
-        return wikis
-    end
-
-    for wiki in io.lines(path) do
-        table.insert(wikis, wiki_config(wiki))
-    end
-
-    return wikis
-end
-
-vim.g.vimwiki_list = get_wikis()
+vim.g.vimwiki_list = {
+    tmdeal_github_io
+}
+    
 vim.g.vimwiki_ext2syntax = vim.empty_dict()
 
 vim.g.vimwiki_key_mappings = {
@@ -93,14 +70,6 @@ vim.api.nvim_create_autocmd("FileType", {
                 }
             }
         }, { prefix = "<leader>", buffer = 0 })
-    end
-})
-
-vim.api.nvim_create_autocmd("BufWritePost", {
-    group = vimwiki,
-    pattern = "*.wiki",
-    callback = function()
-        vim.cmd [[silent! Vimwiki2HTML]]
     end
 })
 
