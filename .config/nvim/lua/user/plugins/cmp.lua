@@ -98,6 +98,15 @@ cmp.setup.cmdline(':', {
     }
 })
 
+cmp.setup.filetype("vimwiki", {
+    sources = {
+        { name = "omni" },
+        { name = "luasnip" },
+        { name = "buffer" },
+        { name = "path" }
+    }
+})
+
 local cmp_pandoc_ok, cmp_pandoc = pcall(require, "cmp_pandoc")
 if not cmp_pandoc_ok then
     return
