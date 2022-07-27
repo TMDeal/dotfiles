@@ -13,3 +13,12 @@ Gobuster
 webserver
 config
 wget
+netcat
+base64
+linpeas
+winpeas
+hardcoded
+exploitdb
+Influxdb
+privesc
+Burpsuite
