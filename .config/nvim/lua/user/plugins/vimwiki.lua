@@ -2,13 +2,14 @@ local tmdeal_github_io = {
     auto_export = 1,
     automatic_nested_syntaxes = 1,
     name = "TMDeal.github.io",
-    path = "~/Documents/vimwiki/",
+    path = "~/Documents/vimwiki",
     css_name = "css/main.css",
-    path_html = "~/Documents/vimwiki/docs/",
-    template_path = "~/Documents/vimwiki/templates/",
+    path_html = "~/Documents/vimwiki/docs",
+    template_path = "~/Documents/vimwiki/data/templates",
     template_ext = ".html",
     syntax = "default",
-    ext = ".wiki"
+    ext = ".wiki",
+    custom_wiki2html = "~/Documents/vimwiki/wiki2html"
 }
 
 vim.g.vimwiki_list = {
@@ -44,7 +45,7 @@ vim.api.nvim_create_autocmd("FileType", {
         local opts = { noremap = true, silent = true }
         vim.api.nvim_buf_set_keymap(0, "n", "<leader>whh", ":Vimwiki2HTML<CR>", opts)
         vim.api.nvim_buf_set_keymap(0, "n", "<leader>whb", ":Vimwiki2HTMLBrowse<CR>", opts)
-        vim.api.nvim_buf_set_keymap(0, "n", "<leader>wha", ":VimwikiAll2HTML<CR>", opts)
+        vim.api.nvim_buf_set_keymap(0, "n", "<leader>wha", ":VimwikiAll2HTML!<CR>", opts)
 
         local which_key_ok, wk = pcall(require, "which-key")
         if not which_key_ok then
