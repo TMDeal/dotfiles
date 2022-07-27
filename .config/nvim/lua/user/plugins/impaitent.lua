@@ -9,9 +9,9 @@ _G.__luacache_config = {
   }
 }
 
-local impatient_ok, impaitent = pcall(require, "impatient")
-if not impatient_ok then
-    return
-end
-
-impaitent.enable_profile()
+-- local impatient_ok, impaitent = pcall(require, "impatient")
+-- if not impatient_ok then
+--     return
+-- end
+--
+-- impaitent.enable_profile()
