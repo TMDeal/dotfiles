@@ -29,7 +29,7 @@ configs.setup {
         disable = {},
 
         -- Also will use vims default method of syntax highlighting
-        additional_vim_regex_highlighting = true
+        additional_vim_regex_highlighting = { "pandoc" }
     },
 
     indent = {
