@@ -106,5 +106,5 @@ end
 
 
 cmp_pandoc.setup {
-    filetypes = { "pandoc", "markdown", "rmd" },
+    filetypes = { "pandoc", "markdown" },
 }
