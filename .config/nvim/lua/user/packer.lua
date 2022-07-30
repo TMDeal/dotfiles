@@ -194,10 +194,7 @@ packer.startup(function(use)
     use 'goolord/alpha-nvim'
 
     -- Note taking
-    use {
-        "vimwiki/vimwiki",
-        branch = "dev"
-    }
+    use "jakewvincent/mkdnflow.nvim"
 
     -- Pretty quickfix/loclist/diagnostics windows
     use "folke/trouble.nvim"
