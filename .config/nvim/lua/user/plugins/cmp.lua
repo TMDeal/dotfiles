@@ -66,6 +66,7 @@ cmp.setup {
         { name = "nvim_lua" },
         { name = "cmp_pandoc" },
         { name = "luasnip" },
+        { name = 'nvim_lsp_signature_help' },
         { name = "buffer" },
         { name = "path" }
     },
