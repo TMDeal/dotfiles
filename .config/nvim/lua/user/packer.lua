@@ -109,6 +109,9 @@ packer.startup(function(use)
         end
     }
 
+    -- Sane indentation for python
+    use "Vimjas/vim-python-pep8-indent"
+
     -- Set commentstring based on cursor position in file
     use "JoosepAlviste/nvim-ts-context-commentstring"
 
