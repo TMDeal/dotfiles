@@ -22,3 +22,6 @@ exploitdb
 Influxdb
 privesc
 Burpsuite
+url
+localhost
+Github
