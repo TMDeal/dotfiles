@@ -49,7 +49,7 @@ opt.directory = cache_root .. '/swap//'
 -- Timeout settings
 opt.timeout = true
 opt.ttimeout = true
-opt.timeoutlen = 500
+opt.timeoutlen = 0
 opt.ttimeoutlen = 0
 
 -- Search settings
