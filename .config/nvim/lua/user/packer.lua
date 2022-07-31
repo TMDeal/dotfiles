@@ -117,6 +117,7 @@ packer.startup(function(use)
 
     -- Close matching sets of (,",',} and so on
     use "windwp/nvim-autopairs"
+    use "windwp/nvim-ts-autotag"
 
     -- Make commenting easier
     use "numToStr/Comment.nvim"
