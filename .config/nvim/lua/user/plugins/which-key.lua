@@ -71,6 +71,27 @@ end
 register_group("b", "Buffers")
 register_group("g", "Git")
 
+-- Descriptions for Mark commands
+local marks = {
+    m = {
+        name = "marks",
+
+        ["-"] = "Line",
+        ["="] = "Bookmark on Cursor",
+        ["<space>"] = "Buffer",
+        ["0"] = "Bookmark 0",
+        ["1"] = "Bookmark 1",
+        ["2"] = "Bookmark 2",
+        ["3"] = "Bookmark 3",
+        ["4"] = "Bookmark 4",
+        ["5"] = "Bookmark 5",
+        ["6"] = "Bookmark 6",
+        ["7"] = "Bookmark 7",
+        ["8"] = "Bookmark 8",
+        ["9"] = "Bookmark 9",
+    }
+}
+
 
     }
 
@@ -80,6 +101,7 @@ register_group("g", "Git")
 
 
 
+wk.register(marks, { mode = "n", prefix = "d" })
 
 return {
     register_group = register_group,

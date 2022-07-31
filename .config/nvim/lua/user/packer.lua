@@ -214,6 +214,9 @@ packer.startup(function(use)
     -- Code outline window
     use "stevearc/aerial.nvim"
 
+    -- Show marks in gutter
+    use "chentoast/marks.nvim"
+
     -- Automatically setup everything after cloning packer.nvim
     -- This should be after all plugins
     if PACKER_BOOTSTRAP then
