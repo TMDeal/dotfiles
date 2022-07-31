@@ -138,7 +138,7 @@ end
 -- Search files
 keymap('f', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], "Find Files")
 -- Search recently used files
-keymap('O', [[<cmd>lua require('telescope.builtin').oldfiles()<cr>]], "Recently Used Files")
+keymap('o', [[<cmd>lua require('telescope.builtin').oldfiles()<cr>]], "Recently Used Files")
 -- Search buffers
 keymap('bl', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], "List Buffers")
 -- Find in current buffer with fuzzy search
