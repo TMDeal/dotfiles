@@ -8,14 +8,12 @@ env:
   TERM: alacritty
 
 shell:
-  program: /bin/tmux
+  program: /bin/bash
   args:
-    - "new"
-    - "-A"
-    - "-s main"
+    - "--login"
 
 window:
-  decorations: none
+  decorations: full
   opacity: 1.0
   startup_mode: Maximized
   title: Alacritty
