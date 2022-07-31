@@ -48,7 +48,9 @@ local function lsp_keymaps(bufnr)
         -- List references to object under cursor
         keymap('r', '<cmd>TroubleToggle lsp_references<CR>', "Show References", { prefix = "g", buffer = bufnr })
         -- List references to object under cursor
-        keymap('d', '<cmd>TroubleToggle lsp_definitions<CR>', "Show Definitions", { prefix = "g", buffer = bufnr })
+        -- Trouble version does not currently work very well, wait till this gets fixed
+        -- keymap('d', '<cmd>TroubleToggle lsp_definitions<CR>', "Show Definitions", { prefix = "g", buffer = bufnr })
+        keymap('d', '<Cmd>lua vim.lsp.buf.definition()<CR>', "Show definition", { prefix = "g", buffer = bufnr })
         -- List references to object under cursor
         keymap('i', '<cmd>TroubleToggle lsp_implementations<CR>', "Show Implementation", { prefix = "g", buffer = bufnr })
     else
@@ -80,7 +82,7 @@ local function lsp_keymaps(bufnr)
     -- Rename within the current buffer
     keymap('lr', '<cmd>lua vim.lsp.buf.rename()<CR>', "Rename", { buffer = bufnr })
     -- Perform code actions
-    keymap('lc', '<cmd>lua vim.lsp.buf.code_action()<CR>', "Code Action", { buffer = bufnr })
+    keymap('la', '<cmd>lua vim.lsp.buf.code_action()<CR>', "Code Action", { buffer = bufnr })
     -- Open the diagnostic menu to show details
     keymap('le', '<cmd>lua vim.diagnostic.open_float()<CR>', "Show Diagnostics", { buffer = bufnr })
 
