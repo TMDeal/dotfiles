@@ -100,6 +100,15 @@ require("telescope").load_extension("notify")
 
 local keymap = require("user.plugins.which-key").register_keymap
 
+-- load nvim-neoclip extension
+local neoclip_ok, _ = pcall(require, "neoclip")
+if neoclip_ok then
+    telescope.load_extension('neoclip')
+    telescope.load_extension('macroscope')
+
+    keymap('y', [[<cmd>:lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown({}))<cr>]], "Neoclip")
+    keymap('m', [[<cmd>:lua require('telescope').extensions.macroscope.default(require('telescope.themes').get_dropdown({}))<cr>]], "Macros - (q)")
+end
 -- Search files
 keymap('f', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], "Find Files")
 -- Search recently used files

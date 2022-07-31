@@ -203,6 +203,14 @@ packer.startup(function(use)
     -- Pretty notifications
     use "rcarriga/nvim-notify"
 
+    -- yankring
+    use {
+        "AckslD/nvim-neoclip.lua",
+        requires = {
+            {'kkharji/sqlite.lua', module = 'sqlite'},
+        },
+    }
+
     -- Automatically setup everything after cloning packer.nvim
     -- This should be after all plugins
     if PACKER_BOOTSTRAP then
