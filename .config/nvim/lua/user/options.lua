@@ -10,6 +10,9 @@ for i = 1, #cache_dirs do
     end
 end
 
+-- Set default shell
+opt.shell = "/bin/zsh"
+
 -- Incremental live completion
 opt.inccommand = 'split'
 
