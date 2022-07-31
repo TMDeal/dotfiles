@@ -168,6 +168,6 @@ if [ -d "/usr/local/go" ]; then
     export PATH="/usr/local/go/bin:$PATH"
 fi
 
-if [ -d "$HOME/pentest/bin" ]; then
-    export PATH="$HOME/pentest/bin:$PATH"
+if [ -d "/pentest/bin" ]; then
+    export PATH="/pentest/bin:$PATH"
 fi
