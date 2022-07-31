@@ -45,58 +45,40 @@ wk.setup {
     hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ ", "<Plug>", "require" }
 }
 
-local function gen_table(key, opts)
-    local char = string.sub(key, 0, 1)
-    local rest = string.sub(key, 2, #key)
-
-    local tbl = {}
-
-    if rest == "" then
-        tbl[char] = opts
-        return tbl
-    end
-
-    tbl[char] = gen_table(rest, opts)
--- Register groups not directly related to specific plugins
-register_group("b", "Buffers")
-register_group("g", "Git")
-
-    return tbl
-end
+-- Default options for the register_keymap/register_group functions
+local register_opts = {
+    mode = "n",
+    prefix = "<leader>",
+    buffer = nil,
+    silent = true,
+    noremap = true,
+    nowait = false
+}
 
 local function register_keymap(key, cmd, label, opts)
-    opts = opts or {}
-
-    local wk_opts = {
-        mode = opts.mode or "n",
-        prefix = opts.prefix or "<leader>",
-        buffer = opts.buffer or nil,
-        silent = opts.silent or true,
-        noremap = opts.noremap or true,
-        nowait = opts.nowait or false
-    }
-
-    local wk_keymap = gen_table(key, { cmd, label })
-
+    local wk_opts = vim.tbl_deep_extend("force", {}, register_opts, opts or {})
+    local wk_keymap = { [key] = { cmd, label } }
     wk.register(wk_keymap, wk_opts)
 end
 
 local function register_group(key, name, opts)
-    opts = opts or {}
-
-    local wk_opts = {
-        mode = opts.mode or "n",
-        prefix = opts.prefix or "<leader>",
-        buffer = opts.buffer or nil,
-        silent = opts.silent or true,
-        noremap = opts.noremap or true,
-        nowait = opts.nowait or false
-    }
-
-    local wk_keymap = gen_table(key, { name = name })
-
+    local wk_opts = vim.tbl_deep_extend("force", {}, register_opts, opts or {})
+    local wk_keymap = { [key] = { name = name } }
     wk.register(wk_keymap, wk_opts)
 end
+
+-- Register groups not directly related to specific plugins
+register_group("b", "Buffers")
+register_group("g", "Git")
+
+
+    }
+
+
+
+    }
+
+
 
 
 return {
