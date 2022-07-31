@@ -222,6 +222,9 @@ packer.startup(function(use)
     -- Show marks in gutter
     use "chentoast/marks.nvim"
 
+    -- Better quickfix menu
+    use "kevinhwang91/nvim-bqf"
+
     -- Automatically setup everything after cloning packer.nvim
     -- This should be after all plugins
     if PACKER_BOOTSTRAP then
