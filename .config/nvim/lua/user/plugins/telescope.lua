@@ -97,6 +97,11 @@ telescope.setup {
 -- Load extensions
 require('telescope').load_extension('projects')
 require("telescope").load_extension("notify")
+    extensions = {
+        aerial = {
+            show_nesting = true
+        },
+
 
 local keymap = require("user.plugins.which-key").register_keymap
 
@@ -109,6 +114,13 @@ if neoclip_ok then
     keymap('y', [[<cmd>:lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown({}))<cr>]], "Neoclip")
     keymap('m', [[<cmd>:lua require('telescope').extensions.macroscope.default(require('telescope.themes').get_dropdown({}))<cr>]], "Macros - (q)")
 end
+
+-- Load aerial extension
+local aerial_ok, _ = pcall(require, "aerial")
+if aerial_ok then
+    telescope.load_extension('aerial')
+end
+
 -- Search files
 keymap('f', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], "Find Files")
 -- Search recently used files
