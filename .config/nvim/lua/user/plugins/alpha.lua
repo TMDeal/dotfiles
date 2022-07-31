@@ -10,10 +10,11 @@ local button = dashboard.button
 section.buttons.val = {
     button("e", "  New file", ":ene<CR>"),
     button("c", "  Configuration", ":e ~/.config/nvim/init.lua<CR>"),
-    button("SPC t f", "  Find file"),
-    button("SPC t o", "  Recently opened files"),
-    button("SPC t p", "  Find project"),
-    button("SPC t g", "  Find text"),
+    button("p", "  Projects", ":Telescope projects<CR>"),
+    button("SPC f", "  Find file"),
+    button("SPC o", "  Recently opened files"),
+    button("SPC P", "  Find project"),
+    button("SPC s", "  Find text"),
     button("q", "  Quit", ":qa<CR>"),
 }
 
