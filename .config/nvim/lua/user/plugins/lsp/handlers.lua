@@ -100,6 +100,12 @@ M.on_attach = function(client, bufnr)
 
         lsp_signature.on_attach(opts, bufnr)
     end
+
+    local aerial_ok, aerial = pcall(require, "aerial")
+    if aerial_ok then
+        aerial.on_attach(client, bufnr)
+    end
+
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
