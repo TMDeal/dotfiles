@@ -1,0 +1,40 @@
+import:
+ - ~/.config/alacritty/colors.yml
+ - ~/.config/alacritty/font.yml
+ - ~/.config/alacritty/keybinds.yml
+ - ~/.config/alacritty/debug.yml
+
+env:
+  TERM: alacritty
+
+shell:
+  program: /bin/tmux
+  args:
+    - "new"
+    - "-A"
+    - "-s main"
+
+window:
+  decorations: none
+  opacity: 1.0
+  startup_mode: Maximized
+  title: Alacritty
+  dynamic_title: false
+
+  class:
+    instance: Alacritty
+    general: Alacritty
+
+scrolling:
+  history: 10000
+  multiplier: 3
+
+selection:
+  save_to_clipboard: true
+
+cursor:
+  style:
+    shape: Block
+    blinking: Off
+
+live_config_reload: true
