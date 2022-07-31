@@ -5,8 +5,16 @@ end
 
 wk.setup {
     plugins = {
+        marks = true, -- shows a list of your marks on ' and `
+        registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+
+        spelling = {
+            enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+            suggestions = 20, -- how many suggestions should be shown in the list?
+        },
+
         presets = {
-            operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+            operators = true, -- adds help for operators like d, y, ...
             motions = true, -- adds help for motions
             text_objects = true, -- help for text objects triggered after entering an operator
             windows = true, -- default bindings on <c-w>
@@ -16,14 +24,25 @@ wk.setup {
         },
     },
 
+    -- add operators that will trigger motion and text object completion
+    -- to enable all native operators, set the preset / operators plugin above
+    operators = {
+        gc = "Comments"
+    },
+
     key_labels = {
         ["<space>"] = "SPC",
         ["<leader>"] = "SPC"
     },
 
-    triggers = { "<leader>", "`", "\"" }, -- input triggers
+    -- enable this to hide mappings for which you didn't specify a label
+    ignore_missing = false,
 
-    hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
+    -- automatically setup triggers
+    triggers = "auto",
+
+    -- hide mapping boilerplate
+    hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ ", "<Plug>", "require" }
 }
 
 local function gen_table(key, opts)
