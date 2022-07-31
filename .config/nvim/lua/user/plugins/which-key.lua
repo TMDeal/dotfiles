@@ -38,6 +38,9 @@ local function gen_table(key, opts)
     end
 
     tbl[char] = gen_table(rest, opts)
+-- Register groups not directly related to specific plugins
+register_group("b", "Buffers")
+register_group("g", "Git")
 
     return tbl
 end
@@ -76,9 +79,6 @@ local function register_group(key, name, opts)
     wk.register(wk_keymap, wk_opts)
 end
 
--- Register groups not directly related to specific plugins
-register_group("b", "[Buffers]")
-register_group("g", "[Git]")
 
 return {
     register_group = register_group,

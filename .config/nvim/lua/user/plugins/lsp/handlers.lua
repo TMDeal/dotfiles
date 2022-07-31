@@ -35,7 +35,7 @@ local function lsp_keymaps(bufnr)
     local keymap = require("user.plugins.which-key").register_keymap
     local groupmap = require("user.plugins.which-key").register_group
 
-    groupmap("l", "[LSP]", { buffer = bufnr })
+    groupmap("l", "LSP", { buffer = bufnr })
 
     -- Display the documentation for item under cursor
     bkeymap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', { noremap = true, silent = true })
@@ -65,7 +65,7 @@ local function lsp_keymaps(bufnr)
     -- Go to previous diagnostic
     keymap('d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', "Previous Diagnostic", { prefix = "[", buffer = bufnr })
 
-    groupmap("lw", "[Workspaces]", { buffer = bufnr })
+    groupmap("lw", "Workspaces", { buffer = bufnr })
     -- Add a workspace folder
     keymap('lwa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', "Add Workspace Folder", { buffer = bufnr })
     -- Remove a workspace folder
