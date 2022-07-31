@@ -102,6 +102,14 @@ require("telescope").load_extension("notify")
             show_nesting = true
         },
 
+        fzf = {
+            fuzzy = true,                    -- false will only do exact matching
+            override_generic_sorter = true,  -- override the generic sorter
+            override_file_sorter = true,     -- override the file sorter
+            case_mode = "smart_case",        -- or "ignore_case" or "respect_case". default is "smart_case"
+        }
+    }
+}
 
 local keymap = require("user.plugins.which-key").register_keymap
 
@@ -119,6 +127,12 @@ end
 local aerial_ok, _ = pcall(require, "aerial")
 if aerial_ok then
     telescope.load_extension('aerial')
+end
+
+-- Load fzf extension
+local fzf_ok, _ = pcall(require, "fzf_lib")
+if fzf_ok then
+    require('telescope').load_extension('fzf')
 end
 
 -- Search files

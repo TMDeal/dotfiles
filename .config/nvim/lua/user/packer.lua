@@ -101,6 +101,11 @@ packer.startup(function(use)
         }
     }
 
+    use {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        run = 'make'
+    }
+
     -- Treesitter
     use {
         "nvim-treesitter/nvim-treesitter",
