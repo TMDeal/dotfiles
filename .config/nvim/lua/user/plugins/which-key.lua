@@ -92,16 +92,81 @@ local marks = {
     }
 }
 
+-- Description for comment commands
+local comments = {
+    b = {
+        name = "Toggle Block Comments",
+        c = "Comment"
+    },
 
+    c = {
+        name = "Toggle Line Comments",
+        c = "Comment Line",
+        o = "Comment Line Below" ,
+        O = "Comment Line Above",
+        A = "Comment at Line End"
     }
+}
 
+-- Descriptions for visual comments
+local vcomments = {
+    c = "Linewise Comment Selection",
+    b = "Blockwise Comment Selection"
+}
 
+-- Descriptions for match-up text objects
+local matchup = {
+    a = {
+        ["%"] = "Matchup Pair"
+    },
 
+    i = {
+        ["%"] = "Matchup Pair"
+    },
+
+    g = {
+        ["%"] = "Matchup Pair"
+    },
+
+    ["]"] = {
+        name = "To Next",
+
+        ["%"] = "Matchup Pair"
+    },
+
+    ["["] = {
+        name = "To Previous",
+
+        ["%"] = "Matchup Pair"
+    },
+
+    z = {
+        ["%"] = "Matchup Pair"
     }
+}
 
+-- Description for commands under the "z" operator
+local z = {
+    ["%"] = "Jump to Begining of Next Pair"
+}
 
+-- Description for commands under the "z" operator in visual mode
+local vz = {
+    ["%"] = "Jump to Begining of Next Pair"
+}
+
+-- Descriptions for window commands
+local windows = {
+    o = "Focus Window"
+}
 
 wk.register(marks, { mode = "n", prefix = "d" })
+wk.register(windows, { mode = "n", prefix = "<c-w>" })
+wk.register(comments, { mode = "n", prefix = "g" })
+wk.register(vcomments, { mode = "v", prefix = "g" })
+wk.register(matchup, { mode = "o", prefix = "" })
+wk.register(z, { mode = "n", prefix = "z" })
+wk.register(vz, { mode = "v", prefix = "z" })
 
 return {
     register_group = register_group,
