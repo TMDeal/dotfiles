@@ -92,11 +92,7 @@ telescope.setup {
             theme = "dropdown"
         }
     },
-}
 
--- Load extensions
-require('telescope').load_extension('projects')
-require("telescope").load_extension("notify")
     extensions = {
         aerial = {
             show_nesting = true
@@ -112,6 +108,21 @@ require("telescope").load_extension("notify")
 }
 
 local keymap = require("user.plugins.which-key").register_keymap
+
+
+-- Load project.nvim extension
+local project_ok, _ = pcall(require, "project_nvim")
+if project_ok then
+    telescope.load_extension('projects')
+    keymap('P', [[<cmd>lua require('telescope').extensions.projects.projects()<cr>]], "Projects")
+end
+
+-- Load nvim-notify extension
+local notify_ok, _ = pcall(require, "notify")
+if notify_ok then
+    telescope.load_extension("notify")
+    keymap('N', [[<cmd>lua require('telescope').extensions.notify.notify(require('telescope.themes').get_dropdown({}))<cr>]], "Projects")
+end
 
 -- load nvim-neoclip extension
 local neoclip_ok, _ = pcall(require, "neoclip")
@@ -154,8 +165,3 @@ keymap('gc', [[<cmd>lua require('telescope.builtin').git_commits()<cr>]], "Git C
 keymap('gb', [[<cmd>lua require('telescope.builtin').git_branches()<cr>]], "Git Branches")
 -- Check git status
 keymap('gs', [[<cmd>lua require('telescope.builtin').git_status()<cr>]], "Git Status")
-
--- Integrate with project.nvim
-keymap('P', [[<cmd>lua require('telescope').extensions.projects.projects()<cr>]], "Projects")
--- Integrate with nvim-notify
-keymap('N', [[<cmd>lua require('telescope').extensions.notify.notify(require('telescope.themes').get_dropdown({}))<cr>]], "Projects")
