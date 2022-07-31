@@ -93,7 +93,7 @@ opt.titlestring = '%t'
 
 -- Enable extra colors in terminal
 opt.termguicolors = true
-opt.guifont = "Anonymice Nerd Font:h12"
+opt.guifont = "Anonymice Nerd Font:h8"
 
 -- Enable python remote-plugins for python3
 vim.g.python3_host_prog = "~/.pyenv/versions/neovim3/bin/python"
