@@ -90,6 +90,16 @@ end
 
 M.on_attach = function(client, bufnr)
     lsp_keymaps(bufnr)
+
+    local lsp_signature_ok, lsp_signature = pcall(require, "lsp_signature")
+    if lsp_signature_ok then
+        local opts = {
+            hint_enable = false,
+            hint_prefix = ""
+        }
+
+        lsp_signature.on_attach(opts, bufnr)
+    end
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
