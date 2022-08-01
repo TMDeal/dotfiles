@@ -96,7 +96,7 @@ plugins=(
     zsh-interactive-cd
 )
 
-export ZSH_TMUX_AUTOSTART="true"
+export ZSH_TMUX_AUTOSTART="false"
 export ZSH_TMUX_FIXTERM_WITH_256COLOR="tmux-256color"
 export ZSH_TMUX_DEFAULT_SESSION_NAME="main"
 export ZSH_TMUX_UNICODE="true"
