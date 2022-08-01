@@ -1,0 +1,18 @@
+#!/bin/bash
+
+choices="Cancel\nShutdown\nReboot\nLogout"
+dmenu="rofi -dmenu"
+
+choice=$(echo -e "$choices" | $dmenu -i -p "> ")
+
+case $choice in
+    Cancel)
+        ;;
+    Shutdown)
+        pkexec shutdown -h now ;;
+    Reboot)
+        pkexec shutdown -r now ;;
+    Logout)
+        i3-msg exit
+esac
+
