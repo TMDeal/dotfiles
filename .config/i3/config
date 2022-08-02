@@ -151,15 +151,17 @@ bindsym $mod+Print exec --no-startup-id flameshot screen
 # rofi clipboard tool
 bindsym $mod+c exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard
 
+# Clear all dunst notifications
+bindsym $alt+d exec --no-startup-id dunstctl close-all
+
 # Use pactl to adjust volume in PulseAudio.
-bindsym XF86AudioRaiseVolume exec --no-startup-id pulsemixer --change-volume +5 --max-volume 150
-bindsym XF86AudioLowerVolume exec --no-startup-id pulsemixer --change-volume -5 --max-volume 150
-bindsym XF86AudioMute exec --no-startup-id pulsemixer --toggle-mute
-bindsym XF86AudioMicMute exec --no-startup-id pulsemixer --toggle-mute source-0
+bindsym XF86AudioRaiseVolume exec --no-startup-id $scripts/volumectl up
+bindsym XF86AudioLowerVolume exec --no-startup-id $scripts/volumectl down
+bindsym XF86AudioMute exec --no-startup-id $scripts/volumectl mute
 
 # brightness
-bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec --no-startup-id $scripts/backlightctl up
+bindsym XF86MonBrightnessDown exec --no-startup-id $scripts/backlightctl down
 
 # I3 Gaps
 gaps inner 6
