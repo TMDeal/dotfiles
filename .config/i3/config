@@ -3,7 +3,7 @@ set $alt mod1
 
 set $background $HOME/.config/i3/background.jpg
 
-set $term --no-startup-id alacritty
+set $term alacritty
 
 set $font pango:AnonymousPro Nerd Font 12
 
@@ -47,7 +47,7 @@ floating_modifier $mod
 focus_follows_mouse no
 
 # start a terminal
-bindsym $mod+Return exec $term
+bindsym $mod+Return exec --no-startup-id $term
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -135,6 +135,8 @@ bindsym $mod+Shift+equal move scratchpad
 bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun
 # start Firefox
 bindsym $mod+w exec --no-startup-id firefox
+# start Spotify - (ncspot)
+bindsym $mod+m exec --no-startup-id $term -e ncspot
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
