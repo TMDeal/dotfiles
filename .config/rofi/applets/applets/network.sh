@@ -5,9 +5,7 @@
 ## Github  : @adi1090x
 ## Twitter : @adi1090x
 
-style="$($HOME/.config/rofi/applets/applets/style.sh)"
-
-dir="$HOME/.config/rofi/applets/applets/configs/$style"
+dir="$HOME/.config/rofi/applets/applets/configs"
 rofi_command="rofi -theme $dir/network.rasi"
 
 ## Get info
@@ -45,6 +43,8 @@ launch=""
 
 options="$connected\n$bmon\n$launch_cli\n$launch"
 
+terminal="alacritty -e"
+
 ## Main
 chosen="$(echo -e "$options" | $rofi_command -p "$SSID" -dmenu $active $urgent -selected-row 1)"
 case $chosen in
@@ -56,10 +56,10 @@ case $chosen in
 		fi 
         ;;
     $bmon)
-        termite -e bmon
+        $terminal bmon
         ;;
     $launch_cli)
-        termite -e nmtui
+        $terminal nmtui
         ;;
     $launch)
         nm-connection-editor
