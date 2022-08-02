@@ -171,3 +171,7 @@ fi
 if [ -d "/pentest/bin" ]; then
     export PATH="/pentest/bin:$PATH"
 fi
+
+if [ -d "$HOME/.cargo" ]; then
+    source "$HOME/.cargo/env"
+fi
