@@ -1,19 +1,7 @@
+/** Basic config file **/
+/** Themes from: https://github.com/adi1090x/rofi **/
+
 configuration {
-
-	font: "AnonymousPro Nerd Font 12";
-	width: 30;
-	line-margin: 10;
-	lines: 6;
-	columns: 2;
-
-     display-ssh:    "";
-    display-run:    "";
-    display-drun:   "";
-    display-window: "";
-    display-combi:  "";
-    show-icons:     true;
-
-    drun-match-fields: "name";
+  show-icons:         true;
+  icon-theme:         "Papirus";
 }
-
-@theme "nord"
