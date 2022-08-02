@@ -8,6 +8,7 @@ set $term --no-startup-id alacritty
 set $font pango:AnonymousPro Nerd Font 12
 
 set $scripts $HOME/.config/i3/scripts
+set $rofi $HOME/.config/rofi/bin
 
 set $left  h
 set $down  j
@@ -51,11 +52,6 @@ bindsym $mod+Return exec $term
 
 # kill focused window
 bindsym $mod+Shift+q kill
-
-# start rofi (a program launcher)
-bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun
-# start Firefox
-bindsym $mod+w exec --no-startup-id firefox
 
 # change focus
 bindsym $mod+h focus left
@@ -135,6 +131,11 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 bindsym $mod+Shift+equal move scratchpad
+
+# start rofi (a program launcher)
+bindsym $mod+d exec --no-startup-id $rofi/launcher
+# start Firefox
+bindsym $mod+w exec --no-startup-id firefox
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
