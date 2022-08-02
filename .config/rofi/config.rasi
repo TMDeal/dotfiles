@@ -1,7 +1,0 @@
-/** Basic config file **/
-/** Themes from: https://github.com/adi1090x/rofi **/
-
-configuration {
-  show-icons:         true;
-  icon-theme:         "Papirus";
-}

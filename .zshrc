@@ -138,6 +138,7 @@ alias rm="rm -I"
 alias ctrlc='xclip -selection c'
 alias ctrlv='xclip -selection c -o'
 
+alias vimdiff="vim -d"
 alias vimn="vim -u NONE"
 alias ev="vim ~/.config/nvim/init.lua"
 
