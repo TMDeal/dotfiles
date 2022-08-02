@@ -93,7 +93,6 @@ plugins=(
     # Utility
     extract
     common-aliases
-    zsh-interactive-cd
 )
 
 export ZSH_TMUX_AUTOSTART="false"
