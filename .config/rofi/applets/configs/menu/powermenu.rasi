@@ -1,0 +1,16 @@
+@import "../base.rasi"
+
+window {
+    width: 420px;
+    location: center;
+    x-offset: 0px;
+    y-offset: 0px;
+}
+
+textbox-prompt-colon {
+	str: " System ";
+}
+
+listview {
+    columns: 5;
+}

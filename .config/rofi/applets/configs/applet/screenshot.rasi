@@ -1,0 +1,16 @@
+@import "../base.rasi"
+
+window {
+    width: 250px;
+    location: northeast;
+    x-offset: -6px;
+    y-offset: 40px;
+}
+
+textbox-prompt-colon {
+	str: " Screenshot ";
+}
+
+listview {
+    columns: 2;
+}
