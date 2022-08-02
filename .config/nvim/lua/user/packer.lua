@@ -114,6 +114,8 @@ packer.startup(function(use)
         end
     }
 
+    use "Fymyte/rasi.vim"
+
     -- Sane indentation for python
     use "Vimjas/vim-python-pep8-indent"
 
