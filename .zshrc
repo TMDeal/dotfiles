@@ -4,11 +4,14 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# Would you like to use another custom folder than $ZSH/custom?
+ZSH_CUSTOM="$HOME/.zsh.d"
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="minimal"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -55,9 +58,6 @@ DISABLE_AUTO_TITLE="true"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
 HIST_STAMPS="yyyy-mm-dd"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -174,4 +174,9 @@ fi
 
 if [ -d "$HOME/.cargo" ]; then
     source "$HOME/.cargo/env"
+fi
+
+# Load up starship if it is available
+if $( command -v starship > /dev/null ); then
+    eval "$(starship init zsh)"
 fi
