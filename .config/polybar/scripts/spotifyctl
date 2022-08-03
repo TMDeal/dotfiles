@@ -2,23 +2,11 @@
 
 cmd="$1"
 
-echo $cmd | grep -E "next|previous|play-pause" 2>/dev/null
-if [ ! $? -eq 0 ]; then
-    echo "Invalid cmd"
-    exit 1
-fi
-
 # The name of polybar bar which houses the main spotify module and the control modules.
 PARENT_BAR="top"
 PARENT_BAR_PID=$(pgrep -a "polybar" | grep "$PARENT_BAR" | cut -d" " -f1)
 PLAYER="ncspot"
-
 STATUS=$(playerctl --player=$PLAYER status 2>/dev/null)
-EXIT_CODE=$?
-
-if [ ! $EXIT_CODE -eq 0 ]; then
-    exit 0
-fi
 
 # Sends $2 as message to all polybar PIDs that are part of $1
 update_play-pause_hooks() {
@@ -46,6 +34,13 @@ prev() {
     playerctl previous -p $PLAYER
 }
 
+status() {
+    echo "阮"
+    if [ -z $STATUS ]; then
+        exit 1
+    fi
+}
+
 case $cmd in
     "next")
         next
@@ -55,5 +50,11 @@ case $cmd in
         ;;
     "play-pause")
         playpause
+        ;;
+    "status")
+        status
+        ;;
+    *)
+        echo "Invalid cmd"
         ;;
 esac
