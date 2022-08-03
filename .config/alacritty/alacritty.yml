@@ -14,7 +14,7 @@ shell:
 
 window:
   decorations: full
-  opacity: 0.9
+  opacity: 0.95
   startup_mode: Maximized
   title: Alacritty
   dynamic_title: false
