@@ -169,6 +169,12 @@ bindsym XF86MonBrightnessDown exec --no-startup-id $scripts/backlightctl down
 gaps inner 6
 gaps outer 1
 
+# Make these applications live in specific workspaces
+assign [class="Firefox"] $ws2
+assign [instance="ncspot"] $ws3
+assign [class="TelegramDesktop"] $ws10
+assign [class="discord"] $ws9
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
     # Pressing left will shrink the window’s width.
