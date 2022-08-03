@@ -3,12 +3,21 @@ if not lualine_ok then
     return
 end
 
+-- local right_separator = ''
+-- local left_separator = ''
+-- local sub_right_separator = ''
+-- local sub_left_separator = ''
+local left_separator = ''
+local right_separator = ''
+local sub_left_separator = ''
+local sub_right_separator = ''
+
 lualine.setup {
     options = {
         theme = 'nord',
         icons_enabled = true,
-        component_separators = { left = '', right = ''},
-        section_separators = { left = '', right = ''},
+        component_separators = { left = sub_left_separator, right = sub_right_separator},
+        section_separators = { left = left_separator, right = right_separator},
         globalstatus = true,
     },
 
@@ -33,7 +42,7 @@ lualine.setup {
                 "aerial",
 
                 -- The separator to be used to separate symbols in status line.
-                sep = '  ',
+                sep = ' ' .. sub_left_separator .. ' ',
 
                 -- The number of symbols to render top-down. In order to render only 'N' last
                 -- symbols, negative numbers may be supplied. For instance, 'depth = -1' can
