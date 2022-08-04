@@ -14,10 +14,22 @@ export ZSH="$HOME/.oh-my-zsh"
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 
+plugin() {
+    repo="$1"
+    plugin=$(echo $repo | cut -f2 -d "/")
+
+    if [ ! -d "$ZSH_CUSTOM/plugins/$plugin" ]; then
+        git clone "https://github.com/$repo" "$ZSH_CUSTOM/plugins/$plugin"
+    fi
+}
+
 # Install powerlevel10k if it is not already installed
 if [ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
 fi
+
+plugin "zsh-users/zsh-autosuggestions"
+plugin "zsh-users/zsh-syntax-highlighting"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -71,11 +83,6 @@ DISABLE_AUTO_TITLE="true"
 # see 'man strftime' for details.
 HIST_STAMPS="yyyy-mm-dd"
 
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(
     git
     tmux
@@ -105,6 +112,9 @@ plugins=(
     # Utility
     extract
     common-aliases
+
+    zsh-autosuggestions
+    zsh-syntax-highlighting
 )
 
 export ZSH_TMUX_AUTOSTART="false"
@@ -123,6 +133,8 @@ export ZSH_PYENV_QUIET="true"
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+bindkey '^ ' autosuggest-accept
 
 if $( command -v nvim > /dev/null ); then
    alias vim="nvim"
@@ -159,7 +171,9 @@ alias ylgit="lazygit --git-dir ~/.local/share/yadm/repo.git --work-tree=$HOME"
 alias lgit="lazygit"
 
 alias dmenu="rofi -dmenu"
-alias bat="batcat"
+if $( command -v batcat > /dev/null ); then
+    alias cat="batcat --paging=never"
+fi
 
 # Make neovim or vim the default editor
 if $( command -v nvim > /dev/null ); then
