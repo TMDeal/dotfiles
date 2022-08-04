@@ -16,7 +16,12 @@ ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 
 plugin() {
     repo="$1"
-    plugin=$(echo $repo | cut -f2 -d "/")
+
+    if [ -z $2 ]; then
+        plugin=$(echo $repo | cut -f2 -d "/")
+    else
+        plugin="$2"
+    fi
 
     if [ ! -d "$ZSH_CUSTOM/plugins/$plugin" ]; then
         git clone "https://github.com/$repo" "$ZSH_CUSTOM/plugins/$plugin"
@@ -30,6 +35,7 @@ fi
 
 plugin "zsh-users/zsh-autosuggestions"
 plugin "zsh-users/zsh-syntax-highlighting"
+plugin "hlissner/zsh-autopair"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -87,34 +93,22 @@ plugins=(
     git
     tmux
     fzf
-
-    # Docker
+    sudo
     docker
     docker-compose
-
-    # Python
     pyenv
     python
     pip
-
-    # Ruby
     rbenv
-
-    # Node.js
     nvm
-
-    # Rust
     rust
-
-    # Golang
     golang
-
-    # Utility
     extract
     common-aliases
-
+    zsh-autopair
     zsh-autosuggestions
     zsh-syntax-highlighting
+    jump
 )
 
 export ZSH_TMUX_AUTOSTART="false"
@@ -149,6 +143,7 @@ alias reload="omz reload"
 alias t="tmux"
 alias tad="tmux detach -t"
 
+alias j="jump"
 alias c="clear"
 alias cls="clear"
 alias q="exit"
@@ -169,6 +164,8 @@ alias ev="vim ~/.config/nvim/init.lua"
 alias ygit="yadm"
 alias ylgit="lazygit --git-dir ~/.local/share/yadm/repo.git --work-tree=$HOME"
 alias lgit="lazygit"
+
+alias news="newsboat"
 
 alias dmenu="rofi -dmenu"
 if $( command -v batcat > /dev/null ); then
