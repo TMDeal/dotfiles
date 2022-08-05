@@ -9,9 +9,11 @@ case $choice in
     Cancel)
         ;;
     Shutdown)
-        pkexec shutdown -h now ;;
+        systemctl poweroff
+        ;;
     Reboot)
-        pkexec shutdown -r now ;;
+        systemctl reboot
+        ;;
     Logout)
         i3-msg exit
 esac
