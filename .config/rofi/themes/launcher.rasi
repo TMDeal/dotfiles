@@ -14,7 +14,7 @@
 }
 
 window {
-    background-color:   @nord0;
+    background-color:   @nord1;
     border-color:       @accent-color;
 
     location:      center;
@@ -75,7 +75,7 @@ element selected active {
 }
 
 element-icon {
-    size:   0.75em;
+    size:   1em;
 }
 
 element-text {

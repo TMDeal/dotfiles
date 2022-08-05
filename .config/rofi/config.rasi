@@ -2,12 +2,12 @@ configuration {
 
 	font: "AnonymousPro Nerd Font 12";
 
-     display-ssh:    "";
-    display-run:    "";
+    display-ssh:    ">";
+    display-run:    ">";
     display-drun:   ">";
-    display-window: "";
-    display-combi:  "";
-    show-icons:     true;
+    display-window: ">";
+    display-combi:  ">";
+    show-icons:     false;
 }
 
-@theme "launcher"
+@theme "dmenu"

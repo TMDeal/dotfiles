@@ -11,12 +11,16 @@
     margin:     0px;
     padding:    0px;
     spacing:    0px;
+    highlight:  underline bold #eceff4;
 }
 
 window {
     location:           north;
-    width:              100%;
-    background-color:   @nord0;
+    width:              99.75%;
+    height: 30px;
+    y-offset: 4px;
+    background-color:   @nord1;
+    border-radius: 6px;
     children:           [ mainbox,message ];
 }
 
@@ -32,7 +36,7 @@ inputbar {
     children:   [ prompt, entry ];
 }
 
-prompt, entry, element-text, element-icon {
+prompt, entry, element-text {
     vertical-align: 0.5;
 }
 
@@ -45,7 +49,9 @@ listview {
 }
 
 element {
-    padding:    1px 8px;
+    border-radius: 6px;
+    vertical-align: 0.5;
+    padding:    6px;
     spacing:    4px;
 }
 
@@ -71,10 +77,6 @@ element selected urgent {
 
 element selected active {
     background-color:   @nord8;
-}
-
-element-icon {
-    size:   0.75em;
 }
 
 element-text {
