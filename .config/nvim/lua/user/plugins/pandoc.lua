@@ -1,7 +1,7 @@
 vim.g.table_mode_map_prefix = "<leader>T"
 vim.g.table_mode_tableize_d_map = "<leader>TT"
 
-vim.g["g:pandoc#syntax#conceal#urls"] = 1
+vim.g["pandoc#syntax#conceal#blacklist"] = { "image" }
 
 local pandoc_ok, pandoc = pcall(require, "pandoc")
 if not pandoc_ok then
