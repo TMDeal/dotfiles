@@ -1,0 +1,10 @@
+# Files
+data.location=$HOME/.local/share/task
+hooks.location=$HOME/.config/task/hooks
+
+# theme
+include dark-16.theme
+
+# options
+regex=on
+news.version=2.6.0
