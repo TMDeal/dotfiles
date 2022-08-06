@@ -14,7 +14,7 @@
 }
 
 window {
-    background-color:   @nord1;
+    background-color:   @nord0;
     border-color:       @accent-color;
 
     location:      center;

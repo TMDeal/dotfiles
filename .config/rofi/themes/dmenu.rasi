@@ -19,7 +19,7 @@ window {
     width:              99.75%;
     height: 30px;
     y-offset: 4px;
-    background-color:   @nord1;
+    background-color:   @nord0;
     border-radius: 6px;
     children:           [ mainbox,message ];
 }

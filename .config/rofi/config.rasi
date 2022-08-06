@@ -7,7 +7,7 @@ configuration {
     display-drun:   ">";
     display-window: ">";
     display-combi:  ">";
-    show-icons:     false;
+    show-icons:     true;
 }
 
-@theme "dmenu"
+@theme "launcher"
