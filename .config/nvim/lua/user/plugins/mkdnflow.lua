@@ -81,15 +81,3 @@ mkdnflow.setup {
         MkdnUnfoldSection = false
     }
 }
-
--- local keymap = require("user.plugins.which-key").register_keymap
--- local groupmap = require("user.plugins.which-key").register_group
-
--- groupmap("w", "[MkdnFlow]")
--- keymap("wnn", "", "Update Numbering")
--- keymap("wir", "", "New Row Below")
--- keymap("wiR", "", "New Row Above")
--- keymap("wic", "", "New Column After")
--- keymap("wiC", "", "New Column Before")
--- keymap("wf", "", "Fold")
--- keymap("wf", "", "Unfold")

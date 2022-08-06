@@ -1,9 +1,33 @@
 local keymap = require("user.plugins.which-key").register_keymap
 local groupmap = require("user.plugins.which-key").register_group
 
-groupmap("t", "Trouble")
-keymap("tt", ":TroubleToggle<CR>", "Toggle")
-keymap("tw", ":TroubleToggle workspace_diagnostics<CR>", "Workspace Diagnostics")
-keymap("td", ":TroubleToggle document_diagnostics<CR>", "Document Diagnostics")
-keymap("tq", ":TroubleToggle quickfix<CR>", "quickfix")
-keymap("tl", ":TroubleToggle loclist<CR>", "loclist")
+groupmap({
+    key = "t",
+    name = "Trouble"
+})
+
+keymap({
+    key = "tt",
+    cmd = ":TroubleToggle<CR>",
+    label = "Toggle"
+})
+keymap({
+    key = "tw",
+    cmd = ":TroubleToggle workspace_diagnostics<CR>",
+    label = "Workspace Diagnostics"
+})
+keymap({
+    key = "td",
+    cmd = ":TroubleToggle document_diagnostics<CR>",
+    label = "Document Diagnostics"
+})
+keymap({
+    key = "tq",
+    cmd = ":TroubleToggle quickfix<CR>",
+    label = "quickfix"
+})
+keymap({
+    key = "tl",
+    cmd = ":TroubleToggle loclist<CR>",
+    label = "loclist"
+})

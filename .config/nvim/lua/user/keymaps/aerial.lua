@@ -7,18 +7,53 @@ M.on_attach = function(bufnr)
     local opts = {}
 
     opts = { buffer = bufnr }
-    groupmap("a", "Aerial")
-    keymap('aa', "<cmd>AerialToggle<cr>", "Sidebar")
+    groupmap({
+        key = "a",
+        name = "Aerial"
+    })
+
+    keymap({
+        key = "aa",
+        cmd = "<cmd>AerialToggle<cr>",
+        label = "Sidebar"
+    })
+
     -- Interact with aerial using telescope
-    keymap('at', [[<cmd>:lua require('telescope').extensions.aerial.aerial(require('telescope.themes').get_dropdown({}))<cr>]], "Telescope")
+    keymap({
+        key = 'at',
+        cmd = [[<cmd>:lua require('telescope').extensions.aerial.aerial(require('telescope.themes').get_dropdown({}))<cr>]],
+        label = "Telescope"
+    })
 
     opts = { prefix = "]", buffer = bufnr }
-    keymap("a", "<cmd>AerialNext<cr>", "Aerial Next Symbol", opts)
-    keymap("A", "<cmd>AerialNextUp<cr>", "Aerial Next Tree", opts)
+    keymap({
+        key = "a",
+        cmd = "<cmd>AerialNext<cr>",
+        label = "Aerial Next Symbol",
+        opts = opts
+    })
+
+    keymap({
+        key = "A",
+        cmd = "<cmd>AerialNextUp<cr>",
+        label = "Aerial Next Tree",
+        opts = opts
+    })
 
     opts = { prefix = "[", buffer = bufnr }
-    keymap("a", "<cmd>AerialPrev<cr>", "Aerial Previous Symbol", opts)
-    keymap("A", "<cmd>AerialPrevUp<cr>", "Aerial Previous Tree", opts)
+    keymap({
+        key = "a",
+        cmd = "<cmd>AerialPrev<cr>",
+        label = "Aerial Previous Symbol",
+        opts = opts
+    })
+
+    keymap({
+        key = "A",
+        cmd = "<cmd>AerialPrevUp<cr>",
+        label = "Aerial Previous Tree",
+        opts = opts
+    })
 end
 
 return M

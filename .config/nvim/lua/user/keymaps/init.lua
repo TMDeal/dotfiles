@@ -32,30 +32,70 @@ vim.api.nvim_set_keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", expr_opts)
 -- Y yank until the end of line
 vim.api.nvim_set_keymap("n", "Y", "y$", opts)
 
-keymap("q", ":wqa!<CR>", "Save and Quit (no prompt)")
+keymap({
+    key = "q",
+    cmd = ":wqa!<CR>",
+    label = "Save and Quit (no prompt)"
+})
 
 -- Loclist/QuickFix mappings
-keymap("q", ":cnext<CR>", "Next Quickfix Item", { prefix = "]" })
-keymap("q", ":cprev<CR>", "Previous Quickfix Item", { prefix = "[" })
-keymap("l", ":lnext<CR>", "Next LocList Item", { prefix = "]" })
-keymap("l", ":lprev<CR>", "Previous LocList Item", { prefix = "[" })
+keymap({
+    key = "q",
+    cmd = ":cnext<CR>",
+    label = "Next Quickfix Item",
+    opts = { prefix = "]" }
+})
+keymap({
+    key = "q",
+    cmd = ":cprev<CR>",
+    label = "Previous Quickfix Item",
+    opts = { prefix = "[" }
+})
+keymap({
+    key = "l",
+    cmd = ":lnext<CR>",
+    label = "Next LocList Item",
+    opts = { prefix = "]" }
+})
+keymap({
+    key = "l",
+    cmd = ":lprev<CR>",
+    label = "Previous LocList Item",
+    opts = { prefix = "[" }
+})
 
 local project_ok, _ = pcall(require, "project_nvim")
 if project_ok then
-    keymap('p', [[<cmd>lua require('telescope').extensions.projects.projects()<cr>]], "Projects")
+    keymap({
+        key = 'p',
+        cmd = [[<cmd>lua require('telescope').extensions.projects.projects()<cr>]],
+        label = "Projects"
+    })
 end
 
 -- Load nvim-notify extension
 local notify_ok, _ = pcall(require, "notify")
 if notify_ok then
-    keymap('N', [[<cmd>lua require('telescope').extensions.notify.notify(require('telescope.themes').get_dropdown({}))<cr>]], "Notifications")
+    keymap({
+        key = 'N',
+        cmd = [[<cmd>lua require('telescope').extensions.notify.notify(require('telescope.themes').get_dropdown({}))<cr>]],
+        label = "Notifications"
+    })
 end
 
 -- load nvim-neoclip extension
 local neoclip_ok, _ = pcall(require, "neoclip")
 if neoclip_ok then
-    keymap('y', [[<cmd>:lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown({}))<cr>]], "Neoclip")
-    keymap('m', [[<cmd>:lua require('telescope').extensions.macroscope.default(require('telescope.themes').get_dropdown({}))<cr>]], "Macros - (q)")
+    keymap({
+        key = 'y',
+        cmd = [[<cmd>:lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown({}))<cr>]],
+        label = "Neoclip"
+    })
+    keymap({
+        key = 'm',
+        cmd = [[<cmd>:lua require('telescope').extensions.macroscope.default(require('telescope.themes').get_dropdown({}))<cr>]],
+        label = "Macros - (q)"
+    })
 end
 
 require("user.keymaps.files")

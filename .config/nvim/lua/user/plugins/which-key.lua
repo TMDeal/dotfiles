@@ -55,17 +55,52 @@ local register_opts = {
     nowait = false
 }
 
-local function register_keymap(key, cmd, label, opts)
-    local wk_opts = vim.tbl_deep_extend("force", {}, register_opts, opts or {})
+local function register_keymap(opts)
+    local label = opts.label or ""
+    local key = opts.key
+    local cmd = opts.cmd
+
+    if key == "" or cmd == "" then
+        print("Missing required args")
+        return
+    end
+
+    local wk_opts = vim.tbl_deep_extend("force", {}, register_opts, opts.opts or {})
     local wk_keymap = { [key] = { cmd, label } }
     wk.register(wk_keymap, wk_opts)
 end
 
-local function register_group(key, name, opts)
-    local wk_opts = vim.tbl_deep_extend("force", {}, register_opts, opts or {})
+local function register_group(opts)
+    if type(opts.key) ~= "string" then
+        print("key is required and must be a string!")
+        return
+    end
+
+    local key = opts.key
+    
+    if type(opts.name) ~= "string" then
+        print("name is required and must be a string")
+        return
+    end
+
+    local name = opts.name
+
+    local wk_opts = vim.tbl_deep_extend("force", {}, register_opts, opts.opts or {})
     local wk_keymap = { [key] = { name = name } }
     wk.register(wk_keymap, wk_opts)
 end
+
+-- local function register_keymap(key, cmd, label, opts)
+--     local wk_opts = vim.tbl_deep_extend("force", {}, register_opts, opts or {})
+--     local wk_keymap = { [key] = { cmd, label } }
+--     wk.register(wk_keymap, wk_opts)
+-- end
+--
+-- local function register_group(key, name, opts)
+--     local wk_opts = vim.tbl_deep_extend("force", {}, register_opts, opts or {})
+--     local wk_keymap = { [key] = { name = name } }
+--     wk.register(wk_keymap, wk_opts)
+-- end
 
 -- Descriptions for Mark commands
 local marks = {
