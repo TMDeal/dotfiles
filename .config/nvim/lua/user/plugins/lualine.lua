@@ -42,7 +42,7 @@ lualine.setup {
                 "aerial",
 
                 -- The separator to be used to separate symbols in status line.
-                sep = ' ' .. sub_left_separator .. ' ',
+                -- sep = ' ' .. sub_left_separator .. ' ',
 
                 -- The number of symbols to render top-down. In order to render only 'N' last
                 -- symbols, negative numbers may be supplied. For instance, 'depth = -1' can

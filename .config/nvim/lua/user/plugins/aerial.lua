@@ -64,7 +64,11 @@ aerial.setup {
     -- "nerd_font" option below.
     -- If you have lspkind-nvim installed, it will be the default icon set.
     -- This can be a filetype map (see :help aerial-filetype-map)
-    icons = {},
+    icons = {
+        Boolean = "",
+        Array = "",
+        String = ""
+    },
 
     -- Control which windows and buffers aerial should ignore.
     -- If close_behavior is "global", focusing an ignored window/buffer will
