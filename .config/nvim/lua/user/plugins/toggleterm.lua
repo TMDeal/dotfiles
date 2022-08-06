@@ -1,3 +1,5 @@
+local M = {}
+
 local toggleterm_ok, toggleterm = pcall(require, "toggleterm")
 if not toggleterm_ok then
     return
@@ -27,11 +29,10 @@ toggleterm.setup {
 }
 
 local Terminal  = require('toggleterm.terminal').Terminal
-local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
 
-function _LAZYGIT_TOGGLE()
-  lazygit:toggle()
+M.lazygit = function()
+    local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
+    lazygit:toggle()
 end
 
-local keymap = require("user.plugins.which-key").register_keymap
-keymap("gl", ":lua _LAZYGIT_TOGGLE()<CR>", "Lazygit")
+return M

@@ -173,7 +173,7 @@ packer.startup(function(use)
     -- pandoc/markdown support
     use "aspeddro/pandoc.nvim"
     use 'vim-pandoc/vim-pandoc-syntax'
-    use 'dhruvasagar/vim-table-mode'
+    use "jakewvincent/mkdnflow.nvim"
 
     -- Leader Guide
     use 'folke/which-key.nvim'
@@ -200,9 +200,6 @@ packer.startup(function(use)
 
     -- Startup menu
     use 'goolord/alpha-nvim'
-
-    -- Note taking
-    use "jakewvincent/mkdnflow.nvim"
 
     -- Pretty quickfix/loclist/diagnostics windows
     use "folke/trouble.nvim"

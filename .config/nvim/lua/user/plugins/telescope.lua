@@ -107,21 +107,16 @@ telescope.setup {
     }
 }
 
-local keymap = require("user.plugins.which-key").register_keymap
-
-
 -- Load project.nvim extension
 local project_ok, _ = pcall(require, "project_nvim")
 if project_ok then
     telescope.load_extension('projects')
-    keymap('P', [[<cmd>lua require('telescope').extensions.projects.projects()<cr>]], "Projects")
 end
 
 -- Load nvim-notify extension
 local notify_ok, _ = pcall(require, "notify")
 if notify_ok then
     telescope.load_extension("notify")
-    keymap('N', [[<cmd>lua require('telescope').extensions.notify.notify(require('telescope.themes').get_dropdown({}))<cr>]], "Projects")
 end
 
 -- load nvim-neoclip extension
@@ -129,9 +124,6 @@ local neoclip_ok, _ = pcall(require, "neoclip")
 if neoclip_ok then
     telescope.load_extension('neoclip')
     telescope.load_extension('macroscope')
-
-    keymap('y', [[<cmd>:lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown({}))<cr>]], "Neoclip")
-    keymap('m', [[<cmd>:lua require('telescope').extensions.macroscope.default(require('telescope.themes').get_dropdown({}))<cr>]], "Macros - (q)")
 end
 
 -- Load aerial extension
@@ -146,22 +138,3 @@ if fzf_ok then
     require('telescope').load_extension('fzf')
 end
 
--- Search files
-keymap('f', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], "Find Files")
--- Search recently used files
-keymap('o', [[<cmd>lua require('telescope.builtin').oldfiles()<cr>]], "Recently Used Files")
--- Search buffers
-keymap('bl', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], "List Buffers")
--- Find in current buffer with fuzzy search
-keymap('bs', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>]], "Find in Current Buffer")
--- Search Tags
-keymap('/', [[<cmd>lua require('telescope.builtin').tags()<cr>]], "Tags")
--- Grep within current project
-keymap('s', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], "Search")
-
--- Check git commits
-keymap('gc', [[<cmd>lua require('telescope.builtin').git_commits()<cr>]], "Git Commits")
--- Check git branches
-keymap('gb', [[<cmd>lua require('telescope.builtin').git_branches()<cr>]], "Git Branches")
--- Check git status
-keymap('gs', [[<cmd>lua require('telescope.builtin').git_status()<cr>]], "Git Status")

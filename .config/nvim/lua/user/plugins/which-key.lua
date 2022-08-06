@@ -67,10 +67,6 @@ local function register_group(key, name, opts)
     wk.register(wk_keymap, wk_opts)
 end
 
--- Register groups not directly related to specific plugins
-register_group("b", "Buffers")
-register_group("g", "Git")
-
 -- Descriptions for Mark commands
 local marks = {
     m = {

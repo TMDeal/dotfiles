@@ -130,23 +130,7 @@ aerial.setup {
 
     -- Call this function when aerial attaches to a buffer.
     -- Useful for setting keymaps. Takes a single `bufnr` argument.
-    on_attach = function(bufnr)
-        local keymap = require("user.plugins.which-key").register_keymap
-        local opts = {}
-
-        opts = { buffer = bufnr }
-        keymap('A', "<cmd>AerialToggle<cr>", "Aerial")
-        -- Interact with aerial using telescope
-        keymap('a', [[<cmd>:lua require('telescope').extensions.aerial.aerial(require('telescope.themes').get_dropdown({}))<cr>]], "Aerial")
-
-        opts = { prefix = "]", buffer = bufnr }
-        keymap("a", "<cmd>AerialNext<cr>", "Aerial Next Symbol", opts)
-        keymap("A", "<cmd>AerialNextUp<cr>", "Aerial Next Tree", opts)
-
-        opts = { prefix = "[", buffer = bufnr }
-        keymap("a", "<cmd>AerialPrev<cr>", "Aerial Previous Symbol", opts)
-        keymap("A", "<cmd>AerialPrevUp<cr>", "Aerial Previous Tree", opts)
-    end,
+    on_attach = require("user.keymaps.aerial").on_attach,
 
     -- Call this function when aerial first sets symbols on a buffer.
     -- Takes a single `bufnr` argument.

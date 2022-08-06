@@ -18,8 +18,3 @@ bufferline.setup {
         sort_by = "id"
     }
 }
-
-local opts = { noremap = true, silent = true }
-vim.api.nvim_set_keymap("n", "<S-h>", ":BufferLineCyclePrev<CR>", opts)
-vim.api.nvim_set_keymap("n", "<S-l>", ":BufferLineCycleNext<CR>", opts)
-
