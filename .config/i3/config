@@ -30,7 +30,7 @@ font $font
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec --no-startup-id nitrogen --set-auto /usr/local/share/backgrounds/pokemon/houndoom.jpg
+exec --no-startup-id nitrogen --set-auto $background
 exec --no-startup-id greenclip daemon > /dev/null
 exec --no-startup-id lxpolkit
 exec --no-startup-id udiskie
