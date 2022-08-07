@@ -34,14 +34,6 @@ autocmd("FileType", {
     callback = function()
         vim.opt_local.wrap = true
         vim.opt_local.spell = true
-    end
-})
-
--- Treat markdown files as pandoc filetype
-autocmd({ "BufNewFile", "BufFilePre", "BufRead" }, {
-    group = markdown,
-    pattern = { "*.markdown", "*.mdown", "*.mkd", "*.mkdn", "*.mdwn", "*.md" },
-    callback = function()
-        vim.opt_local.filetype = "pandoc"
+        vim.opt_local.autowriteall = true
     end
 })

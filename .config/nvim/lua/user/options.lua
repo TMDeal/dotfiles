@@ -87,6 +87,7 @@ opt.splitright = true
 
 -- Word wrap disable
 opt.wrap = false
+opt.textwidth = 85
 
 -- Set completeopt to have a better completion experience
 opt.completeopt = "menuone,noinsert,noselect"
