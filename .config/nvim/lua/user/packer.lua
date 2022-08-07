@@ -114,6 +114,17 @@ packer.startup(function(use)
         end
     }
 
+    -- Treesitter for spellcheck
+    use {
+        'lewis6991/spellsitter.nvim',
+        config = function()
+            require('spellsitter').setup {
+                enable = { "markdown" },
+                debug = false
+            }
+        end
+    }
+
     use "Fymyte/rasi.vim"
 
     -- Sane indentation for python
@@ -172,7 +183,6 @@ packer.startup(function(use)
 
     -- pandoc/markdown support
     use "aspeddro/pandoc.nvim"
-    use 'vim-pandoc/vim-pandoc-syntax'
     use "jakewvincent/mkdnflow.nvim"
 
     -- Leader Guide

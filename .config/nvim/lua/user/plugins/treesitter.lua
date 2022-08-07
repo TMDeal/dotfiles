@@ -33,7 +33,8 @@ configs.setup {
         disable = {},
 
         -- Also will use vims default method of syntax highlighting
-        additional_vim_regex_highlighting = true
+        -- Needs to be disabled for spellsitter
+        additional_vim_regex_highlighting = false
     },
 
     indent = {
