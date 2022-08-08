@@ -7,7 +7,7 @@ local yank_highlight = augroup("yank_highlight", { clear = true })
 local terminal = augroup("terminal", { clear = true })
 local markdown = augroup("markdown", { clear = true })
 
--- Remeber where the curser was when reopening a file
+-- Remember where the curser was when reopening a file
 autocmd("BufReadPost", {
     group = remember_last_position,
     callback = function()
@@ -33,7 +33,7 @@ autocmd("FileType", {
     pattern = { "pandoc", "markdown" },
     callback = function()
         vim.opt_local.wrap = true
-        vim.opt_local.spell = true
         vim.opt_local.autowriteall = true
+        vim.opt_local.textwidth = 85
     end
 })
