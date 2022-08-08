@@ -205,29 +205,7 @@ for_window [window_role="pop-up"] floating enable
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 
-# bar {
-# 	status_command i3status
-#    	height 25
-# 	position top
-#     font $font
-#     tray_padding 1
-#     strip_workspace_numbers yes
-#
-#     colors {
-#             separator  #1f222d
-#             background #1f222d
-#             statusline #81a1c1
-#
-#             #                   border  background text
-#             focused_workspace  #1f222d #1f222d    #81a1c1
-#             active_workspace   #1f222d #252936    #5e81ac
-#             inactive_workspace #1f222d #1f222d    #4c566a
-#             urgent_workspace   #1f222d #1f222d    #ee829f
-#             binding_mode       #1f222d #81a1c1    #2e3440
-#     }
-# }
-
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Window color settings
 # class                 border  backgr. text    indicator
