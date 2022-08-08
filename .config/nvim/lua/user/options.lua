@@ -78,8 +78,11 @@ opt.wildignore = '*/.git/*,*/.hg/*,*/.svn/*,*.bmp,*.gif,*.mp3,*.wav,*.wav,*.clas
 opt.shortmess:append('c')
 
 -- Fold handling settings
-opt.foldmethod = 'marker'
+-- opt.foldmethod = 'marker'
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldnestmax = 10
+opt.foldlevel=99
 
 -- Change preview window location
 opt.splitbelow = true
