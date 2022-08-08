@@ -119,7 +119,7 @@ packer.startup(function(use)
         'lewis6991/spellsitter.nvim',
         config = function()
             require('spellsitter').setup {
-                enable = { "markdown" },
+                enable = true,
                 debug = false
             }
         end
@@ -183,6 +183,7 @@ packer.startup(function(use)
 
     -- pandoc/markdown support
     use "aspeddro/pandoc.nvim"
+    -- use 'vim-pandoc/vim-pandoc-syntax'
     use "jakewvincent/mkdnflow.nvim"
 
     -- Leader Guide
