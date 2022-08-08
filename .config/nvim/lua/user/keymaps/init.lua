@@ -33,6 +33,12 @@ vim.api.nvim_set_keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", expr_opts)
 vim.api.nvim_set_keymap("n", "Y", "y$", opts)
 
 keymap({
+    key = "S",
+    label = "Toggle Spellcheck",
+    cmd = "<cmd>setlocal spell!<cr>"
+})
+
+keymap({
     key = "q",
     cmd = ":wqa!<CR>",
     label = "Save and Quit (no prompt)"
