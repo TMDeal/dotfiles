@@ -169,7 +169,7 @@ alias news="newsboat"
 
 alias dmenu="rofi -dmenu"
 if $( command -v batcat > /dev/null ); then
-    alias cat="batcat --paging=never"
+    alias bat="batcat"
 fi
 
 # Make neovim or vim the default editor
