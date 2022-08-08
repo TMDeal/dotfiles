@@ -3,7 +3,7 @@ data.location=$HOME/.local/share/task
 hooks.location=$HOME/.config/task/hooks
 
 # theme
-include dark-16.theme
+include local.theme
 
 # options
 regex=on
