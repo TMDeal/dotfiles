@@ -87,9 +87,13 @@ packer.startup(function(use)
     -- Snippets
     use "L3MON4D3/LuaSnip"
 
+    -- Portable package manager for LSP,Dap,Linters,Formatters
+    use "williamboman/mason.nvim"
+    use "williamboman/mason-lspconfig.nvim"
+
     -- LSP
     use "neovim/nvim-lspconfig"
-    use "williamboman/nvim-lsp-installer"
+    -- use "williamboman/nvim-lsp-installer"
     use "ray-x/lsp_signature.nvim"
 
     -- Telescope
