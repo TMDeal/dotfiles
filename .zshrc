@@ -119,8 +119,6 @@ export ZSH_TMUX_UNICODE="true"
 export DISABLE_FZF_AUTO_COMPLETION="false"
 export DISABLE_FZF_KEY_BINDINGS="false"
 
-export NVM_LAZY=1
-
 export VIRTUAL_ENV_DISABLE_PROMPT="false"
 export ZSH_PYENV_QUIET="true"
 
@@ -189,7 +187,7 @@ fi
 
 if [ -d "/usr/local/go" ]; then
     export GOROOT="/usr/local/go"
-    export GOPATH="~/go"
+    export GOPATH="$HOME/go"
     export PATH="$GOROOT/bin:$PATH"
 fi
 
