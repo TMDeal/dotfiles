@@ -116,11 +116,6 @@ packer.startup(function(use)
 
     -- Treesitter for spellcheck
     use {
-        'lewis6991/spellsitter.nvim',
-        config = function()
-            require('spellsitter').setup {
-                enable = true,
-                debug = false
             }
         end
     }
