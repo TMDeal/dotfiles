@@ -114,16 +114,18 @@ packer.startup(function(use)
         end
     }
 
-    -- Treesitter for spellcheck
+    -- syntax for rofi theme configs
+    use "Fymyte/rasi.vim"
+
+    -- syntax for everything else
     use {
+        "sheerun/vim-polyglot",
+        setup = function()
+            vim.g.polyglot_disabled = {
+                "markdown"
             }
         end
     }
-
-    use "Fymyte/rasi.vim"
-
-    -- Sane indentation for python
-    use "Vimjas/vim-python-pep8-indent"
 
     -- Set commentstring based on cursor position in file
     use "JoosepAlviste/nvim-ts-context-commentstring"
@@ -178,7 +180,6 @@ packer.startup(function(use)
 
     -- pandoc/markdown support
     use "aspeddro/pandoc.nvim"
-    -- use 'vim-pandoc/vim-pandoc-syntax'
     use "jakewvincent/mkdnflow.nvim"
 
     -- Leader Guide
