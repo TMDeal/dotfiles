@@ -12,10 +12,19 @@ bind-key ^D pagedown
 bind-key ^U pageup
 bind-key a toggle-article-read
 
+# colors
 color listnormal          green default
 color listfocus           black default bold
 color listnormal_unread   cyan default
 color listfocus_unread    yellow default bold
 color info                blue black bold
-color background          black default
+color background          default default
 color article             blue default
+
+# highlights
+highlight article "^(Feed|Link):.*$" cyan default bold
+highlight article "^(Title|Date|Author):.*$" cyan default bold
+highlight article "https?://[^ ]+" green default underline
+highlight article "\\[[0-9]+\\]" green default bold
+highlight article "\\[image\\ [0-9]+\\]" green default bold
+highlight feedlist "^─.*$" cyan black bold
