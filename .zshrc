@@ -116,6 +116,8 @@ export ZSH_TMUX_FIXTERM_WITH_256COLOR="tmux-256color"
 export ZSH_TMUX_DEFAULT_SESSION_NAME="main"
 export ZSH_TMUX_UNICODE="true"
 
+export NVM_LAZY=1
+
 export DISABLE_FZF_AUTO_COMPLETION="false"
 export DISABLE_FZF_KEY_BINDINGS="false"
 
