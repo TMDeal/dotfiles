@@ -182,6 +182,10 @@ packer.startup(function(use)
     use "aspeddro/pandoc.nvim"
     use "jakewvincent/mkdnflow.nvim"
 
+    -- Plugin for hugo - forked from https://github.com/phelipetls/vim-hugo
+    -- use "TMDeal/hugo.nvim"
+    use "~/my-workspace/hugo.nvim"
+
     -- Leader Guide
     use 'folke/which-key.nvim'
 
