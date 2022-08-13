@@ -50,7 +50,7 @@ mason.setup {
         -- and is not recommended.
         --
         -- Example: { "--proxy", "https://proxyserver" }
-        install_args = { "--user" },
+        install_args = {},
     },
 
     -- Controls to which degree logs are written to the log file. It's useful to set this to vim.log.levels.DEBUG when

@@ -3,11 +3,6 @@ if not lsp_ok then
     return
 end
 
---[[ local nvim_lsp_installer_ok, lsp_installer = pcall(require, "nvim-lsp-installer") ]]
---[[ if not nvim_lsp_installer_ok then ]]
---[[     return ]]
---[[ end ]]
-
 local mason_ok, mason = pcall(require, "mason-lspconfig")
 if not mason_ok then
     return
@@ -35,3 +30,4 @@ for _, server in pairs(servers) do
 end
 
 require("user.plugins.lsp.handlers").setup()
+require("user.plugins.lsp.null-ls")
