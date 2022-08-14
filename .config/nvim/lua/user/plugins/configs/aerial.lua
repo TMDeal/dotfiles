@@ -134,7 +134,15 @@ aerial.setup {
 
     -- Call this function when aerial attaches to a buffer.
     -- Useful for setting keymaps. Takes a single `bufnr` argument.
-    on_attach = require("user.keymaps.aerial").on_attach,
+    on_attach = function(bufnr)
+        local wk_ok, wk = pcall(require, "which-key")
+        if not wk_ok then
+            return
+        end
+
+        local mappings = require("user.keymaps.groups").aerial
+        wk.register(mappings, { buffer = bufnr })
+    end,
 
     -- Call this function when aerial first sets symbols on a buffer.
     -- Takes a single `bufnr` argument.

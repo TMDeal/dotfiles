@@ -1,10 +1,8 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
-local local_keymap = vim.api.nvim_buf_set_keymap
 
 local remember_last_position = augroup("remember_last_position_group", { clear = true })
 local yank_highlight = augroup("yank_highlight", { clear = true })
-local terminal = augroup("terminal", { clear = true })
 local markdown = augroup("markdown", { clear = true })
 
 -- Remember where the curser was when reopening a file
@@ -36,4 +34,25 @@ autocmd("FileType", {
         vim.opt_local.autowriteall = true
         vim.opt_local.textwidth = 85
     end
+})
+
+-- Disable statusline in dashboard
+autocmd("FileType", {
+    pattern = "alpha",
+    callback = function()
+        vim.opt.laststatus = 0
+    end,
+})
+
+autocmd("BufUnload", {
+    buffer = 0,
+    callback = function()
+        vim.opt.laststatus = 3
+    end,
+})
+
+-- Don't auto commenting new lines
+autocmd("BufEnter", {
+  pattern = "*",
+  command = "set fo-=c fo-=r fo-=o",
 })

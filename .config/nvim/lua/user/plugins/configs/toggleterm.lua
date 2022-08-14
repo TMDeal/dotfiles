@@ -1,5 +1,3 @@
-local M = {}
-
 local toggleterm_ok, toggleterm = pcall(require, "toggleterm")
 if not toggleterm_ok then
     return
@@ -27,12 +25,3 @@ toggleterm.setup {
         }
     }
 }
-
-local Terminal  = require('toggleterm.terminal').Terminal
-
-M.lazygit = function()
-    local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
-    lazygit:toggle()
-end
-
-return M

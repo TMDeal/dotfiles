@@ -3,10 +3,6 @@ if not lualine_ok then
     return
 end
 
--- local right_separator = ''
--- local left_separator = ''
--- local sub_right_separator = ''
--- local sub_left_separator = ''
 local left_separator = ''
 local right_separator = ''
 local sub_left_separator = ''

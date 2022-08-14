@@ -30,7 +30,11 @@ M.setup = function()
 end
 
 M.on_attach = function(client, bufnr)
-    require("user.keymaps.lsp").keymaps(bufnr)
+    local wk_ok, wk = pcall(require, "which-key")
+    if wk_ok then
+        local mappings = require("user.keymaps.groups").lsp
+        wk.register(mappings, { buffer = bufnr })
+    end
 
     local lsp_signature_ok, lsp_signature = pcall(require, "lsp_signature")
     if lsp_signature_ok then
