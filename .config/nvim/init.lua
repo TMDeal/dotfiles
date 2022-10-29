@@ -9,9 +9,6 @@ _G.__luacache_config = {
   }
 }
 
--- Needs to be loaded first
-require 'impatient'
-
 -- Load plugins
 require 'user.plugins'
 

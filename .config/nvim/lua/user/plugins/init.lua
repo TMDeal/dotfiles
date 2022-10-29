@@ -41,14 +41,19 @@ packer.startup(function(use)
     -- Have packer manage itself
     use "wbthomason/packer.nvim"
 
+    -- Make startup fastlike
+    use {
+        "lewis6991/impatient.nvim",
+	config = function()
+		require "impatient"
+	end
+    }
+
     -- Implementation of popup api from vim in neovim
     use "nvim-lua/popup.nvim"
 
     -- Prerequisite for most lua plugins
     use "nvim-lua/plenary.nvim"
-
-    -- Make startup fastlike
-    use "lewis6991/impatient.nvim"
 
     -- Integrate seamlessly with tmux
     use {

@@ -116,8 +116,6 @@ export ZSH_TMUX_FIXTERM_WITH_256COLOR="tmux-256color"
 export ZSH_TMUX_DEFAULT_SESSION_NAME="main"
 export ZSH_TMUX_UNICODE="true"
 
-export NVM_LAZY=1
-
 export DISABLE_FZF_AUTO_COMPLETION="false"
 export DISABLE_FZF_KEY_BINDINGS="false"
 
@@ -189,7 +187,8 @@ fi
 
 if [ -d "/usr/local/go" ]; then
     export GOROOT="/usr/local/go"
-    export GOPATH="$HOME/go"
+    export GOPATH="$HOME/.go"
+    export PATH="$GOPATH/bin:$PATH"
     export PATH="$GOROOT/bin:$PATH"
 fi
 
@@ -199,6 +198,10 @@ fi
 
 if [ -d "$HOME/.cargo" ]; then
     source "$HOME/.cargo/env"
+fi
+
+if [ -d "$HOME/.nimble" ]; then
+    export PATH="$HOME/.nimble/bin:$PATH"
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
