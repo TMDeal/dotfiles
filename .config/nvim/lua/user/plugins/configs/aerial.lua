@@ -140,18 +140,6 @@ aerial.setup {
     -- "auto" will set it to true if nvim-web-devicons or lspkind-nvim is installed.
     nerd_font = "auto",
 
-    -- Call this function when aerial attaches to a buffer.
-    -- Useful for setting keymaps. Takes a single `bufnr` argument.
-    on_attach = function(bufnr)
-        local wk_ok, wk = pcall(require, "which-key")
-        if not wk_ok then
-            return
-        end
-
-        local mappings = require("user.keymaps.groups").aerial
-        wk.register(mappings, { buffer = bufnr })
-    end,
-
     -- Call this function when aerial first sets symbols on a buffer.
     -- Takes a single `bufnr` argument.
     on_first_symbols = nil,

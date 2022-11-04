@@ -48,7 +48,8 @@ M.on_attach = function(client, bufnr)
 
     local aerial_ok, aerial = pcall(require, "aerial")
     if aerial_ok then
-        aerial.on_attach(client, bufnr)
+        local aerial_mappings = require("user.keymaps.groups").aerial
+        wk.register(aerial_mappings, { buffer = bufnr })
     end
 
 end

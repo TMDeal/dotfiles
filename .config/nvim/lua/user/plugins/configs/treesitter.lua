@@ -7,7 +7,7 @@ local configs = require("nvim-treesitter.configs")
 
 configs.setup {
     -- Ensure these parsers are always installed
-    ensure_installed = "all",
+    ensure_installed = "",
 
     -- Automatically install relevant parser when opening file
     auto_install = false,

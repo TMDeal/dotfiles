@@ -30,7 +30,7 @@ local sumneko_lua = {
 }
 
 mason.setup {
-    ensure_installed = { "sumneko_lua", "gopls", "clangd", "bashls", "marksman", "nimls", "powershell_es", "pyright", "ruby_ls", "rust_analyzer" }
+    ensure_installed = {}
 }
 
 mason.setup_handlers {
