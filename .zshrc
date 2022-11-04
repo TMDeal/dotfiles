@@ -159,9 +159,7 @@ alias vimdiff="vim -d"
 alias vimn="vim -u NONE"
 alias ev="vim ~/.config/nvim/init.lua"
 
-alias ygit="yadm"
-alias ylgit="lazygit --git-dir ~/.local/share/yadm/repo.git --work-tree=$HOME"
-alias lgit="lazygit"
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 alias news="newsboat"
 
