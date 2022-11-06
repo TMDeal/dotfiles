@@ -276,7 +276,7 @@ packer.startup(function(use)
 
     -- Plugin for hugo - forked from https://github.com/phelipetls/vim-hugo
     -- "TMDeal/hugo.nvim"
-    use "~/my-workspace/hugo.nvim"
+    -- use "~/my-workspace/hugo.nvim"
 
     -- Leader Guide
     use {

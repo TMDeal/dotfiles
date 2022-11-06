@@ -126,6 +126,10 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+
+[[ ! -f "$HOME/.dir_colors" ]] && wget https://raw.githubusercontent.com/arcticicestudio/nord-dircolors/develop/src/dir_colors -O ~/.dir_colors
+eval $(dircolors ~/.dir_colors)
+
 bindkey '^ ' autosuggest-accept
 
 if $( command -v nvim > /dev/null ); then

@@ -120,11 +120,11 @@ if notify_ok then
 end
 
 -- load nvim-neoclip extension
-local neoclip_ok, _ = pcall(require, "neoclip")
-if neoclip_ok then
-    telescope.load_extension('neoclip')
-    telescope.load_extension('macroscope')
-end
+-- local neoclip_ok, _ = pcall(require, "neoclip")
+-- if neoclip_ok then
+--     telescope.load_extension('neoclip')
+--     telescope.load_extension('macroscope')
+-- end
 
 -- Load aerial extension
 local aerial_ok, _ = pcall(require, "aerial")
