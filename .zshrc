@@ -202,5 +202,9 @@ if [ -d "$HOME/.nimble" ]; then
     export PATH="$HOME/.nimble/bin:$PATH"
 fi
 
+if [ -d "$HOME/.cargo" ]; then
+    source "$HOME/.cargo/env"
+fi
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
