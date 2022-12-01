@@ -38,7 +38,7 @@ local sessions = {
         s = { c[[ Autosession search ]], "Search Saved Sessions" },
         w = { c[[ SaveSession ]], "Save Current Session" },
         r = { c[[ RestoreSession ]], "Restore Current Session" },
-        d = { c[[ DeleteSession ]], "Delete Current Session" }
+        d = { c[[ Autosession delete ]], "Delete Sessions" }
     }
 }
 

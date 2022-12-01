@@ -8,13 +8,14 @@ local section = dashboard.section
 local button = dashboard.button
 
 section.buttons.val = {
-    button("e", "  New file", ":ene<CR>"),
-    button("c", "  Configuration", ":e ~/.config/nvim/init.lua<CR>"),
-    button("p", "  Projects", ":Telescope projects<CR>"),
+    button("SPC a s", "  Open Session", ":Autosession search<CR>"),
+    button("SPC p", "  Projects", ":Telescope projects<CR>"),
     button("SPC f f", "  Find file"),
     button("SPC f r", "  Recently opened files"),
     button("SPC P", "  Find project"),
     button("SPC s", "  Find text"),
+    button("e", "  New file", ":ene<CR>"),
+    button("c", "  Edit Configuration", ":e ~/.config/nvim/init.lua<CR>"),
     button("q", "  Quit", ":qa<CR>"),
 }
 
