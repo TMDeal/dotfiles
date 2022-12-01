@@ -204,6 +204,22 @@ packer.startup(function(use)
         end
     }
 
+    use {
+        "TimUntersberger/neogit",
+        config = function()
+            require("neogit").setup({
+                integrations = {
+                    diffview = true
+                }
+            })
+        end
+    }
+
+    use {
+        'sindrets/diffview.nvim',
+        requires = 'nvim-lua/plenary.nvim'
+    } 
+
     -- Add git blame info
     use {
         "f-person/git-blame.nvim"

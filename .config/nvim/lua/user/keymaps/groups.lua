@@ -69,11 +69,14 @@ local git = {
         B = { telescope.git_branches, "Branches" },
         s = { telescope.git_status, "Status" },
         l = { cmds.lazygit, "Lazygit" },
+        m = { c[[ Neogit kind=replace ]], "Neogit" },
 
         b = {
+            name = "Git Blame",
+
             b = { c[[ GitBlameToggle ]], "Toggle Git Blame" },
             c = { c[[ GitBlameCopyCommitURL ]], "Copy Commit URL" },
-            o = { c[[ GitBlameOpenCommitURL ]], "Open Commit URL" },
+            o = { c[[ GitBlameOpenCommitURl ]], "Open Commit URL" },
             h = { c[[ GitBlameCopySHA ]], "Copy Commit SHA" }
         }
     },
