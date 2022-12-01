@@ -32,9 +32,9 @@
       <property name="Print" type="string" value="/usr/bin/flameshot gui"/>
       <property name="&lt;Super&gt;w" type="string" value="exo-open --launch WebBrowser"/>
       <property name="&lt;Super&gt;Return" type="string" value="exo-open --launch TerminalEmulator"/>
-      <property name="&lt;Super&gt;c" type="string" value="rofi -modi &quot;clipboard:greenclip print&quot; -show clipboard"/>
       <property name="&lt;Super&gt;d" type="string" value="/usr/local/bin/appmenu"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;e" type="string" value="/usr/local/bin/exitmenu"/>
+      <property name="&lt;Super&gt;c" type="string" value="rofi -modi &quot;clipboard:greenclip print&quot; -show clipboard"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">

@@ -61,11 +61,16 @@
         <value type="string" value="thunar"/>
         <value type="string" value="networkmanager applet"/>
       </property>
+      <property name="known-items" type="array">
+        <value type="string" value="KeePassXC"/>
+        <value type="string" value="Microsoft Teams - Preview1"/>
+        <value type="string" value="CopyQ_copyq"/>
+      </property>
     </property>
     <property name="plugin-15" type="string" value="genmon"/>
     <property name="plugin-16" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
-      <property name="mpris-players" type="string" value=""/>
+      <property name="mpris-players" type="string" value="firefox.instance168598;firefox.instance3288;firefox.instance3381;firefox.instance3545;firefox.instance3716;firefox.instance3822;firefox.instance3942;firefox.instance8578;spotify"/>
       <property name="blacklisted-players" type="string" value=""/>
     </property>
     <property name="plugin-17" type="string" value="notification-plugin"/>

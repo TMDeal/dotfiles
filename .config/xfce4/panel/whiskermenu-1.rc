@@ -1,5 +1,5 @@
 favorites=xfce4-terminal-emulator.desktop,root-terminal.desktop,xfce4-file-manager.desktop,xfce-text-editor.desktop,xfce4-web-browser.desktop,kali-www.desktop,kali-docs.desktop,kali-bugs.desktop,offsec-training.desktop,exploit-database.desktop,vulnhub.desktop
-recent=xfce-wm-settings.desktop,xfce-ui-settings.desktop,xfce-backdrop-settings.desktop,xfce-keyboard-settings.desktop,xfce-settings-manager.desktop,xfce-mouse-settings.desktop,lightdm-gtk-greeter-settings.desktop,thunar.desktop,xfce4-mime-settings.desktop,firefox-esr.desktop
+recent=speedcrunch.desktop,xfce-display-settings.desktop,virtualbox.desktop,teams.desktop,pavucontrol.desktop,thunar.desktop,mate-calc.desktop,org.keepassxc.KeePassXC.desktop,lightdm-gtk-greeter-settings.desktop,xfce-session-settings.desktop
 button-icon=kali-panel-menu
 button-single-row=false
 show-button-title=false

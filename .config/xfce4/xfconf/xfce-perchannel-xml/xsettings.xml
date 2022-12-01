@@ -3,7 +3,7 @@
 <channel name="xsettings" version="1.0">
   <property name="Net" type="empty">
     <property name="ThemeName" type="string" value="Nordic-darker-standard-buttons-v40"/>
-    <property name="IconThemeName" type="string" value="Zafiro-Dark"/>
+    <property name="IconThemeName" type="string" value="Zafiro-icons-dark"/>
   </property>
   <property name="Xft" type="empty">
     <property name="HintStyle" type="empty"/>
