@@ -17,10 +17,6 @@ map("n", "q:", "<nop>", opts)
 map("v", ">", "md>`d:delm d<cr>gv", opts)
 map("v", "<", "md<`d:delm d<cr>gv", opts)
 
--- Keep search matches in the middle of the window
-map("n", "n", "nzzzv", opts)
-map("n", "N", "Nzzzv", opts)
-
 -- Remove highlighting
 map("n", "\\", ":nohl<cr>", opts)
 

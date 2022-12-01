@@ -222,6 +222,13 @@ packer.startup(function(use)
     use "jamestthompson3/nvim-remote-containers"
 
     use {
+        "kevinhwang91/nvim-hlslens",
+        config = function()
+            require "user.plugins.configs.hlslens"
+        end
+    }
+
+    use {
         'sindrets/diffview.nvim',
         requires = 'nvim-lua/plenary.nvim'
     }
