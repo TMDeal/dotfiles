@@ -9,6 +9,9 @@ _G.__luacache_config = {
   }
 }
 
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Load plugins
 require 'user.plugins'
 
