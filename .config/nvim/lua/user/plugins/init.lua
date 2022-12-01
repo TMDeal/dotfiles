@@ -204,6 +204,24 @@ packer.startup(function(use)
         end
     }
 
+    -- Add git blame info
+    use {
+        "f-person/git-blame.nvim"
+    }
+
+    -- manage github issues/pull requests, will set this up later. Looks hella nice
+    use {
+        'pwntester/octo.nvim',
+        requires = {
+            'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope.nvim',
+            'kyazdani42/nvim-web-devicons',
+        },
+        config = function ()
+            require("octo").setup()
+        end
+    }
+
     -- Highlight colorcodes to the color they represent
     use {
         "norcalli/nvim-colorizer.lua",

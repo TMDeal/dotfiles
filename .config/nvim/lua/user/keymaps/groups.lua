@@ -66,9 +66,16 @@ local git = {
         name = "Git",
 
         c = { telescope.git_commits, "Commits" },
-        b = { telescope.git_branches, "Branches" },
+        B = { telescope.git_branches, "Branches" },
         s = { telescope.git_status, "Status" },
-        l = { cmds.lazygit, "Lazygit" }
+        l = { cmds.lazygit, "Lazygit" },
+
+        b = {
+            b = { c[[ GitBlameToggle ]], "Toggle Git Blame" },
+            c = { c[[ GitBlameCopyCommitURL ]], "Copy Commit URL" },
+            o = { c[[ GitBlameOpenCommitURL ]], "Open Commit URL" },
+            h = { c[[ GitBlameCopySHA ]], "Copy Commit SHA" }
+        }
     },
 }
 
