@@ -3,6 +3,7 @@ import:
  - ~/.config/alacritty/font.yml
  - ~/.config/alacritty/keybinds.yml
  - ~/.config/alacritty/debug.yml
+ - ~/.config/alacritty/local.yml
 
 env:
   TERM: alacritty
