@@ -31,6 +31,17 @@ local general = {
     }
 }
 
+local sessions = {
+    ["<leader>a"] = {
+        name = "Sessions",
+
+        s = { c[[ Autosession search ]], "Search Saved Sessions" },
+        w = { c[[ SaveSession ]], "Save Current Session" },
+        r = { c[[ RestoreSession ]], "Restore Current Session" },
+        d = { c[[ DeleteSession ]], "Delete Current Session" }
+    }
+}
+
 local buffer = {
     ["<s-h>"] = { c[[ BufferLineCyclePrev ]], "Previous Buffer" },
     ["<s-l>"] = { c[[ BufferLineCycleNext ]], "Next Buffer" },
@@ -153,6 +164,7 @@ local window = {
 
 M.global = {
     general,
+    sessions,
     buffer,
     file,
     git,
@@ -164,8 +176,8 @@ M.global = {
 }
 
 M.aerial = {
-    ["<leader>a"] = {
-        name = "Aerial",
+    ["<leader>la"] = {
+        name = "Symbols",
 
         a = { c[[ AerialToggle ]], "Sidebar" },
         t = { telescope.aerial, "Telescope" }
@@ -199,7 +211,7 @@ M.lsp = {
         s = { vim.lsp.buf.signature_help, "Signature Help" },
         d = { vim.lsp.buf.type_definition, "Type Definition" },
         r = { vim.lsp.buf.rename, "Rename" },
-        a = { vim.lsp.buf.code_action, "Code Action" },
+        A = { vim.lsp.buf.code_action, "Code Action" },
         e = { vim.diagnostic.open_float, "Show Diagnostics" },
         f = { vim.lsp.buf.formatting, "Format" }
     },

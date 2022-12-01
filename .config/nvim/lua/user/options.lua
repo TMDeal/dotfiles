@@ -103,3 +103,6 @@ opt.guifont = "Anonymice Nerd Font:h8"
 
 -- Enable python remote-plugins for python3
 vim.g.python3_host_prog = "~/.pyenv/versions/neovim3/bin/python"
+
+-- session settings for autosession.nvim
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"

@@ -218,7 +218,7 @@ packer.startup(function(use)
     use {
         'sindrets/diffview.nvim',
         requires = 'nvim-lua/plenary.nvim'
-    } 
+    }
 
     -- Add git blame info
     use {
@@ -235,6 +235,20 @@ packer.startup(function(use)
         },
         config = function ()
             require("octo").setup()
+        end
+    }
+
+    use {
+        "rmagatti/auto-session",
+        config = function()
+            require("auto-session").setup({
+                log_level = 'info',
+                auto_session_enable_last_session = false,
+                auto_session_create_enabled = false,
+                auto_session_enabled = true,
+                auto_restore_enabled = nil,
+                auto_save_enabled = true
+            })
         end
     }
 
