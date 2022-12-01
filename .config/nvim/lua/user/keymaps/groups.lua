@@ -209,7 +209,7 @@ M.lsp = {
         },
 
         s = { vim.lsp.buf.signature_help, "Signature Help" },
-        d = { vim.lsp.buf.type_definition, "Type Definition" },
+        d = { c[[ Telescope lsp_type_definitions ]], "Type Definition" },
         r = { vim.lsp.buf.rename, "Rename" },
         A = { vim.lsp.buf.code_action, "Code Action" },
         e = { vim.diagnostic.open_float, "Show Diagnostics" },
@@ -219,8 +219,8 @@ M.lsp = {
     ["g"] = {
         D = { vim.lsp.buf.declaration, "Goto Declaration" },
         d = { vim.lsp.buf.definition, "Goto Definition" },
-        r = { c[[ TroubleToggle lsp_references ]], "Show References" },
-        i = { c[[ TroubleToggle lsp_implementations ]], "Show Implementations" }
+        r = { c[[ Telescope lsp_references ]], "Show References" },
+        i = { c[[ Telescope lsp_implementations ]], "Show Implementations" }
     },
 
     ["["] = {
