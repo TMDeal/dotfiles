@@ -208,6 +208,10 @@ packer.startup(function(use)
         "TimUntersberger/neogit",
         config = function()
             require("neogit").setup({
+                kind = "floating",
+                popup = {
+                    kind = "floating"
+                },
                 integrations = {
                     diffview = true
                 }

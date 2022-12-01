@@ -2,7 +2,7 @@ local M = {}
 
 local cmds = require("user.plugins.commands")
 local telescope = cmds.telescope
-local pandoc = cmds.pandoc
+local pan = cmds.pandoc
 
 local c = function(c)
     return "<cmd>" .. c .. "<cr>"
@@ -80,7 +80,7 @@ local git = {
         B = { telescope.git_branches, "Branches" },
         s = { telescope.git_status, "Status" },
         l = { cmds.lazygit, "Lazygit" },
-        m = { c[[ Neogit kind=replace ]], "Neogit" },
+        m = { c[[ Neogit ]], "Neogit" },
 
         b = {
             name = "Git Blame",
@@ -107,8 +107,8 @@ local pandoc = {
     ["<leader>P"] = {
         name = "Pandoc",
 
-        b = { pandoc.default_build, "Default Build" },
-        ["1"] = { pandoc.build_one, "Build With 'eisvogel' Template" }
+        b = { pan.default_build, "Default Build" },
+        ["1"] = { pan.build_one, "Build With 'eisvogel' Template" }
     },
 }
 
