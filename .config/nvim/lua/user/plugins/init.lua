@@ -219,6 +219,8 @@ packer.startup(function(use)
         end
     }
 
+    use "jamestthompson3/nvim-remote-containers"
+
     use {
         'sindrets/diffview.nvim',
         requires = 'nvim-lua/plenary.nvim'
