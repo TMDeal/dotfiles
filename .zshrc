@@ -109,6 +109,7 @@ plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
     jump
+    poetry
 )
 
 export ZSH_TMUX_AUTOSTART="false"
