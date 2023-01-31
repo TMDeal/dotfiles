@@ -44,13 +44,15 @@ default_floating_border pixel 1
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec --no-startup-id nitrogen --set-auto $background
+exec --no-startup-id nitrogen --set-zoom-fill $background
 exec --no-startup-id greenclip daemon > /dev/null
 exec --no-startup-id lxpolkit
 exec --no-startup-id udiskie
 exec --no-startup-id picom
-exec --no-startup-id alacritty --class ncspot -e ncspot
-exec --no-startup-id telegram-desktop
+exec --no-startup-id $scripts/xinput
+exec --no-startup-id nm-applet
+exec --no-startup-id dunst
+exec --no-startup-id keepassxc
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -63,6 +65,7 @@ bindsym $mod+Return exec --no-startup-id $term
 
 # kill focused window
 bindsym $mod+Shift+q kill
+bindsym $alt+F4 kill
 
 # change focus
 bindsym $mod+$left focus left
@@ -126,13 +129,6 @@ bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
 
-# scratchpads
-bindsym $mod+equal [instance="ncspot"] scratchpad show
-for_window [instance="ncspot"] move to scratchpad
-
-bindsym $mod+m [class="TelegramDesktop"] scratchpad show
-for_window [class="TelegramDesktop"] move to scratchpad
-
 # move back and forth between workspaces easier
 workspace_auto_back_and_forth yes
 
@@ -163,9 +159,6 @@ bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec $scripts/i3exit
-
-# Open dmenu interface for network manager
-bindsym $mod+n exec $scripts/nmcli-dmenu.py
 
 # take screenshots with flameshot
 bindsym Print exec --no-startup-id flameshot gui
@@ -219,6 +212,8 @@ no_focus [window_role="pop-up"]
 for_window [window_role="pop-up"] floating enable
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
+
+for_window [class="KeePassXC"] floating enable
 
 # startup polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+#TODO: grab this with grep or something
+prop="PIXA3854:00 093A:0274 Touchpad"
+
+xinput set-prop "$prop" "libinput Tapping Enabled" 1
