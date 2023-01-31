@@ -57,11 +57,16 @@
       <property name="square-icons" type="bool" value="true"/>
       <property name="symbolic-icons" type="bool" value="true"/>
       <property name="known-legacy-items" type="array">
+        <value type="string" value="veracrypt"/>
+        <value type="string" value="kazam"/>
         <value type="string" value="xfce4-power-manager"/>
         <value type="string" value="thunar"/>
         <value type="string" value="networkmanager applet"/>
       </property>
       <property name="known-items" type="array">
+        <value type="string" value="veracrypt"/>
+        <value type="string" value="discord1"/>
+        <value type="string" value="flameshot"/>
         <value type="string" value="KeePassXC"/>
         <value type="string" value="Microsoft Teams - Preview1"/>
         <value type="string" value="CopyQ_copyq"/>
@@ -70,13 +75,15 @@
     <property name="plugin-15" type="string" value="genmon"/>
     <property name="plugin-16" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
-      <property name="mpris-players" type="string" value="firefox.instance168598;firefox.instance3288;firefox.instance3381;firefox.instance3545;firefox.instance3716;firefox.instance3822;firefox.instance3942;firefox.instance8578;spotify"/>
+      <property name="mpris-players" type="string" value="chromium.instance1947;chromium.instance2305;chromium.instance2337;chromium.instance2395;chromium.instance2429;chromium.instance2653;chromium.instance2944;chromium.instance38559;firefox.instance168598;firefox.instance1945;firefox.instance2035;firefox.instance2047;firefox.instance2114;firefox.instance2289;firefox.instance2319;firefox.instance2389;firefox.instance30812;firefox.instance3120;firefox.instance3165;firefox.instance3191;firefox.instance3223;firefox.instance3245;firefox.instance3283;firefox.instance3288;firefox.instance328973;firefox.instance3381;firefox.instance3545;firefox.instance3564;firefox.instance3675;firefox.instance3716;firefox.instance3759;firefox.instance3770;firefox.instance3822;firefox.instance3849;firefox.instance3894;firefox.instance3899;firefox.instance3942;firefox.instance3970;firefox.instance4919;firefox.instance65533;firefox.instance75218;firefox.instance8578;firefox.instance93188;spotify"/>
       <property name="blacklisted-players" type="string" value=""/>
     </property>
     <property name="plugin-17" type="string" value="notification-plugin"/>
     <property name="plugin-18" type="string" value="power-manager-plugin"/>
     <property name="plugin-19" type="string" value="clock">
       <property name="digital-format" type="string" value="%_H:%M"/>
+      <property name="digital-time-format" type="string" value="%_H:%M"/>
+      <property name="digital-layout" type="uint" value="3"/>
     </property>
     <property name="plugin-20" type="string" value="separator">
       <property name="style" type="uint" value="0"/>

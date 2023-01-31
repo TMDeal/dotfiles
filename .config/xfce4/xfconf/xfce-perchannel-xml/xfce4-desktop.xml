@@ -84,9 +84,21 @@
       </property>
       <property name="monitorDP-3-3" type="empty">
         <property name="workspace0" type="empty">
-          <property name="color-style" type="int" value="1"/>
-          <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/kali-16x9/default"/>
+          <property name="color-style" type="int" value="0"/>
+          <property name="image-style" type="int" value="4"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/background.jpg"/>
+          <property name="rgba1" type="array">
+            <value type="double" value="0.250980"/>
+            <value type="double" value="0.286275"/>
+            <value type="double" value="0.352941"/>
+            <value type="double" value="1.000000"/>
+          </property>
+          <property name="rgba2" type="array">
+            <value type="double" value="0.262745"/>
+            <value type="double" value="0.298039"/>
+            <value type="double" value="0.368627"/>
+            <value type="double" value="1.000000"/>
+          </property>
         </property>
         <property name="workspace1" type="empty">
           <property name="color-style" type="int" value="1"/>
