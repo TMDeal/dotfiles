@@ -23,6 +23,10 @@ telescope.aerial = function()
     require('telescope').extensions.aerial.aerial(require('telescope.themes').get_dropdown({}))
 end
 
+telescope.workspace_symbols = function()
+    require('telescope.builtin').lsp_dynamic_workspace_symbols()
+end
+
 telescope.buffers = function()
     require("telescope.builtin").buffers()
 end

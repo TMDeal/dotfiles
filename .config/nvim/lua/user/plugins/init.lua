@@ -107,6 +107,7 @@ packer.startup(function(use)
 
     -- Snippets
     use "L3MON4D3/LuaSnip"
+    use "rafamadriz/friendly-snippets"
 
     -- Portable package manager for LSP,Dap,Linters,Formatters
     use {
@@ -208,9 +209,9 @@ packer.startup(function(use)
         "TimUntersberger/neogit",
         config = function()
             require("neogit").setup({
-                kind = "floating",
+                kind = "replace",
                 popup = {
-                    kind = "floating"
+                    kind = "split"
                 },
                 integrations = {
                     diffview = true
@@ -355,6 +356,20 @@ packer.startup(function(use)
         end
     }
 
+    use {
+        "MunifTanjim/exrc.nvim",
+        config = function()
+            require("exrc").setup({
+                files = {
+                    ".nvimrc.lua",
+                    ".nvimrc",
+                    ".exrc.lua",
+                    ".exrc",
+                }
+            })
+        end
+    }
+
     -- File Tree
     use {
         "kyazdani42/nvim-tree.lua",
@@ -411,9 +426,6 @@ packer.startup(function(use)
     -- yankring
     use {
         "AckslD/nvim-neoclip.lua",
-        requires = {
-            {'kkharji/sqlite.lua', module = 'sqlite'},
-        },
         config = function()
             require "user.plugins.configs.neoclip"
         end

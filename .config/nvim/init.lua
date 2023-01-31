@@ -23,3 +23,6 @@ require 'user.keymaps'
 
 -- Autocmds not related to plugins
 require 'user.autocmds'
+
+-- Files for specific custom functionality
+require 'user.django'

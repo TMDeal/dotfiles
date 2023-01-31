@@ -20,7 +20,8 @@ configs.setup {
     },
 
     autotag = {
-        enable = true
+        enable = true,
+        filetypes = { "html", "htmldjango" }
     },
 
     context_commentstring = {

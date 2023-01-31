@@ -3,6 +3,7 @@ local M = {}
 local cmds = require("user.plugins.commands")
 local telescope = cmds.telescope
 local pan = cmds.pandoc
+local aerial = require("aerial")
 
 local c = function(c)
     return "<cmd>" .. c .. "<cr>"
@@ -184,13 +185,13 @@ M.aerial = {
     },
 
     ["["] = {
-        a = { c[[ AerialPrev ]], "Previous Symbol" },
-        A = { c[[ AerialPrevUp ]], "Previous Tree" }
+        a = { aerial.prev, "Previous Symbol" },
+        A = { aerial.prev_up, "Previous Tree" }
     },
 
     ["]"] = {
-        a = { c[[ AerialNext ]], "Next Symbol" },
-        A = { c[[ AerialNextUp ]], "Next Tree" }
+        a = { aerial.next, "Next Symbol" },
+        A = { aerial.next_up, "Next Tree" }
     }
 }
 
@@ -205,7 +206,8 @@ M.lsp = {
 
             a = { vim.lsp.buf.add_workspace_folder, "Add Workspace Folder" },
             r = { vim.lsp.buf.remove_workspace_folder, "Remove Wokspace Folder" },
-            l = { c[[ lua print(vim.inspect(vim.lsp.buf.list_workspace_folders())) ]], "List Workspace Folders" }
+            l = { c[[ lua print(vim.inspect(vim.lsp.buf.list_workspace_folders())) ]], "List Workspace Folders" },
+            s = { telescope.workspace_symbols, "Symbols" }
         },
 
         s = { vim.lsp.buf.signature_help, "Signature Help" },
@@ -213,7 +215,7 @@ M.lsp = {
         r = { vim.lsp.buf.rename, "Rename" },
         A = { vim.lsp.buf.code_action, "Code Action" },
         e = { vim.diagnostic.open_float, "Show Diagnostics" },
-        f = { vim.lsp.buf.formatting, "Format" }
+        f = { vim.lsp.buf.format, "Format" }
     },
 
     ["g"] = {

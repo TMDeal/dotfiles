@@ -29,6 +29,14 @@ local sumneko_lua = {
     }
 }
 
+local html = {
+    filetypes = { "html", "htmldjango" }
+}
+
+local tailwindcss = {
+    init_options = { userLanguages = { htmldjango = "html" } }
+}
+
 mason.setup {
     ensure_installed = {}
 }
@@ -41,6 +49,16 @@ mason.setup_handlers {
     ["sumneko_lua"] = function()
         local opts = vim.tbl_deep_extend("force", sumneko_lua, default_opts) 
         lspconfig.sumneko_lua.setup(opts)
+    end,
+
+    ["html"] = function()
+        local opts = vim.tbl_deep_extend("force", html, default_opts) 
+        lspconfig.html.setup(opts)
+    end,
+
+    ["tailwindcss"] = function()
+        local opts = vim.tbl_deep_extend("force", tailwindcss, default_opts) 
+        lspconfig.tailwindcss.setup(opts)
     end
 }
 
