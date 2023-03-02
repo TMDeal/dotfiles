@@ -156,6 +156,7 @@ alias :qq="clear; tad"
 alias mkdir="mkdir -p"
 alias open="xdg-open"
 alias rm="rm -I"
+alias lgit="lazygit"
 
 alias ctrlc='xclip -selection c'
 alias ctrlv='xclip -selection c -o'
