@@ -205,21 +205,6 @@ packer.startup(function(use)
         end
     }
 
-    use {
-        "TimUntersberger/neogit",
-        config = function()
-            require("neogit").setup({
-                kind = "replace",
-                popup = {
-                    kind = "split"
-                },
-                integrations = {
-                    diffview = true
-                }
-            })
-        end
-    }
-
     use "jamestthompson3/nvim-remote-containers"
 
     use {
@@ -232,24 +217,6 @@ packer.startup(function(use)
     use {
         'sindrets/diffview.nvim',
         requires = 'nvim-lua/plenary.nvim'
-    }
-
-    -- Add git blame info
-    use {
-        "f-person/git-blame.nvim"
-    }
-
-    -- manage github issues/pull requests, will set this up later. Looks hella nice
-    use {
-        'pwntester/octo.nvim',
-        requires = {
-            'nvim-lua/plenary.nvim',
-            'nvim-telescope/telescope.nvim',
-            'kyazdani42/nvim-web-devicons',
-        },
-        config = function ()
-            require("octo").setup()
-        end
     }
 
     use {
@@ -335,10 +302,6 @@ packer.startup(function(use)
             require "user.plugins.configs.mkdnflow"
         end
     }
-
-    -- Plugin for hugo - forked from https://github.com/phelipetls/vim-hugo
-    -- "TMDeal/hugo.nvim"
-    -- use "~/my-workspace/hugo.nvim"
 
     -- Leader Guide
     use {

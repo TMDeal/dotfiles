@@ -36,7 +36,9 @@ telescope.buffer_find = function()
 end
 
 telescope.files = function()
-    require("telescope.builtin").find_files()
+    require("telescope.builtin").find_files({
+        previewer = false
+    })
 end
 
 telescope.mru = function()

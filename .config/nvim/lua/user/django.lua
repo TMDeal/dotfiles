@@ -11,6 +11,11 @@ local is_django = function()
     end
 
     local rootdir = project.get_project_root()
+
+    if not rootdir then
+        return false
+    end
+
     local is_django = vim.fn.filereadable(rootdir .. "/manage.py")
     return is_django == 1
 end

@@ -13,12 +13,15 @@ local general = {
     ["Y"] = { "y$", "Yank Until End of Line" },
 
     ["<leader>"] = {
-        q = { c[[ wqa! ]], "Save and Quit (no prompt)" },
+        q = { c[[ q ]], "Quit" },
         p = { telescope.projects, "Projects" },
         N = { telescope.notifications, "Notifications" },
         y = { telescope.neoclip, "Neoclip" },
-        m = { telescope.macroscope, "Macros - (q)" },
         S = { c[[ setlocal spell! ]], "Toggle Spellcheck" },
+        n = { c[[ NvimTreeToggle ]], "NvimTree" },
+        W = { c[[ SudaWrite ]], "Sudo Save" },
+        w = { c[[ w ]], "Save" },
+        f = { telescope.files, "Files" },
     },
 
     ["["] = {
@@ -50,27 +53,19 @@ local buffer = {
     ["<leader>b"] = {
         name = "Buffer",
 
-        l = { telescope.buffers, "List Buffers" },
-        s = { telescope.buffer_find, "Find in Current Buffer" },
-        q = { cmds.close_buffer, "Close Current Buffer" },
-        h = { cmds.close_hidden_buffers, "Close Hidden Buffers" },
-        o = { cmds.close_other_buffers, "Close All Other Buffers" },
+        j = { c[[ BufferLinePick ]], "Jump" },
+        e = { c[[ BufferLinePickClose ]], "Pick Which Buffer to Close" },
+        h = { c[[ BufferLineCloseLeft ]], "Close All to the Left" },
+        l = { c[[ BufferLineCloseRight ]], "Close All to the Right" },
         ["["] = { c[[ BufferLineCyclePrev ]], "Previous Buffer" },
-        ["]"] = { c[[ BufferLineCycleNext ]], "Next Buffer" }
+        ["]"] = { c[[ BufferLineCycleNext ]], "Next Buffer" },
+
+        s = { telescope.buffer_find, "Find in Current Buffer" },
+        L = { telescope.buffers, "List Buffers" },
+        H = { cmds.close_hidden_buffers, "Close Hidden Buffers" },
+        q = { cmds.close_buffer, "Close Current Buffer" },
+        o = { cmds.close_other_buffers, "Close All Other Buffers" },
     }
-}
-
-local file = {
-    ["<leader>f"] = {
-        name = "File",
-
-        f = { telescope.files, "Find Files" },
-        r = { telescope.mru, "Recently Used Files" },
-        c = { c[[ e $MYVIMRC ]], "Edit vimrc" },
-        R = { c[[ SudaRead ]], "Re-open With Sudo" },
-        W = { c[[ SudaWrite ]], "Write With Sudo" },
-        w = { c[[ w ]], "Save File" }
-    },
 }
 
 local git = {
@@ -81,26 +76,9 @@ local git = {
         B = { telescope.git_branches, "Branches" },
         s = { telescope.git_status, "Status" },
         l = { cmds.lazygit, "Lazygit" },
-        m = { c[[ Neogit ]], "Neogit" },
-
-        b = {
-            name = "Git Blame",
-
-            b = { c[[ GitBlameToggle ]], "Toggle Git Blame" },
-            c = { c[[ GitBlameCopyCommitURL ]], "Copy Commit URL" },
-            o = { c[[ GitBlameOpenCommitURl ]], "Open Commit URL" },
-            h = { c[[ GitBlameCopySHA ]], "Copy Commit SHA" }
-        }
-    },
-}
-
-local nvim_tree = {
-    ["<leader>n"] = {
-        name = "NvimTree",
-
-        t = { c[[ NvimTreeToggle ]], "Toggle" },
-        f = { c[[ NvimTreeFocus ]], "Focus" },
-        c = { c[[ NvimTreeCollapse ]], "Collapse" }
+        b = { require("gitsigns").blame_line, "Blame" },
+        r = { require ("gitsigns").reset_buffer, "Reset Buffer" },
+        d = { c[[ DiffviewOpen ]], "Diff" },
     },
 }
 
@@ -117,9 +95,10 @@ local search = {
     ["<leader>s"] = {
         name = "Search",
 
-        s = { telescope.grep, "Search" },
-        w = { telescope.grep_string, "Search Under Cursor" },
-        b = { telescope.buffer_find, "Search in Buffer" },
+        r = { telescope.mru, "Recently Used Files" },
+        f = { telescope.files, "Files" },
+        s = { telescope.grep, "Text" },
+        l = { telescope.grep_string, "Line Under Cursor" },
     },
 }
 
@@ -167,9 +146,7 @@ M.global = {
     general,
     sessions,
     buffer,
-    file,
     git,
-    nvim_tree,
     pandoc,
     search,
     trouble,

@@ -13,7 +13,7 @@ local default_opts = {
     capabilities = require("user.plugins.configs.lsp.handlers").capabilities
 }
 
-local sumneko_lua = {
+local lua_ls = {
     settings = {
         Lua = {
             diagnostics = {
@@ -46,18 +46,18 @@ mason.setup_handlers {
         lspconfig[server].setup(default_opts)
     end,
 
-    ["sumneko_lua"] = function()
-        local opts = vim.tbl_deep_extend("force", sumneko_lua, default_opts) 
-        lspconfig.sumneko_lua.setup(opts)
+    ["lua_ls"] = function()
+        local opts = vim.tbl_deep_extend("force", lua_ls, default_opts)
+        lspconfig.lua_ls.setup(opts)
     end,
 
     ["html"] = function()
-        local opts = vim.tbl_deep_extend("force", html, default_opts) 
+        local opts = vim.tbl_deep_extend("force", html, default_opts)
         lspconfig.html.setup(opts)
     end,
 
     ["tailwindcss"] = function()
-        local opts = vim.tbl_deep_extend("force", tailwindcss, default_opts) 
+        local opts = vim.tbl_deep_extend("force", tailwindcss, default_opts)
         lspconfig.tailwindcss.setup(opts)
     end
 }
