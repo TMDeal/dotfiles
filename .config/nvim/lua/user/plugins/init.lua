@@ -127,6 +127,8 @@ packer.startup(function(use)
         end
     }
 
+    use "b0o/schemastore.nvim"
+
     use {
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
@@ -187,7 +189,11 @@ packer.startup(function(use)
             require "user.plugins.configs.autopairs"
         end
     }
-    use "windwp/nvim-ts-autotag"
+
+    use {
+        "windwp/nvim-ts-autotag",
+        commit = "fdefe46"
+    }
 
     -- Make commenting easier
     use {
