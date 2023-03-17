@@ -29,6 +29,33 @@ local lua_ls = {
     }
 }
 
+local pyright = {
+    settings = {
+        python = {
+            analysis = {
+                typeCheckingMode = 'off'
+            }
+        }
+    }
+}
+
+local jsonls = {
+    settings = {
+        json = {
+            schemas = require('schemastore').json.schemas(),
+            validate = { enable = true },
+        },
+    },
+}
+
+local yamlls = {
+    settings = {
+        yaml = {
+            schemas = require('schemastore').yaml.schemas(),
+        },
+    },
+}
+
 local html = {
     filetypes = { "html", "htmldjango" }
 }
@@ -59,6 +86,21 @@ mason.setup_handlers {
     ["tailwindcss"] = function()
         local opts = vim.tbl_deep_extend("force", tailwindcss, default_opts)
         lspconfig.tailwindcss.setup(opts)
+    end,
+
+    ["pyright"] = function()
+        local opts = vim.tbl_deep_extend("force", pyright, default_opts)
+        lspconfig.pyright.setup(opts)
+    end,
+
+    ["jsonls"] = function()
+        local opts = vim.tbl_deep_extend("force", jsonls, default_opts)
+        lspconfig.jsonls.setup(opts)
+    end,
+
+    ["yamlls"] = function()
+        local opts = vim.tbl_deep_extend("force", yamlls, default_opts)
+        lspconfig.yamlls.setup(opts)
     end
 }
 
