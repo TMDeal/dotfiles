@@ -304,6 +304,7 @@ packer.startup(function(use)
 
     use {
         "jakewvincent/mkdnflow.nvim",
+        rocks = 'luautf8',
         config = function()
             require "user.plugins.configs.mkdnflow"
         end
