@@ -133,19 +133,9 @@ eval $(dircolors ~/.dir_colors)
 
 bindkey '^ ' autosuggest-accept
 
-if $( command -v nvim > /dev/null ); then
-   alias vim="nvim"
-fi
-
-if $( command -v htop > /dev/null ); then
-    alias top="htop"
-fi
-
 alias reload="omz reload"
-
 alias t="tmux"
 alias tad="tmux detach -t"
-
 alias j="jump"
 alias c="clear"
 alias cls="clear"
@@ -157,17 +147,23 @@ alias mkdir="mkdir -p"
 alias open="xdg-open"
 alias rm="rm -I"
 alias lgit="lazygit"
-
 alias ctrlc='xclip -selection c'
 alias ctrlv='xclip -selection c -o'
-
 alias vimdiff="vim -d"
 alias vimn="vim -u NONE"
 alias ev="vim ~/.config/nvim/init.lua"
-
+alias prun='source "$(poetry env info --path)/bin/activate"'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-
 alias news="newsboat"
+alias msfconsole="msfconsole -q"
+
+if $( command -v nvim > /dev/null ); then
+   alias vim="nvim"
+fi
+
+if $( command -v htop > /dev/null ); then
+    alias top="htop"
+fi
 
 alias dmenu="rofi -dmenu"
 if $( command -v batcat > /dev/null ); then
