@@ -218,6 +218,7 @@ for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 for_window [window_type="notification"] floating enable
 
+for_window [class="Microsoft-edge-beta"] floating disable
 for_window [class="KeePassXC"] floating enable
 
 # startup polybar
