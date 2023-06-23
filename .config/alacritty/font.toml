@@ -1,0 +1,18 @@
+[font]
+size = 9
+
+[font.normal]
+family = "Inconsolata Nerd Font"
+style = "Regular"
+
+[font.bold]
+family = "Inconsolata Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "Inconsolata Nerd Font"
+style = "Italic"
+
+[font.bold_italic]
+family = "Inconsolata Nerd Font"
+style = "Bold Italic"

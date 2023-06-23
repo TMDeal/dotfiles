@@ -1,4 +1,4 @@
-local utils = require "astrocommunity.utils"
+local utils = require "astronvim.utils"
 
 local mason_lspconfig = {
   "lua_ls",

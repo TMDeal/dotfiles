@@ -1,0 +1,36 @@
+import = [
+  "~/.config/alacritty/colors.toml",
+  "~/.config/alacritty/font.toml",
+  "~/.config/alacritty/keybinds.toml",
+  "~/.config/alacritty/debug.toml",
+  "~/.config/alacritty/local.toml"
+]
+
+[env]
+TERM = "alacritty"
+
+[shell]
+program = "/bin/zsh"
+args = ["--login"]
+
+[window]
+decorations = "full"
+opacity = 1.00
+startup_mode = "Maximized"
+title = "Alacritty"
+dynamic_title = false
+
+[window.class]
+instance = "Alacritty"
+general = "Alacritty"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[selection]
+save_to_clipboard = true
+
+[cursor.style]
+shape = "Block"
+blinking = "Off"
