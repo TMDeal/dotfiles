@@ -1,9 +1,13 @@
 return {
   -- Add the community repository of plugin specifications
   "AstroNvim/astrocommunity",
-  { import = "astrocommunity.project.neoconf-nvim" },
   { import = "astrocommunity.project.nvim-spectre" },
   { import = "astrocommunity.project.project-nvim" },
+  {
+    "jay-babu/project.nvim",
+    name = "project_nvim",
+    lazy = false
+  },
 
   { import = "astrocommunity.debugging.nvim-bqf" },
 
