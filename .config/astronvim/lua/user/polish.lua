@@ -18,3 +18,14 @@ autocmd("FileType", {
     vim.opt_local.textwidth = 85
   end,
 })
+
+autocmd("VimEnter", {
+  desc = "Auto select virtualenv Nvim open",
+  pattern = "*",
+  callback = function()
+    local venv = vim.fn.findfile("pyproject.toml", vim.fn.getcwd() .. ";")
+    if venv ~= "" then require("venv-selector").retrieve_from_cache() end
+    vim.api.nvim_command("LspRestart")
+  end,
+  once = true,
+})
