@@ -24,8 +24,10 @@ autocmd("VimEnter", {
   pattern = "*",
   callback = function()
     local venv = vim.fn.findfile("pyproject.toml", vim.fn.getcwd() .. ";")
-    if venv ~= "" then require("venv-selector").retrieve_from_cache() end
-    vim.api.nvim_command("LspRestart")
+    if venv ~= "" then
+      require("venv-selector").retrieve_from_cache() 
+      vim.api.nvim_command("LspRestart")
+    end
   end,
   once = true,
 })
