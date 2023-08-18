@@ -64,6 +64,9 @@ focus_follows_mouse no
 # start a terminal
 bindsym $mod+Return exec --no-startup-id $term
 
+# lock screen
+bindsym $mod+semicolon exec i3lock
+
 # kill focused window
 bindsym $mod+Shift+q kill
 bindsym $alt+F4 kill
