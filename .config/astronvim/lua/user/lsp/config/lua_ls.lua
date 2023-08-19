@@ -11,9 +11,14 @@ return {
         -- Get the language server to recognize the `vim` global
         globals = { "vim" },
       },
+      semantic = {
+        enable = false
+      },
       workspace = {
         -- Make the server aware of Neovim runtime files
-        library = { [vim.fn.expand "$VIMRUNTIME/lua"] = true, [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true },
+        library = {
+          [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+        },
       },
     },
   },
