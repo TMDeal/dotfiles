@@ -45,7 +45,7 @@ return {
         resize_step_x = 1,
         -- sets resize steps for y axis
         resize_step_y = 1,
-      }
-    }
-  }
+      },
+    },
+  },
 }

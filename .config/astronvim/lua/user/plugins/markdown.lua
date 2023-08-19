@@ -41,7 +41,7 @@ return {
         transform_explicit = function(text)
           text = text:gsub(" ", "-")
           text = text:lower()
-          text = os.date("%Y-%m-%d_") .. text
+          text = os.date "%Y-%m-%d_" .. text
           return text
         end,
       },
@@ -145,6 +145,6 @@ return {
         -- MkdnFoldSection = { "n", "<leader>f" },
         -- MkdnUnfoldSection = { "n", "<leader>F" },
       },
-    }
-  }
+    },
+  },
 }

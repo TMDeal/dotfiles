@@ -1,7 +1,6 @@
 require "user.django"
 require("dap.ext.vscode").load_launchjs()
 
-local notify = require "notify"
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
@@ -25,8 +24,8 @@ autocmd("VimEnter", {
   callback = function()
     local venv = vim.fn.findfile("pyproject.toml", vim.fn.getcwd() .. ";")
     if venv ~= "" then
-      require("venv-selector").retrieve_from_cache() 
-      vim.api.nvim_command("LspRestart")
+      require("venv-selector").retrieve_from_cache()
+      vim.api.nvim_command "LspRestart"
     end
   end,
   once = true,

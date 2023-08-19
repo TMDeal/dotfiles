@@ -20,6 +20,14 @@ return {
       return opts
     end,
   },
+  -- {
+  --   "nvim-treesitter/nvim-treesitter",
+  --   dependencies = {
+  --     "JoosepAlviste/nvim-ts-context-commentstring",
+  --     "nvim-treesitter/nvim-treesitter-textobjects",
+  --     "TMDeal/nvim-ts-autotag",
+  --   }
+  -- }
   -- You can disable default plugins as follows:
   -- { "max397574/better-escape.nvim", enabled = false },
   --

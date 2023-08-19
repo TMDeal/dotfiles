@@ -6,7 +6,7 @@ return {
   {
     "jay-babu/project.nvim",
     name = "project_nvim",
-    lazy = false
+    lazy = false,
   },
 
   { import = "astrocommunity.debugging.nvim-bqf" },

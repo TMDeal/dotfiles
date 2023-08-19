@@ -17,7 +17,7 @@ return {
       "DiffviewToggleFiles",
       "DiffviewFocusFiles",
       "DiffviewRefresh",
-      "DiffviewFileHistory"
+      "DiffviewFileHistory",
     },
     dependencies = {
       "nvim-lua/plenary.nvim",
