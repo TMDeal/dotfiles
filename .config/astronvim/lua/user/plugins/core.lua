@@ -1,85 +1,115 @@
 return {
-  -- customize alpha options
   {
     "goolord/alpha-nvim",
-    opts = function(_, opts)
-      -- customize the dashboard header
-      opts.section.header.val = {
-        " █████  ███████ ████████ ██████   ██████",
-        "██   ██ ██         ██    ██   ██ ██    ██",
-        "███████ ███████    ██    ██████  ██    ██",
-        "██   ██      ██    ██    ██   ██ ██    ██",
-        "██   ██ ███████    ██    ██   ██  ██████",
-        " ",
-        "    ███    ██ ██    ██ ██ ███    ███",
-        "    ████   ██ ██    ██ ██ ████  ████",
-        "    ██ ██  ██ ██    ██ ██ ██ ████ ██",
-        "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
-        "    ██   ████   ████   ██ ██      ██",
+    opts = function(_, dashboard)
+      local button = require("astronvim.utils").alpha_button
+
+      dashboard.section.buttons.val = {
+        button("SPC n", "  new file"),
+        button("SPC f f", "  Find File"),
+        button("SPC f o", "  Recent Files"),
+        button("SPC f w", "  Find Word"),
+        button("SPC f '", "  Bookmarks"),
+        button("SPC S l", "  Last Session"),
+        button("SPC q", "  Quit"),
       }
-      return opts
+
+      return dashboard
     end,
   },
-  -- {
-  --   "nvim-treesitter/nvim-treesitter",
-  --   dependencies = {
-  --     "JoosepAlviste/nvim-ts-context-commentstring",
-  --     "nvim-treesitter/nvim-treesitter-textobjects",
-  --     "TMDeal/nvim-ts-autotag",
-  --   }
-  -- }
-  -- You can disable default plugins as follows:
-  -- { "max397574/better-escape.nvim", enabled = false },
-  --
-  -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
-  -- {
-  --   "L3MON4D3/LuaSnip",
-  --   config = function(plugin, opts)
-  --     require "plugins.configs.luasnip"(plugin, opts) -- include the default astronvim config that calls the setup call
-  --     -- add more custom luasnip configuration such as filetype extend or custom snippets
-  --     local luasnip = require "luasnip"
-  --     luasnip.filetype_extend("javascript", { "javascriptreact" })
-  --   end,
-  -- },
-  -- {
-  --   "windwp/nvim-autopairs",
-  --   config = function(plugin, opts)
-  --     require "plugins.configs.nvim-autopairs"(plugin, opts) -- include the default astronvim config that calls the setup call
-  --     -- add more custom autopairs configuration such as custom rules
-  --     local npairs = require "nvim-autopairs"
-  --     local Rule = require "nvim-autopairs.rule"
-  --     local cond = require "nvim-autopairs.conds"
-  --     npairs.add_rules(
-  --       {
-  --         Rule("$", "$", { "tex", "latex" })
-  --           -- don't add a pair if the next character is %
-  --           :with_pair(cond.not_after_regex "%%")
-  --           -- don't add a pair if  the previous character is xxx
-  --           :with_pair(
-  --             cond.not_before_regex("xxx", 3)
-  --           )
-  --           -- don't move right when repeat character
-  --           :with_move(cond.none())
-  --           -- don't delete if the next character is xx
-  --           :with_del(cond.not_after_regex "xx")
-  --           -- disable adding a newline when you press <cr>
-  --           :with_cr(cond.none()),
-  --       },
-  --       -- disable for .vim files, but it work for another filetypes
-  --       Rule("a", "a", "-vim")
-  --     )
-  --   end,
-  -- },
-  -- By adding to the which-key config and using our helper function you can add more which-key registered bindings
-  -- {
-  --   "folke/which-key.nvim",
-  --   config = function(plugin, opts)
-  --     require "plugins.configs.which-key"(plugin, opts) -- include the default astronvim config that calls the setup call
-  --     -- Add bindings which show up as group name
-  --     local wk = require "which-key"
-  --     wk.register({
-  --       b = { name = "Buffer" },
-  --     }, { mode = "n", prefix = "<leader>" })
-  --   end,
-  -- },
+  {
+    "mfussenegger/nvim-dap",
+    config = function()
+      local dap = require "dap"
+
+      local filters = {}
+      dap.defaults.python.exception_breakpoints = filters
+    end,
+  },
+  {
+    "lambdalisue/suda.vim",
+    cmd = "SudaWrite",
+  },
+  {
+    "sindrets/diffview.nvim",
+    cmd = {
+      "DiffviewOpen",
+      "DiffviewClose",
+      "DiffviewToggleFiles",
+      "DiffviewFocusFiles",
+      "DiffviewRefresh",
+      "DiffviewFileHistory",
+    },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+  },
+  {
+    "kylechui/nvim-surround",
+    event = "VeryLazy",
+    opts = {},
+  },
+  {
+    "ahmedkhalf/project.nvim",
+    opts = {
+      manual_mode = false,
+      detection_methods = { "pattern", "lsp" },
+      patterns = { ".git", "venv", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", ".projectroot" },
+    },
+  },
+  {
+    "stevearc/overseer.nvim",
+    opts = {
+      strategy = "toggleterm",
+    },
+  },
+  {
+    "rcarriga/nvim-notify",
+    opts = {
+      background_colour = "#2e3440",
+      fps = 30,
+      level = 2,
+      minimum_width = 50,
+      render = "default",
+      stages = "fade_in_slide_out",
+      timeout = 250,
+    },
+  },
+  {
+    "aserowy/tmux.nvim",
+    lazy = false,
+    opts = {
+      copy_sync = {
+        enable = true,
+        ignore_buffers = { empty = false },
+        redirect_to_clipboard = false,
+        register_offset = 0,
+        sync_clipboard = false,
+        sync_registers = true,
+        sync_deletes = true,
+        sync_unnamed = true,
+      },
+      navigation = {
+        cycle_navigation = true,
+        enable_default_keybindings = true,
+        persist_zoom = false,
+      },
+      resize = {
+        enable_default_keybindings = true,
+        resize_step_x = 1,
+        resize_step_y = 1,
+      },
+    },
+  },
+  {
+    "kevinhwang91/nvim-bqf",
+    event = "VeryLazy",
+    opts = {},
+  },
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      path = "append",
+    },
+  },
 }
