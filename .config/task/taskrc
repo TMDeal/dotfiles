@@ -1,10 +1,39 @@
-# Files
+#+------+
+#+ Core +
+#+------+
 data.location=$HOME/.local/share/task
 hooks.location=$HOME/.config/task/hooks
 
-# theme
-include local.theme
+complete.all.tags=true
+default.command=list
+editor=nvim
+list.all.projects=true
+list.all.tags=true
+regex=true
+weekstart=Monday
 
-# options
-regex=on
+#+----+
+#+ UI +
+#+----+
+include ~/.config/task/nord.theme
+color=true
+
+#+-----+
+#+ UDA +
+#+-----+
+
+#+---------+
+#+ Reports +
+#+---------+
+
+#+---------+
+#+ Aliases +
+#+---------+
+alias.a=add
+alias.bd=burndown.daily
+alias.cx=context
+alias.e=edit
+alias.ls=list
+alias.mod=modify
+
 news.version=2.6.0
