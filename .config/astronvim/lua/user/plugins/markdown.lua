@@ -1,3 +1,5 @@
+local utils = require "astronvim.utils"
+
 return {
   {
     "jakewvincent/mkdnflow.nvim",
@@ -19,9 +21,9 @@ return {
       filetypes = { md = true, rmd = true, markdown = true },
       create_dirs = true,
       perspective = {
-        priority = "root",
+        priority = "current",
         fallback = "first",
-        root_tell = "index.md",
+        root_tell = false,
         nvim_wd_heel = false,
         update = true,
       },
@@ -129,6 +131,7 @@ return {
       templates = {
         subdir = "templates",
       },
+      mappings = {},
     },
   },
   {
@@ -143,4 +146,18 @@ return {
       },
     },
   },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    opts = function(_, opts)
+      if not opts.ensure_installed then opts.ensure_installed = {} end
+      utils.list_insert_unique(opts.ensure_installed, "marksman")
+    end,
+  },
+  -- {
+  --   "jay-babu/mason-null-ls.nvim",
+  --   opts = function(_, opts)
+  --     if not opts.ensure_installed then opts.ensure_installed = {} end
+  --     utils.list_insert_unique(opts.ensure_installed, "prettierd")
+  --   end,
+  -- },
 }

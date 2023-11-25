@@ -1,8 +1,21 @@
 return {
   {
     "nvim-neotest/neotest",
-    config = function()
-      -- get neotest namespace (api call creates or returns namespace)
+    ft = { "python" },
+    dependencies = {
+      "nvim-neotest/neotest-python",
+    },
+    opts = function()
+      return {
+        adapters = {
+          require "neotest-python",
+        },
+        quickfix = {
+          open = function() vim.cmd "Trouble quickfix" end,
+        },
+      }
+    end,
+    config = function(_, opts)
       local neotest_ns = vim.api.nvim_create_namespace "neotest"
       vim.diagnostic.config({
         virtual_text = {
@@ -12,24 +25,8 @@ return {
           end,
         },
       }, neotest_ns)
-      require("neotest").setup {
-        -- your neotest config here
-        adapters = {
-          require "neotest-python",
-        },
-        quickfix = {
-          open = function() vim.cmd "Trouble quickfix" end,
-        },
-      }
+
+      require("neotest").setup(opts)
     end,
-    ft = { "python" },
-    dependencies = {
-      "nvim-neotest/neotest-python",
-    },
   },
-  -- {
-  --   "andythigpen/nvim-coverage",
-  --   event = "User AstroFile",
-  --   requires = { "nvim-lua/plenary.nvim" },
-  -- },
 }

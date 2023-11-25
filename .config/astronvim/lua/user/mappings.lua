@@ -19,6 +19,9 @@ return {
     -- tables with the `name` key will be registered with which-key if it's installed
     -- this is useful for naming menus
     ["<leader>b"] = { name = "Buffers" },
+    ["<leader>bq"] = { function() require("astronvim.utils.buffer").close() end, desc = "Close buffer" },
+    ["<leader>bQ"] = { function() require("astronvim.utils.buffer").close(0, true) end, desc = "Force Close buffer" },
+
     ["<leader>x"] = { name = " Trouble" },
     ["<leader>j"] = { name = " Tasks" },
     ["<leader>jr"] = { "<cmd>OverseerRun<cr>", desc = "Run Task" },
@@ -32,6 +35,11 @@ return {
     ["<leader>jtf"] = { function() require("neotest").run.run(vim.fn.expand "%") end, desc = "Run Tests in File" },
     ["<leader>jts"] = { function() require("neotest").run.stop() end, desc = "Stop Test" },
     ["<leader>lV"] = { "<cmd>:VenvSelectCached<cr>", desc = "Select Cached VirtualEnv" },
+
+    ["<leader>\\"] = { "<cmd>:vsplit<cr>", desc = "Vertical Split" },
+    ["<leader>-"] = { "<cmd>:split<cr>", desc = "Horizontal Split" },
+
+    ["<leader>|"] = "<nop>",
   },
   i = {
     ["<F1>"] = "<nop>",

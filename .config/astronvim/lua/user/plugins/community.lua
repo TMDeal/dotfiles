@@ -3,11 +3,8 @@ return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.project.nvim-spectre" },
   { import = "astrocommunity.project.project-nvim" },
-  {
-    "jay-babu/project.nvim",
-    name = "project_nvim",
-    lazy = false,
-  },
+
+  { import = "astrocommunity.completion.cmp-cmdline" },
 
   { import = "astrocommunity.debugging.nvim-bqf" },
 
@@ -16,7 +13,6 @@ return {
 
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.lua" },
-  -- { import = "astrocommunity.pack.markdown" },
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.json" },
   { import = "astrocommunity.pack.yaml" },
