@@ -110,6 +110,7 @@ plugins=(
     zsh-syntax-highlighting
     jump
     poetry
+    zoxide
 )
 
 export ZSH_TMUX_AUTOSTART="false"
@@ -122,6 +123,8 @@ export DISABLE_FZF_KEY_BINDINGS="false"
 
 export VIRTUAL_ENV_DISABLE_PROMPT="false"
 export ZSH_PYENV_QUIET="true"
+
+export ZOXIDE_CMD_OVERRIDE="cd"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -165,9 +168,16 @@ if $( command -v htop > /dev/null ); then
     alias top="htop"
 fi
 
-alias dmenu="rofi -dmenu"
+if $( command -v rofi > /dev/null ); then
+    alias dmenu="rofi -dmenu"
+fi
+
 if $( command -v batcat > /dev/null ); then
     alias bat="batcat"
+fi
+
+if $( command -v rg > /dev/null ); then
+    alias grep="rg"
 fi
 
 # Make neovim or vim the default editor
@@ -206,3 +216,7 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
