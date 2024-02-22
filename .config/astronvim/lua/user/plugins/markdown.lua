@@ -114,27 +114,6 @@ return {
     },
   },
   {
-    "epwalsh/obsidian.nvim",
-    lazy = true,
-    event = {
-      "BufReadPre " .. vim.fn.expand "~" .. "/.vault/**.md",
-    },
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    opts = {
-      dir = "~/.vault",
-      notes_subdir = "notes",
-      daily_notes = {
-        folder = "notes/journal",
-      },
-      templates = {
-        subdir = "templates",
-      },
-      mappings = {},
-    },
-  },
-  {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       highlight = {
@@ -153,11 +132,4 @@ return {
       utils.list_insert_unique(opts.ensure_installed, "marksman")
     end,
   },
-  -- {
-  --   "jay-babu/mason-null-ls.nvim",
-  --   opts = function(_, opts)
-  --     if not opts.ensure_installed then opts.ensure_installed = {} end
-  --     utils.list_insert_unique(opts.ensure_installed, "prettierd")
-  --   end,
-  -- },
 }

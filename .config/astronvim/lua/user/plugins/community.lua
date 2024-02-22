@@ -11,6 +11,22 @@ return {
   { import = "astrocommunity.diagnostics.trouble-nvim" },
   { import = "astrocommunity.code-runner.overseer-nvim" },
 
+  -- { import = "astrocommunity.motion.flash-nvim" },
+  -- {
+  --   "folke/flash.nvim",
+  --   opts = {
+  --     modes = {
+  --       char = {
+  --         jump_labels = true,
+  --       },
+  --     },
+  --   },
+  -- },
+
+  -- { import = "astrocommunity.utility.noice-nvim" },
+
+  { import = "astrocommunity.colorscheme.nord-nvim" },
+
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.typescript" },
