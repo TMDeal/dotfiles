@@ -35,7 +35,6 @@ prev() {
 }
 
 status() {
-    echo "阮"
     if [ -z $STATUS ]; then
         exit 1
     fi
