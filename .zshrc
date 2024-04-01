@@ -90,6 +90,7 @@ DISABLE_AUTO_TITLE="true"
 HIST_STAMPS="yyyy-mm-dd"
 
 plugins=(
+    asdf
     git
     tmux
     fzf
@@ -110,7 +111,6 @@ plugins=(
     zsh-syntax-highlighting
     jump
     poetry
-    zoxide
 )
 
 export ZSH_TMUX_AUTOSTART="false"
@@ -123,8 +123,6 @@ export DISABLE_FZF_KEY_BINDINGS="false"
 
 export VIRTUAL_ENV_DISABLE_PROMPT="false"
 export ZSH_PYENV_QUIET="true"
-
-export ZOXIDE_CMD_OVERRIDE="cd"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -159,6 +157,12 @@ alias prun='source "$(poetry env info --path)/bin/activate"'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias news="newsboat"
 alias msfconsole="msfconsole -q"
+alias sudop='sudo env "PATH=$PATH"'
+
+if $( command -v ruby > /dev/null ); then
+    USER_GEM_PATH=$(gem environment | grep USER | awk '{print $5}')
+    export PATH="$PATH:$USER_GEM_PATH/bin"
+fi
 
 if $( command -v nvim > /dev/null ); then
    alias vim="nvim"
@@ -173,7 +177,9 @@ if $( command -v rofi > /dev/null ); then
 fi
 
 if $( command -v batcat > /dev/null ); then
+    export BAT_THEME="Nord"
     alias bat="batcat"
+    alias cat="bat -pp"
 fi
 
 if $( command -v rg > /dev/null ); then
