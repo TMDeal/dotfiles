@@ -1,3 +1,3 @@
 return {
-  { "stevearc/aerial.nvim", enabled = false },
+  -- { "stevearc/aerial.nvim", enabled = false },
 }
