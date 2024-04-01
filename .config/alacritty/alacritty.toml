@@ -3,7 +3,7 @@ import = [
   "~/.config/alacritty/font.toml",
   "~/.config/alacritty/keybinds.toml",
   "~/.config/alacritty/debug.toml",
-  "~/.config/alacritty/local.toml"
+  "~/.config/alacritty/local.toml",
 ]
 
 [env]
