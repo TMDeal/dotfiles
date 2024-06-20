@@ -33,7 +33,7 @@ opt.smartcase = true
 opt.gdefault = true
 opt.showmatch = true
 opt.showmode = false
-opt.cmdheight = 0
+opt.cmdheight = 1
 opt.list = true
 opt.listchars = {
   extends = "»",
@@ -63,4 +63,3 @@ g.diagnostics_mode = 3 -- set the visibility of diagnostics in the UI (0=off, 1=
 g.icons_enabled = true -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
 g.ui_notifications_enabled = true -- disable notifications when toggling UI elements
 g.editorconfig = true
-g.python3_host_prog = "~/.pyenv/versions/neovim3/bin/python"

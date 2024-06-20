@@ -4,19 +4,19 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("user_" .. name, { clear = true })
 end
 
-autocmd("VimEnter", {
-  desc = "Auto select virtualenv on Neovim open",
-  group = augroup("venv-selector"),
-  pattern = "*",
-  callback = function()
-    local venv = vim.fn.findfile("pyproject.toml", vim.fn.getcwd() .. ";")
-    if venv ~= "" then
-      require("venv-selector").retrieve_from_cache()
-      vim.api.nvim_command("LspRestart")
-    end
-  end,
-  once = true,
-})
+-- autocmd("VimEnter", {
+--   desc = "Auto select virtualenv on Neovim open",
+--   group = augroup("venv-selector"),
+--   pattern = "*",
+--   callback = function()
+--     local venv = vim.fn.findfile("pyproject.toml", vim.fn.getcwd() .. ";")
+--     if venv ~= "" then
+--       require("venv-selector").retrieve_from_cache()
+--       vim.api.nvim_command("LspRestart")
+--     end
+--   end,
+--   once = true,
+-- })
 
 autocmd("FileType", {
   desc = "Markdown specific settings",
@@ -34,6 +34,17 @@ autocmd("FileType", {
   desc = "HTML/CSS specific settings",
   group = augroup("webfiles"),
   pattern = { "html", "css", "scss", "htmldjango" },
+  callback = function()
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.softtabstop = 2
+    vim.opt_local.tabstop = 2
+  end,
+})
+
+autocmd("FileType", {
+  desc = "Nix filetype specific settings",
+  group = augroup("nix"),
+  pattern = { "nix" },
   callback = function()
     vim.opt_local.shiftwidth = 2
     vim.opt_local.softtabstop = 2

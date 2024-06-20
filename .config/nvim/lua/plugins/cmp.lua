@@ -17,6 +17,8 @@ return {
       local luasnip = require("luasnip")
       local cmp = require("cmp")
 
+      opts.auto_brackets = {}
+
       opts.preselect = cmp.PreselectMode.None
 
       opts.confirm_opts = {
