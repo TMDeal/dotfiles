@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=/usr/sbin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -111,6 +111,7 @@ plugins=(
     zsh-syntax-highlighting
     jump
     poetry
+    poetry-env
 )
 
 export ZSH_TMUX_AUTOSTART="false"
@@ -138,6 +139,9 @@ alias reload="omz reload"
 alias t="tmux"
 alias tad="tmux detach -t"
 alias j="jump"
+alias m="mark"
+alias dm="unmark"
+alias mls="marks"
 alias c="clear"
 alias cls="clear"
 alias q="exit"
