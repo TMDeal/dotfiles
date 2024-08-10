@@ -2,15 +2,11 @@ return {
   {
     "linux-cultist/venv-selector.nvim",
     opts = {
-      auto_refresh = false,
-      search_venv_managers = true,
-      search_workspace = true,
-      search = true,
-      dap_enabled = true,
-      parents = 2,
-      name = { "venv", ".venv" },
-      fd_binary_name = "fdfind",
-      notify_user_on_activate = false,
+      settings = {
+        options = {
+          notify_user_on_venv_activation = false,
+        },
+      },
     },
   },
   {
@@ -25,17 +21,27 @@ return {
     "williamboman/mason-lspconfig.nvim",
     opts = function(_, opts)
       if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "pyright" })
+        vim.list_extend(opts.ensure_installed, { "pyright", "ruff" })
       end
     end,
   },
   {
-    "jay-babu/mason-null-ls.nvim",
-    opts = function(_, opts)
-      if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "ruff-lsp", "djlint", "black", "isort" })
-      end
-    end,
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        ["python"] = { "ruff_format" },
+        ["htmldjango"] = { "djlint" },
+      },
+    },
+  },
+  {
+    "mfussenegger/nvim-lint",
+    opts = {
+      linters_by_ft = {
+        ["python"] = { "ruff" },
+        ["htmldjango"] = { "djlint" },
+      },
+    },
   },
   {
     "jay-babu/mason-nvim-dap.nvim",
