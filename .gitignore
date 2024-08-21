@@ -1,4 +1,1 @@
-~/.config/nvim/plugin/packer_compiled.lua
-~/.local/share/fonts/anonymous-pro-nerd/.uuid
-~/.config/picom/picom.log
-~/.cfg
+.config/picom/picom.log
