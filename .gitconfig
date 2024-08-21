@@ -7,7 +7,6 @@
     trustctime = false
     editor = nvim
     filemode = false
-	excludesfile = ~/.gitignore
 [color]
     ui = true
 [credential]
@@ -29,7 +28,7 @@
     br = branch
 	unstage = reset HEAD --
     undo = reset --soft HEAD~
-    dc = diff --cached
+    diffc = diff --cached
 	lg = log --graph --branches --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	fix-commit = commit --edit --file=.git/COMMIT_EDITMSG
 [safe]
