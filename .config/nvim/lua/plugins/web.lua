@@ -14,7 +14,7 @@ return {
       if not opts.ensure_installed then
         opts.ensure_installed = {}
       end
-      vim.list_extend(opts.ensure_installed, { "cssls", "html", "tsserver", "eslint" })
+      vim.list_extend(opts.ensure_installed, { "cssls", "html", "ts_ls", "eslint" })
     end,
   },
 }
