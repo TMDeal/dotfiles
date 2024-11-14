@@ -233,32 +233,3 @@ for_window [class="KeePassXC"] floating enable
 
 # startup polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
-# dummy bar the same height as polybar and transparent
-# used to preserve space for polybar
-# bar {
-#     i3bar_command i3bar -t
-#     height 38 # polybar_height + (polybar_border * 2)
-#     mode dock
-#     position top
-#
-#     # prevent accidental misclicks
-#     bindsym button1 nop
-#     bindsym button2 nop
-#     bindsym button3 nop
-#     bindsym button4 nop
-#     bindsym button5 nop
-#
-#     # make everything transparent
-#     colors {
-#         background #00000000
-#         statusline #00000000
-#         separator  #00000000
-#
-#         focused_workspace  #00000000 #00000000 #00000000
-#         active_workspace   #00000000 #00000000 #00000000
-#         inactive_workspace #00000000 #00000000 #00000000
-#         urgent_workspace   #00000000 #00000000 #00000000
-#         binding_mode       #00000000 #00000000 #00000000
-#     }
-# }
