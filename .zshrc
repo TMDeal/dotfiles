@@ -112,6 +112,7 @@ plugins=(
     jump
     poetry
     poetry-env
+    exercism
 )
 
 export ZSH_TMUX_AUTOSTART="false"
@@ -135,6 +136,7 @@ eval $(dircolors ~/.dir_colors)
 
 bindkey '^ ' autosuggest-accept
 
+alias glow="glow -p"
 alias reload="omz reload"
 alias t="tmux"
 alias tad="tmux detach -t"
@@ -162,6 +164,7 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias news="newsboat"
 alias msfconsole="msfconsole -q"
 alias sudop='sudo env "PATH=$PATH"'
+alias myip='curl icanhazip.com'
 
 if $( command -v ruby > /dev/null ); then
     USER_GEM_PATH=$(gem environment | grep USER | awk '{print $5}')
@@ -218,6 +221,10 @@ fi
 
 if [ -d "$HOME/.nimble" ]; then
     export PATH="$HOME/.nimble/bin:$PATH"
+fi
+
+if [ -d "$HOME/.dotnet" ]; then
+    export PATH="$HOME/.dotnet:$PATH"
 fi
 
 if [ -d "$HOME/.cargo" ]; then
