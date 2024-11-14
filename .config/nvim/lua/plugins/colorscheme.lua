@@ -1,5 +1,5 @@
 return {
-  { "catppuccin/nvim", name = "catppuccin", enabled = false },
+  { "catppuccin/nvim", name = "catppuccin", opts = { flavor = "frappe", background = { dark = "frappe" } } },
   { "folke/tokyonight.nvim", enabled = false },
   {
     "gbprod/nord.nvim",

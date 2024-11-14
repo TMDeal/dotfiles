@@ -45,7 +45,7 @@ opt.listchars = {
 }
 opt.wildmenu = true
 opt.wildignorecase = true
-opt.wildignore = "*/.git/*,*/.hg/*,*/.svn/*,*.bmp,*.gif,*.mp3,*.wav,*.wav,*.class,*.o,*.pyc"
+opt.wildignore = "*/.git/*,*/.hg/*,*/.svn/*,*.bmp,*.gif,*.mp3,*.wav,*.wav,*.class,*.o,*.pyc,*.beam"
 opt.splitbelow = true
 opt.splitright = true
 opt.wrap = false

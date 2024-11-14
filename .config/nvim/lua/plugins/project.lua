@@ -17,6 +17,8 @@ return {
       "package.json",
       ".projectroot",
       "go.mod",
+      "mix.exs",
+      "mix.lock",
     },
   },
   config = function(_, opts)

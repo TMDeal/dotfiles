@@ -6,13 +6,22 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
+vim.filetype.add({
+  extension = {
+    gotmpl = "gotmpl",
+  },
+  pattern = {
+    [".*/templates/.*%.tmpl"] = "gotmpl",
+  },
+})
+
 require("lazy").setup({
   spec = {
     {
       "LazyVim/LazyVim",
       import = "lazyvim.plugins",
       opts = {
-        colorscheme = "nord",
+        colorscheme = "catppuccin",
       },
     },
     { import = "plugins" },
