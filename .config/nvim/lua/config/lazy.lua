@@ -9,6 +9,9 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 vim.filetype.add({
   extension = {
     gotmpl = "gotmpl",
+    jinja = "jinja",
+    jinja2 = "jinja",
+    j2 = "jinja",
   },
   pattern = {
     [".*/templates/.*%.tmpl"] = "gotmpl",
@@ -21,7 +24,7 @@ require("lazy").setup({
       "LazyVim/LazyVim",
       import = "lazyvim.plugins",
       opts = {
-        colorscheme = "catppuccin",
+        colorscheme = "nord",
       },
     },
     { import = "plugins" },
