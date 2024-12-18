@@ -90,6 +90,7 @@ DISABLE_AUTO_TITLE="true"
 HIST_STAMPS="yyyy-mm-dd"
 
 plugins=(
+    ssh-agent
     asdf
     git
     tmux
@@ -125,6 +126,12 @@ export DISABLE_FZF_KEY_BINDINGS="false"
 
 export VIRTUAL_ENV_DISABLE_PROMPT="false"
 export ZSH_PYENV_QUIET="true"
+
+export PYTHON_VENV_NAME=".venv"
+export PYTHON_AUTO_VRUN=true
+
+zstyle :omz:plugins:ssh-agent quiet yes
+zstyle :omz:plugins:ssh-agent lazy yes
 
 source $ZSH/oh-my-zsh.sh
 
@@ -165,6 +172,7 @@ alias news="newsboat"
 alias msfconsole="msfconsole -q"
 alias sudop='sudo env "PATH=$PATH"'
 alias myip='curl icanhazip.com'
+alias lg="lazygit"
 
 if $( command -v ruby > /dev/null ); then
     USER_GEM_PATH=$(gem environment | grep USER | awk '{print $5}')
