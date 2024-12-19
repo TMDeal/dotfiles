@@ -1,9 +1,9 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# # Initialization code that may require console input (password prompts, [y/n]
+# # confirmations, etc.) must go above this block; everything else may go below.
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
 # If you come from bash you might have to change your $PATH.
 export PATH=/usr/sbin:$PATH
@@ -28,10 +28,10 @@ plugin() {
     fi
 }
 
-# Install powerlevel10k if it is not already installed
-if [ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
-fi
+# # Install powerlevel10k if it is not already installed
+# if [ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
+#     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+# fi
 
 plugin "zsh-users/zsh-autosuggestions"
 plugin "zsh-users/zsh-syntax-highlighting"
@@ -41,7 +41,7 @@ plugin "hlissner/zsh-autopair"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -91,6 +91,7 @@ HIST_STAMPS="yyyy-mm-dd"
 
 plugins=(
     ssh-agent
+    eza
     asdf
     git
     tmux
@@ -114,12 +115,16 @@ plugins=(
     poetry
     poetry-env
     exercism
+    zoxide
+    starship
 )
 
 export ZSH_TMUX_AUTOSTART="false"
 export ZSH_TMUX_FIXTERM_WITH_256COLOR="tmux-256color"
 export ZSH_TMUX_DEFAULT_SESSION_NAME="main"
 export ZSH_TMUX_UNICODE="true"
+
+export ZOXIDE_CMD_OVERRIDE="cd"
 
 export DISABLE_FZF_AUTO_COMPLETION="false"
 export DISABLE_FZF_KEY_BINDINGS="false"
@@ -132,6 +137,14 @@ export PYTHON_AUTO_VRUN=true
 
 zstyle :omz:plugins:ssh-agent quiet yes
 zstyle :omz:plugins:ssh-agent lazy yes
+
+zstyle ':omz:plugins:eza' 'dirs-first' yes
+zstyle ':omz:plugins:eza' 'git-status' yes
+zstyle ':omz:plugins:eza' 'header' no
+zstyle ':omz:plugins:eza' 'show-group' no
+zstyle ':omz:plugins:eza' 'icons' no
+zstyle ':omz:plugins:eza' 'size-prefix' si
+zstyle ':omz:plugins:eza' 'hyperlink' yes
 
 source $ZSH/oh-my-zsh.sh
 
