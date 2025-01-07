@@ -146,6 +146,31 @@ zstyle ':omz:plugins:eza' 'icons' no
 zstyle ':omz:plugins:eza' 'size-prefix' si
 zstyle ':omz:plugins:eza' 'hyperlink' yes
 
+
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+if [ -d "$HOME/.gem/bin" ]; then
+    export PATH="$HOME/.gem/bin:$PATH"
+fi
+
+if [ -d "/usr/local/go" ]; then
+    export GOROOT="/usr/local/go"
+    export GOPATH="$HOME/.go"
+    export PATH="$GOPATH/bin:$PATH"
+    export PATH="$GOROOT/bin:$PATH"
+fi
+
+if [ -d "$HOME/.dotnet" ]; then
+    export PATH="$HOME/.dotnet:$PATH"
+fi
+
+if $( command -v ruby > /dev/null ); then
+    USER_GEM_PATH=$(gem environment | grep USER | awk '{print $5}')
+    export PATH="$PATH:$USER_GEM_PATH/bin"
+fi
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -155,6 +180,13 @@ source $ZSH/oh-my-zsh.sh
 eval $(dircolors ~/.dir_colors)
 
 bindkey '^ ' autosuggest-accept
+
+# Make neovim or vim the default editor
+if $( command -v nvim > /dev/null ); then
+    export EDITOR="nvim"
+else
+    export EDITOR="vim"
+fi
 
 alias glow="glow -p"
 alias reload="omz reload"
@@ -187,11 +219,6 @@ alias sudop='sudo env "PATH=$PATH"'
 alias myip='curl icanhazip.com'
 alias lg="lazygit"
 
-if $( command -v ruby > /dev/null ); then
-    USER_GEM_PATH=$(gem environment | grep USER | awk '{print $5}')
-    export PATH="$PATH:$USER_GEM_PATH/bin"
-fi
-
 if $( command -v nvim > /dev/null ); then
    alias vim="nvim"
 fi
@@ -214,46 +241,9 @@ if $( command -v rg > /dev/null ); then
     alias grep="rg"
 fi
 
-# Make neovim or vim the default editor
-if $( command -v nvim > /dev/null ); then
-    export EDITOR="nvim"
-else
-    export EDITOR="vim"
-fi
-
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-
-if [ -d "$HOME/.gem/bin" ]; then
-    export PATH="$HOME/.gem/bin:$PATH"
-fi
-
-if [ -d "/usr/local/go" ]; then
-    export GOROOT="/usr/local/go"
-    export GOPATH="$HOME/.go"
-    export PATH="$GOPATH/bin:$PATH"
-    export PATH="$GOROOT/bin:$PATH"
-fi
-
-if [ -d "/pentest/bin" ]; then
-    export PATH="/pentest/bin:$PATH"
-fi
-
-if [ -d "$HOME/.nimble" ]; then
-    export PATH="$HOME/.nimble/bin:$PATH"
-fi
-
-if [ -d "$HOME/.dotnet" ]; then
-    export PATH="$HOME/.dotnet:$PATH"
-fi
-
 if [ -d "$HOME/.cargo" ]; then
     source "$HOME/.cargo/env"
 fi
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
