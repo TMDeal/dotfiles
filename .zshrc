@@ -91,7 +91,6 @@ HIST_STAMPS="yyyy-mm-dd"
 
 plugins=(
     ssh-agent
-    eza
     asdf
     git
     tmux
@@ -99,7 +98,6 @@ plugins=(
     sudo
     docker
     docker-compose
-    pyenv
     python
     pip
     rbenv
@@ -113,7 +111,7 @@ plugins=(
     zsh-syntax-highlighting
     jump
     poetry
-    poetry-env
+    uv
     exercism
     zoxide
     starship
@@ -130,21 +128,14 @@ export DISABLE_FZF_AUTO_COMPLETION="false"
 export DISABLE_FZF_KEY_BINDINGS="false"
 
 export VIRTUAL_ENV_DISABLE_PROMPT="false"
-export ZSH_PYENV_QUIET="true"
 
 export PYTHON_VENV_NAME=".venv"
 export PYTHON_AUTO_VRUN=true
 
+export POETRY_VIRTUALENVS_IN_PROJECT=1
+
 zstyle :omz:plugins:ssh-agent quiet yes
 zstyle :omz:plugins:ssh-agent lazy yes
-
-zstyle ':omz:plugins:eza' 'dirs-first' yes
-zstyle ':omz:plugins:eza' 'git-status' yes
-zstyle ':omz:plugins:eza' 'header' no
-zstyle ':omz:plugins:eza' 'show-group' no
-zstyle ':omz:plugins:eza' 'icons' no
-zstyle ':omz:plugins:eza' 'size-prefix' si
-zstyle ':omz:plugins:eza' 'hyperlink' yes
 
 
 if [ -d "$HOME/.local/bin" ] ; then
