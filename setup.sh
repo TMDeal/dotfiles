@@ -46,8 +46,7 @@ sudo apt autoremove
 # 5. I3 Dependencies
 # 6. john Dependencies
 sudo apt install \
-    lm-sensors keepassxc zoxide fzf rofi xclip jq xq htop remmina flameshot chromium tmux python3-venv fd-find luarocks autorandr picom libreoffice bat ripgrep stow libgssapi-krb5-2 docker.io signal-desktop build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev \
-    cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3 scdoc \
+    lm-sensors keepassxc zoxide fzf rofi xclip jq xq htop remmina flameshot chromium tmux python3-venv fd-find luarocks autorandr picom libreoffice bat ripgrep stow libgssapi-krb5-2 docker.io signal-desktop build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev microsoft-edge-stable cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3 scdoc \
     build-essential git cmake cmake-data pkg-config python3-sphinx python3-packaging libuv1-dev libcairo2-dev libxcb1-dev libxcb-util0-dev libxcb-randr0-dev libxcb-composite0-dev python3-xcbgen xcb-proto libxcb-image0-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-xkb-dev libxcb-xrm-dev libxcb-cursor-dev libasound2-dev libpulse-dev i3-wm libjsoncpp-dev libmpdclient-dev libcurl4-openssl-dev libnl-genl-3-dev \
     i3 nitrogen lxpolkit udiskie picom brightnessctl alsa-utils dunst \
     libnss3-dev libkrb5-dev libgmp-dev libbz2-dev zlib1g-dev
