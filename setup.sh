@@ -180,7 +180,7 @@ ln -sf /opt/metasploit-framework/bin/* ~/.local/bin
 # install responder
 git clone https://github.com/lgandx/Responder ~/.local/share/responder && cd ~/.local/share/responder
 uv venv
-./.venv/bin/pip install -r requirements.txt
+uv pip install -r requirements.txt
 cat <<EOF >"~/.local/bin/responder"
 #!/bin/bash
 ~/.local/share/responder/.venv/bin/python ~/.local/share/responder/Responder.py "$@"
@@ -231,7 +231,7 @@ EOF
 # Targeted Kerberoast
 git clone https://github.com/ShutdownRepo/targetedKerberoast ~/.local/share/targetedKerberoast && cd ~/.local/share/targetedKerberoast
 uv venv
-./.venv/bin/pip install -r requirements.txt
+uv pip install -r requirements.txt
 cat <<EOF >"~/.local/bin/targetedKerberoast"
 #!/bin/bash
 ~/.local/share/targetedKerberoast/.venv/bin/python ~/.local/share/targetedKerberoast/targetedKerberoast.py "$@"
@@ -241,7 +241,7 @@ chmod +x ~/.local/bin/targetedKerberoast
 # Petitpotam
 git clone https://github.com/topotam/PetitPotam ~/.local/share/PetitPotam/ && cd ~/.local/share/PetitPotam
 uv venv
-./.venv/bin/pip install impacket
+uv pip install -r requirements.txt
 cat <<EOF >"~/.local/bin/petitpotam"
 #!/bin/bash
 ~/.local/share/PetitPotam/.venv/bin/python ~/.local/share/PetitPotam/PetitPotam.py "$@"
@@ -251,8 +251,8 @@ chmod +x ~/.local/bin/petitpotam
 # gMSADumper
 git clone https://github.com/micahvandeusen/gMSADumper ~/.local/share/gMSADumper && cd ~/.local/share/gMSADumper
 uv venv
-./.venv/bin/pip install -r requirements.txt
-./.venv/bin/pip install gssapi
+uv pip install -r requirements.txt
+uv pip install gssapi
 cat <<EOF >"~/.local/bin/gMSADumper"
 #!/bin/bash
 ~/.local/share/gMSADumper/.venv/bin/python ~/.local/share/gMSADumper/gMSADumper.py "$@"
