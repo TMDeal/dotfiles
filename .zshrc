@@ -207,7 +207,8 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias news="newsboat"
 alias msfconsole="msfconsole -q"
 alias sudop='sudo env "PATH=$PATH"'
-alias myip='curl icanhazip.com'
+alias ipv4='curl -s -4 ifconfig.co/json | jq'
+alias ipv6='curl -s -6 ifconfig.co/json | jq'
 alias lg="lazygit"
 
 if $( command -v nvim > /dev/null ); then
