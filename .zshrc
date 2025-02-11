@@ -105,8 +105,6 @@ plugins=(
     jump
     poetry
     uv
-    exercism
-    zoxide
     starship
 )
 
