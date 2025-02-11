@@ -317,5 +317,7 @@ docker run \
         neo4j:"$VERSION"
 EOF
 
+stow .
+
 echo "Setup is Complete!"
 echo "Reboot to Finish Setup"
