@@ -1,4 +1,12 @@
 return {
+  -- {
+  --   "windwp/nvim-ts-autotag",
+  --   opts = {
+  --     aliases = {
+  --       ["gotmpl"] = "html",
+  --     },
+  --   },
+  -- },
   {
     "windwp/nvim-autopairs",
     config = function(_, opts)
