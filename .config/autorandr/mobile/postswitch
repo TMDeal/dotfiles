@@ -1,0 +1,4 @@
+#!/bin/bash
+
+i3 restart
+nitrogen --set-zoom-fill --head=-1 ~/Pictures/background.jpg

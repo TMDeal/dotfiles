@@ -1,0 +1,8 @@
+#!/bin/bash
+
+pactl set-default-sink alsa_output.usb-KTMicro_KT_USB_AUDIO_214b206000000178-00.analog-stereo
+
+i3 restart
+#
+nitrogen --set-zoom-fill --head=0 ~/Pictures/background.jpg
+nitrogen --set-zoom-fill --head=1 ~/Pictures/background.jpg
