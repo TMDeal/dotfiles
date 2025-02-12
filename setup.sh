@@ -23,7 +23,9 @@ LAZYGIT_VERSION="0.45.2"
 APPLICATIONS_DIR="$HOME/.local/share/applications"
 ICONS_DIR="$HOME/.local/share/icons"
 FONTS_DIR="$HOME/.local/share/fonts"
+THEMES_DIR="$HOME/.themes"
 NERD_FONT_DIR="$FONTS_DIR/$NERD_FONT"
+WORKSPACE_DIR="$HOME/my-workspace"
 
 apt() {
     export DEBIAN_FRONTEND=noninteractive
@@ -44,12 +46,11 @@ if [[ ! -f /etc/apt/sources.list.d/signal-xenial.list || ! -f /usr/share/keyring
 fi
 
 # 1. General Packages
-# 3. Alacritty Dependencies
-# 4. Polybar Dependencies
-# 5. I3 Dependencies
-# 6. john Dependencies
+# 2. Alacritty Dependencies
+# 3. I3 Dependencies
+# 4. john Dependencies
 sudo apt install \
-    zsh cherrytree lm-sensors keepassxc zoxide fzf rofi xclip jq xq htop remmina flameshot chromium tmux python3-venv fd-find luarocks autorandr picom libreoffice bat ripgrep stow libgssapi-krb5-2 docker.io signal-desktop build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3 scdoc python3-dev \
+    xinput zsh cherrytree lm-sensors keepassxc zoxide fzf rofi xclip jq xq htop remmina flameshot chromium tmux python3-venv fd-find luarocks autorandr picom libreoffice bat ripgrep stow libgssapi-krb5-2 docker.io signal-desktop build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3 scdoc python3-dev \
     build-essential git cmake cmake-data pkg-config python3-sphinx python3-packaging libuv1-dev libcairo2-dev libxcb1-dev libxcb-util0-dev libxcb-randr0-dev libxcb-composite0-dev python3-xcbgen xcb-proto libxcb-image0-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-xkb-dev libxcb-xrm-dev libxcb-cursor-dev libasound2-dev libpulse-dev i3-wm libjsoncpp-dev libmpdclient-dev libcurl4-openssl-dev libnl-genl-3-dev \
     i3 nitrogen lxpolkit udiskie picom brightnessctl alsa-utils dunst \
     libnss3-dev libkrb5-dev libgmp-dev libbz2-dev zlib1g-dev
@@ -58,10 +59,12 @@ if ! $(stow .); then
     exit 2
 fi
 
-# Create folders in .local/share
+# Create needed folders
+[ ! -d "$WORKSPACE_DIR" ] && mkdir "$WORKSPACE_DIR"
 [ ! -d "$APPLICATIONS_DIR" ] && mkdir "$APPLICATIONS_DIR"
 [ ! -d "$ICONS_DIR" ] && mkdir "$ICONS_DIR"
 [ ! -d "$FONTS_DIR" ] && mkdir "$FONTS_DIR"
+[ ! -d "$THEMES_DIR" ] && mkdir "$THEMES_DIR"
 
 # Install prefered font
 if [ ! -d "$NERD_FONT_DIR" ]; then
@@ -69,6 +72,23 @@ if [ ! -d "$NERD_FONT_DIR" ]; then
     wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v$NERD_FONT_VERSION/$NERD_FONT.zip" -O "/tmp/$NERD_FONT.zip"
     unzip -o "/tmp/$NERD_FONT.zip" -d "$NERD_FONT_DIR"
     fc-cache
+fi
+
+# Install prefered Icons
+if [ ! -d "$ICONS_DIR/Zafiro-Icons-Dark" ]; then
+    rm -rf /tmp/zafiro-icons && git clone https://github.com/zayronxio/Zafiro-icons /tmp/zafiro-icons && cd /tmp/zafiro-icons
+    cp -r -a Dark "$HOME/.local/share/icons/Zafiro-Icons-Dark"
+fi
+
+# Install prefered GTK theme
+if [ ! -d "$THEMES_DIR/Nordic" ]; then
+    git clone https://github.com/EliverLara/Nordic "$THEMES_DIR/Nordic"
+fi
+
+# Install prefered cursor theme
+if [ ! -d "$HOME/.icons/Nordzy-cursors" ]; then
+    rm -rf /tmp/nordzy-cursors && git clone https://github.com/guillaumeboehm/Nordzy-cursors /tmp/nordzy-cursors && cd /tmp/nordzy-cursors
+    cp -r xcursors/Nordzy-cursors ~/.icons
 fi
 
 # Docker setup
@@ -84,6 +104,7 @@ DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker}
 mkdir -p $DOCKER_CONFIG/cli-plugins
 if [ ! -f "$DOCKER_CONFIG/cli-plugins/docker-compose" ]; then
     curl -SL https://github.com/docker/compose/releases/download/v$DOCKER_COMPOSE_VERSION/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose
+    chmod +x "$DOCKER_CONFIG/cli-plugins/docker-compose"
 fi
 
 # Install golang
@@ -288,20 +309,21 @@ fi
 
 # Install Bloodhound Community Edition and Legacy Edition
 if ! exists bloodhound; then
+    mkdir -p ~/.local/share/bloodhound
     rm -rf /tmp/bloodhound-cli && git clone https://github.com/SpecterOps/bloodhound-cli /tmp/bloodhound-cli && cd /tmp/bloodhound-cli
     go build -ldflags="-s -w -X 'github.com/SpecterOps/BloodHound_CLI/cmd/config.Version=$(git describe --tags --abbrev=0)' -X 'github.com/SpecterOps/BloodHound_CLI/cmd/config.BuildDate=$(date -u '+%d %b %Y')'" -o bloodhound-cli main.go
-    rm -rf ~/.local/share/bloodhound && mkdir ~/.local/share/bloodhound
     mv bloodhound-cli ~/.local/share/bloodhound/bloodhound-cli
     cat <<'EOF' >~/.local/bin/bloodhound
 #!/bin/bash
-cd ~/.local/share/bloodhound && ./bloodhound-cli "$@" && cd -
+cd ~/.local/share/bloodhound && ./bloodhound-cli "$@" && cd - > /dev/null
 EOF
     chmod +x ~/.local/bin/bloodhound
 fi
 
 if ! exists bloodhound-legacy; then
+    mkdir -p ~/.local/share/bloodhound
     rm -rf /tmp/bloodhound.zip && curl -SL https://github.com/SpecterOps/BloodHound-Legacy/releases/download/v4.3.1/BloodHound-linux-x64.zip -o /tmp/bloodhound.zip &&
-        rm -rf ~/.local/share/bloodhound &&
+        rm -rf ~/.local/share/bloodhound/legacy &&
         unzip /tmp/bloodhound.zip -d ~/.local/share/bloodhound &&
         mv ~/.local/share/bloodhound/BloodHound-linux-x64 ~/.local/share/bloodhound/legacy
 
