@@ -1,4 +1,4 @@
 --target=~
 --ignore=.stowrc
 --ignore=setup.sh
---ignore=tmp/
+--ignore=README.md
