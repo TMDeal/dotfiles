@@ -35,7 +35,7 @@ OPT_DIR="/opt"
 PREFIX="/usr/local"
 APPLICATIONS_DIR="$PREFIX/share/applications"
 ICONS_DIR="$PREFIX/share/icons"
-FONTS_DIR="$PREFIX/share/icons"
+FONTS_DIR="$PREFIX/share/fonts"
 THEMES_DIR="$PREFIX/share/themes"
 NERD_FONT_DIR="$FONTS_DIR/$NERD_FONT"
 DOCKER_PLUGINS_DIR="/usr/local/lib/docker/cli-plugins"
@@ -117,14 +117,20 @@ curl -LsSf https://astral.sh/uv/install.sh | env UV_INSTALL_DIR="$PREFIX/bin" sh
 
 # install nvm
 wget "https://raw.githubusercontent.com/nvm-sh/nvm/v$NVM_VERSION/install.sh" -O "$TMP_DIR/nvm-install.sh" && chmod +x "$TMP_DIR/nvm-install.sh"
-sudo -iu "$REAL_USER" bash -c "$TMP_DIR/nvm-install.sh && source $REAL_HOME/.nvm/nvm.sh && nvm install --lts"
+nvm_install_cmd="$TMP_DIR/nvm-install.sh && source \$HOME/.nvm/nvm.sh && nvm install --lts"
+sudo -iu "$REAL_USER" bash -c "$nvm_install_cmd"
+bash -c "$nvm_install_cmd"
+source "$HOME/.nvm/nvm.sh"
 
 # install rustup
 curl --proto '=https' --tlsv1.2 -sSf -o "$TMP_DIR/rustup-install.sh" https://sh.rustup.rs && chmod +x "$TMP_DIR/rustup-install.sh"
-sudo -iu "$REAL_USER" bash -c "$TMP_DIR/rustup-install.sh -y --no-modify-path && source $REAL_HOME/.cargo/env && rustup override set stable && rustup update stable"
+rustup_install_cmd="$TMP_DIR/rustup-install.sh -y --no-modify-path && source \$HOME/.cargo/env && rustup override set stable && rustup update stable"
+sudo -iu "$REAL_USER" bash -c "$rustup_install_cmd"
+bash -c "$rustup_install_cmd"
+source "$HOME/.cargo/env"
 
 # install Alacritty
-git clone https://github.com/alacritty/alacritty.git $TMP_DIR/alacritty && cd $TMP_DIR/alacritty
+git clone https://github.com/alacritty/alacritty.git $OPT_DIR/alacritty && cd $OPT_DIR/alacritty
 git checkout "v$ALACRITTY_VERSION"
 cargo build --release
 
@@ -159,7 +165,7 @@ wget https://starship.rs/install.sh -O "$TMP_DIR/starship-install.sh" && chmod +
 "$TMP_DIR/starship-install.sh" --bin-dir "$PREFIX/bin" -y
 
 # install polybar
-git clone --recursive https://github.com/polybar/polybar "$TMP_DIR/polybar" && cd "$TMP_DIR/polybar"
+git clone --recursive https://github.com/polybar/polybar "$OPT_DIR/polybar" && cd "$OPT_DIR/polybar"
 git checkout "$POLYBAR_VERSION"
 mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX:PATH="$PREFIX" ..
@@ -194,9 +200,9 @@ curl -SL "https://github.com/balena-io/etcher/releases/download/v$ETCHER_VERSION
 chmod +x "$PREFIX/bin/etcher"
 
 # install john the ripper
-git clone https://github.com/openwall/john $TMP_DIR/john && cd $TMP_DIR/john/src
+git clone https://github.com/openwall/john "$OPT_DIR/john-src" && cd "$OPT_DIR/john-src/src"
 ./configure && make -sj$(nproc)
-mv ../run "$OPT_DIR/john"
+ln -sf "$OPT_DIR/john-src/run" "$OPT_DIR/john"
 cat <<EOF >"$PREFIX/bin/john"
 #!/bin/bash
 cd $OPT_DIR/john && ./john "\$@" && cd - >/dev/null
@@ -275,7 +281,7 @@ EOF
 chmod +x "$PREFIX/bin/targetedKerberoast"
 
 # Petitpotam
-git clone https://github.com/topotam/PetitPotam "$PREFIX/share/PetitPotam" && cd "$PREFIX/share/PetitPotam"
+git clone https://github.com/topotam/PetitPotam "$OPT_DIR/PetitPotam" && cd "$OPT_DIR/PetitPotam"
 uv venv
 uv pip install impacket
 cat <<EOF >"$PREFIX/bin/petitpotam"
