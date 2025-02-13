@@ -1,5 +1,3 @@
-. "$HOME/.cargo/env"
-
 export ENABLE_LOGGING=
 
 if [ ! -z $ENABLE_LOGGING ]; then
