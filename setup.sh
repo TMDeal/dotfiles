@@ -107,6 +107,7 @@ export PATH="$PREFIX/go/bin:$PATH"
 # install oh-my-zsh
 curl -fsSL -o "$TMP_DIR/oh-my-zsh-install.sh" https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh && chmod +x "$TMP_DIR/oh-my-zsh-install.sh"
 sudo -iu "$REAL_USER" bash -c "$TMP_DIR/oh-my-zsh-install.sh --unattended --keep-zshrc"
+chsh -s $(which zsh) "$REAL_USER"
 
 # install poetry
 curl -sSL -o "$TMP_DIR/poetry-install.py" https://install.python-poetry.org
