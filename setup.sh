@@ -257,6 +257,10 @@ git clone https://github.com/SpecterOps/bloodhound-cli "$OPT_DIR/bloodhound-cli"
 go build -ldflags="-s -w -X 'github.com/SpecterOps/BloodHound_CLI/cmd/config.Version=$(git describe --tags --abbrev=0)' -X 'github.com/SpecterOps/BloodHound_CLI/cmd/config.BuildDate=$(date -u '+%d %b %Y')'" -o bloodhound-cli main.go
 cat <<EOF >"$PREFIX/bin/bloodhound"
 #!/bin/bash
+if ! [ \$(id -u) = 0 ]; then
+    echo "The script need to be run as root." >&2
+    exit 1
+fi
 cd $OPT_DIR/bloodhound-cli && ./bloodhound-cli "\$@" && cd - > /dev/null
 EOF
 chmod +x "$PREFIX/bin/bloodhound"
