@@ -55,19 +55,20 @@ cat "$TMP_DIR/signal-desktop-keyring.gpg" | tee /usr/share/keyrings/signal-deskt
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' |
     tee /etc/apt/sources.list.d/signal-xenial.list
 
+apt-get update
 # 1. General Packages
 # 2. General Libs and Essentials
 # 3. Alacritty Dependencies
 # 4. I3 Dependencies
 # 5. john Dependencies
-
-apt-get update
+# 6. rbenv Dependencies
 DEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical apt-get --yes --quiet --option Dpkg::Options::="--force-confold" --option Dpkg::Options::="--force-confdef" install \
-    xinput zsh cherrytree lm-sensors keepassxc fzf rofi xclip jq xq htop remmina flameshot chromium tmux fd-find luarocks autorandr picom libreoffice bat ripgrep stow signal-desktop \
-    rust-all nodejs npm libsecret-1-dev python3-venv libgssapi-krb5-2 docker.io build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3 scdoc python3-dev \
+    vim xinput zsh cherrytree lm-sensors keepassxc fzf rofi xclip jq xq htop remmina flameshot chromium tmux fd-find luarocks autorandr picom libreoffice bat ripgrep stow signal-desktop \
+    ruby nodejs npm libsecret-1-dev python3-venv libgssapi-krb5-2 docker.io build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3 scdoc python3-dev \
     build-essential git cmake cmake-data pkg-config python3-sphinx python3-packaging libuv1-dev libcairo2-dev libxcb1-dev libxcb-util0-dev libxcb-randr0-dev libxcb-composite0-dev python3-xcbgen xcb-proto libxcb-image0-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-xkb-dev libxcb-xrm-dev libxcb-cursor-dev libasound2-dev libpulse-dev i3-wm libjsoncpp-dev libmpdclient-dev libcurl4-openssl-dev libnl-genl-3-dev \
     i3 nitrogen lxpolkit lxappearance udiskie picom brightnessctl alsa-utils dunst \
-    libnss3-dev libkrb5-dev libgmp-dev libbz2-dev zlib1g-dev
+    libnss3-dev libkrb5-dev libgmp-dev libbz2-dev zlib1g-dev \
+    autoconf patch build-essential rustc libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libgmp-dev libncurses5-dev libffi-dev libgdbm6 libgdbm-dev libdb-dev uuid-dev
 
 if [ -d /usr/share/doc/git/contrib/credential/libsecret/ ]; then
     cd /usr/share/doc/git/contrib/credential/libsecret/ && make
@@ -100,30 +101,34 @@ mkdir -p "$DOCKER_PLUGINS_DIR" &&
     curl -SL "https://github.com/docker/compose/releases/download/v$DOCKER_COMPOSE_VERSION/docker-compose-linux-x86_64" -o "$DOCKER_PLUGINS_DIR/docker-compose" &&
     chmod +x "$DOCKER_PLUGINS_DIR/docker-compose"
 
-# Install golang
-curl -SL "https://go.dev/dl/go$GO_VERSION.linux-amd64.tar.gz" -o "$TMP_DIR/go.tar.gz" && tar -xvzf "$TMP_DIR/go.tar.gz" -C "$PREFIX"
-export PATH="$PREFIX/go/bin:$PATH"
-
 # install oh-my-zsh
 curl -fsSL -o "$TMP_DIR/oh-my-zsh-install.sh" https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh && chmod +x "$TMP_DIR/oh-my-zsh-install.sh"
 sudo -iu "$REAL_USER" bash -c "$TMP_DIR/oh-my-zsh-install.sh --unattended --keep-zshrc"
 chsh -s $(which zsh) "$REAL_USER"
 
-# install poetry
-curl -sSL -o "$TMP_DIR/poetry-install.py" https://install.python-poetry.org
-sudo -iu "$REAL_USER" python3 "$TMP_DIR/poetry-install.py"
+# Install golang
+curl -SL "https://go.dev/dl/go$GO_VERSION.linux-amd64.tar.gz" -o "$TMP_DIR/go.tar.gz" && tar -xvzf "$TMP_DIR/go.tar.gz" -C "$PREFIX"
+export PATH="$PREFIX/go/bin:$PATH"
 
 # install uv python package and version manager
 curl -LsSf https://astral.sh/uv/install.sh | env UV_INSTALL_DIR="$PREFIX/bin" sh
 
-# install nvm
+# install rbenv for REAL_USER
+wget -q https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer -O "$TMP_DIR/rbenv_install.sh" && chmod +x "$TMP_DIR/rbenv_install.sh"
+wget -q https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-doctor -O "$TMP_DIR/rbenv_doctor.sh" && chmod +x "$TMP_DIR/rbenv_doctor.sh"
+rbenv_install_cmd="$TMP_DIR/rbenv_install.sh && $TMP_DIR/rbenv_doctor.sh"
+sudo -iu "$REAL_USER" bash -c "$rbenv_install_cmd"
+
+# install poetry for REAL_USER
+curl -sSL -o "$TMP_DIR/poetry-install.py" https://install.python-poetry.org
+sudo -iu "$REAL_USER" python3 "$TMP_DIR/poetry-install.py"
+
+# install nvm for REAL_USER
 wget "https://raw.githubusercontent.com/nvm-sh/nvm/v$NVM_VERSION/install.sh" -O "$TMP_DIR/nvm-install.sh" && chmod +x "$TMP_DIR/nvm-install.sh"
 nvm_install_cmd="$TMP_DIR/nvm-install.sh && source \$HOME/.nvm/nvm.sh && nvm install --lts"
 sudo -iu "$REAL_USER" bash -c "$nvm_install_cmd"
-bash -c "$nvm_install_cmd"
-source "$HOME/.nvm/nvm.sh"
 
-# install rustup
+# install rustup for REAL_USER
 curl --proto '=https' --tlsv1.2 -sSf -o "$TMP_DIR/rustup-install.sh" https://sh.rustup.rs && chmod +x "$TMP_DIR/rustup-install.sh"
 rustup_install_cmd="$TMP_DIR/rustup-install.sh -y --no-modify-path && source \$HOME/.cargo/env && rustup override set stable && rustup update stable"
 sudo -iu "$REAL_USER" bash -c "$rustup_install_cmd"
@@ -131,10 +136,8 @@ bash -c "$rustup_install_cmd"
 source "$HOME/.cargo/env"
 
 # install Alacritty
-git clone https://github.com/alacritty/alacritty.git $OPT_DIR/alacritty && cd $OPT_DIR/alacritty
-git checkout "v$ALACRITTY_VERSION"
-cargo build --release
-
+# Build it as REAL_USER since they have rustup
+sudo -iu "$REAL_USER" bash -c "git clone https://github.com/alacritty/alacritty.git $TMP_DIR/alacritty && cd $TMP_DIR/alacritty && git checkout v$ALACRITTY_VERSION && cargo build --release"
 tic -xe alacritty,alacritty-direct extra/alacritty.info
 
 cp target/release/alacritty "$PREFIX/bin"
@@ -149,10 +152,10 @@ scdoc <extra/man/alacritty-msg.1.scd | gzip -c | tee "$PREFIX/share/man/man1/ala
 scdoc <extra/man/alacritty.5.scd | gzip -c | tee "$PREFIX/share/man/man5/alacritty.5.gz" >/dev/null
 scdoc <extra/man/alacritty-bindings.5.scd | gzip -c | tee "$PREFIX/share/man/man5/alacritty-bindings.5.gz" >/dev/null
 
-# install tmux tpm
+# install tmux tpm for REAL_USER
 sudo -iu "$REAL_USER" bash -c "git clone https://github.com/tmux-plugins/tpm $REAL_HOME/.tmux/plugins/tpm && $REAL_HOME/.tmux/plugins/tpm/scripts/install_plugins.sh"
 
-# install python tools with uv for $REAL_USER
+# install python tools with uv for REAL_USER
 sudo -iu "$REAL_USER" uv tool install jrnl
 sudo -iu "$REAL_USER" uv tool install sqlmap
 sudo -iu "$REAL_USER" uv tool install git+https://github.com/Pennyw0rth/NetExec
@@ -161,7 +164,7 @@ sudo -iu "$REAL_USER" uv tool install semgrep
 sudo -iu "$REAL_USER" uv tool install bloodhound
 sudo -iu "$REAL_USER" uv tool install bloodyad
 
-# install cargo packages
+# install starship prompt
 wget https://starship.rs/install.sh -O "$TMP_DIR/starship-install.sh" && chmod +x "$TMP_DIR/starship-install.sh"
 "$TMP_DIR/starship-install.sh" --bin-dir "$PREFIX/bin" -y
 
@@ -366,6 +369,26 @@ docker run \
     neo4j:"$VERSION"
 EOF
 chmod +x "$PREFIX/bin/neo4j-docker"
+
+# Create a simple bashrc for root user with correct ENV
+cat <<'EOF' >"/root/.bashrc"
+export LS_OPTIONS="--color=auto"
+eval "$(dircolors)"
+alias ls="ls $LS_OPTIONS"
+
+alias rm="rm -i"
+alias cp="cp -i"
+alias mv="mv -i"
+alias q="exit"
+alias :q="exit"
+alias c="clear"
+
+# ENVIRONMENT
+export GOROOT="/usr/local/go"
+export GOPATH="$HOME/.go"
+export PATH="$GOPATH/bin:$PATH"
+export PATH="$GOROOT/bin:$PATH"
+EOF
 
 cd "$SCRIPT_DIR"
 echo "Setup is Complete!"
