@@ -22,7 +22,7 @@ vim.filetype.add({
     j2 = "jinja",
   },
   pattern = {
-    [".*/templates/.*%.tmpl"] = "gotmpl",
+    [".*%.tmpl"] = "gotmpl",
   },
 })
 

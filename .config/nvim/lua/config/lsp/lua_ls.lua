@@ -12,12 +12,13 @@ return {
         globals = { "vim" },
       },
       semantic = {
-        enable = false
+        enable = false,
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
         library = {
-          [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+          vim.fn.expand("$VIMRUNTIME/lua"),
+          vim.fn.expand("$HOME") .. ".config//nvim/lua",
         },
       },
     },
