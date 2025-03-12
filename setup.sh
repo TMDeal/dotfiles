@@ -1,11 +1,11 @@
 #!/bin/bash
 
-if ! [ $(id -u) = 0 ]; then
+if ! [ "$(id -u)" = 0 ]; then
     echo "The script need to be run as root." >&2
     exit 1
 fi
 
-if [ $SUDO_USER ]; then
+if [ "$SUDO_USER" ]; then
     REAL_USER=$SUDO_USER
 else
     REAL_USER=$(whoami)
@@ -18,7 +18,6 @@ GREENCLIP_VERSION="4.2"
 NVIM_VERSION="stable"
 NVM_VERSION="0.39.2"
 NERD_FONT_VERSION="3.0.2"
-NERD_FONT="Inconsolata"
 ALACRITTY_VERSION="0.15.0"
 POLYBAR_VERSION="3.7.2"
 BLOODHOUND_CLI_VERSION="0.1.3"
@@ -27,6 +26,7 @@ GO_VERSION="1.23.5"
 CHISEL_VERSION="1.10.1"
 ETCHER_VERSION="1.19.25"
 LAZYGIT_VERSION="0.45.2"
+NERD_FONT="Inconsolata"
 
 # Folders
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
@@ -38,7 +38,6 @@ ICONS_DIR="$PREFIX/share/icons"
 FONTS_DIR="$PREFIX/share/fonts"
 THEMES_DIR="$PREFIX/share/themes"
 NERD_FONT_DIR="$FONTS_DIR/$NERD_FONT"
-DOCKER_PLUGINS_DIR="/usr/local/lib/docker/cli-plugins"
 
 # Create needed folders
 [ ! -d "$TMP_DIR" ] && mkdir -p "$TMP_DIR"
@@ -48,27 +47,37 @@ DOCKER_PLUGINS_DIR="/usr/local/lib/docker/cli-plugins"
 [ ! -d "$ICONS_DIR" ] && mkdir -p "$ICONS_DIR"
 [ ! -d "$FONTS_DIR" ] && mkdir -p "$FONTS_DIR"
 [ ! -d "$THEMES_DIR" ] && mkdir -p "$THEMES_DIR"
-[ ! -d "$DOCKER_PLUGINS_DIR" ] && mkdir -p "$DOCKER_PLUGINS_DIR"
 
-wget -O- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor >"$TMP_DIR/signal-desktop-keyring.gpg"
-cat "$TMP_DIR/signal-desktop-keyring.gpg" | tee /usr/share/keyrings/signal-desktop-keyring.gpg >/dev/null
+wget -O- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor >"/usr/share/keyrings/signal-desktop-keyring.gpg"
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' |
-    tee /etc/apt/sources.list.d/signal-xenial.list
+    tee /etc/apt/sources.list.d/signal-xenial.list >/dev/null
+
+wget https://download.docker.com/linux/debian/gpg -O /etc/apt/keyrings/docker.asc
+chmod a+r /etc/apt/keyrings/docker.asc
+echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |
+    sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 
 apt-get update
 # 1. General Packages
 # 2. General Libs and Essentials
-# 3. Alacritty Dependencies
-# 4. I3 Dependencies
-# 5. john Dependencies
-# 6. rbenv Dependencies
+# 3. Docker Engine
+# 4. Alacritty Dependencies
+# 5. I3 Dependencies
+# 6. john Dependencies
+# 7. rbenv Dependencies
 DEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical apt-get --yes --quiet --option Dpkg::Options::="--force-confold" --option Dpkg::Options::="--force-confdef" install \
-    vim xinput zsh cherrytree lm-sensors keepassxc fzf rofi xclip jq xq htop remmina flameshot chromium tmux fd-find luarocks autorandr picom libreoffice bat ripgrep stow signal-desktop \
-    ruby nodejs npm libsecret-1-dev python3-venv libgssapi-krb5-2 docker.io build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3 scdoc python3-dev \
+    snapd playerctl forensics-all nmap sshuttle ffuf vim xinput zsh cherrytree lm-sensors keepassxc fzf rofi xclip jq xq htop remmina flameshot chromium tmux fd-find luarocks autorandr picom libreoffice bat ripgrep stow signal-desktop \
+    ruby nodejs npm libsecret-1-dev python3-venv libgssapi-krb5-2 build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3 scdoc python3-dev \
+    docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
     build-essential git cmake cmake-data pkg-config python3-sphinx python3-packaging libuv1-dev libcairo2-dev libxcb1-dev libxcb-util0-dev libxcb-randr0-dev libxcb-composite0-dev python3-xcbgen xcb-proto libxcb-image0-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-xkb-dev libxcb-xrm-dev libxcb-cursor-dev libasound2-dev libpulse-dev i3-wm libjsoncpp-dev libmpdclient-dev libcurl4-openssl-dev libnl-genl-3-dev \
     i3 nitrogen lxpolkit lxappearance udiskie picom brightnessctl alsa-utils dunst \
     libnss3-dev libkrb5-dev libgmp-dev libbz2-dev zlib1g-dev \
     autoconf patch build-essential rustc libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libgmp-dev libncurses5-dev libffi-dev libgdbm6 libgdbm-dev libdb-dev uuid-dev
+
+snap install core
+snap refresh core
 
 if [ -d /usr/share/doc/git/contrib/credential/libsecret/ ]; then
     cd /usr/share/doc/git/contrib/credential/libsecret/ && make
@@ -104,7 +113,10 @@ mkdir -p "$DOCKER_PLUGINS_DIR" &&
 # install oh-my-zsh
 curl -fsSL -o "$TMP_DIR/oh-my-zsh-install.sh" https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh && chmod +x "$TMP_DIR/oh-my-zsh-install.sh"
 sudo -iu "$REAL_USER" bash -c "$TMP_DIR/oh-my-zsh-install.sh --unattended --keep-zshrc"
-chsh -s $(which zsh) "$REAL_USER"
+chsh -s "$(which zsh)" "$REAL_USER"
+
+# install direnv for REAL_USER
+sudo -iu "$REAL_USER" bash -c "curl -sfL https://direnv.net/install.sh | bash"
 
 # Install golang
 curl -SL "https://go.dev/dl/go$GO_VERSION.linux-amd64.tar.gz" -o "$TMP_DIR/go.tar.gz" && tar -xvzf "$TMP_DIR/go.tar.gz" -C "$PREFIX"
@@ -157,6 +169,7 @@ sudo -iu "$REAL_USER" bash -c "git clone https://github.com/tmux-plugins/tpm $RE
 
 # install python tools with uv for REAL_USER
 sudo -iu "$REAL_USER" uv tool install jrnl
+sudo -iu "$REAL_USER" uv tool install bbot
 sudo -iu "$REAL_USER" uv tool install sqlmap
 sudo -iu "$REAL_USER" uv tool install git+https://github.com/Pennyw0rth/NetExec
 sudo -iu "$REAL_USER" uv tool install impacket
@@ -257,6 +270,7 @@ sudo -iu "$REAL_USER" cp -n "$OPT_DIR/exploitdb/.searchsploit_rc" "\$HOME/.searc
 
 # Install Bloodhound Community Edition and Legacy Edition
 git clone https://github.com/SpecterOps/bloodhound-cli "$OPT_DIR/bloodhound-cli" && cd "$OPT_DIR/bloodhound-cli"
+git checkout "v$BLOODHOUND_CLI_VERSION"
 go build -ldflags="-s -w -X 'github.com/SpecterOps/BloodHound_CLI/cmd/config.Version=$(git describe --tags --abbrev=0)' -X 'github.com/SpecterOps/BloodHound_CLI/cmd/config.BuildDate=$(date -u '+%d %b %Y')'" -o bloodhound-cli main.go
 cat <<EOF >"$PREFIX/bin/bloodhound"
 #!/bin/bash
@@ -323,7 +337,7 @@ fi
 id_ed25519=$(find -iname "*-id_ed25519" | cut -b3-)
 jumpbox_ip=$(cat terraform.tfstate | jq ".resources[] | select(.name | split(\"-\") | index(\"jumpbox\") == 1 ) | .instances[].attributes.ipv4_address" -r)
 
-echo sshuttle -r "root@$jumpbox_ip" 0.0.0.0/0 -e "ssh -i $INFRA_PATH/$id_ed25519"
+sshuttle -r "root@$jumpbox_ip" 0.0.0.0/0 -e "ssh -i $INFRA_PATH/$id_ed25519"
 
 EOF
 chmod +x "$PREFIX/bin/shuttle"
@@ -392,3 +406,4 @@ EOF
 
 cd "$SCRIPT_DIR"
 echo "Setup is Complete!"
+echo "Reboot to Finalize Setup!"
