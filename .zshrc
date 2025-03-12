@@ -83,6 +83,7 @@ DISABLE_AUTO_TITLE="true"
 HIST_STAMPS="yyyy-mm-dd"
 
 plugins=(
+    direnv
     ssh-agent
     asdf
     git
