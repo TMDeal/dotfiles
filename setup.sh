@@ -59,6 +59,10 @@ echo \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |
     sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 
+VERSION_ID=$(cat /etc/os-release | grep VERSION_ID | awk -F= '{print $2}' | sed 's/"//g')
+wget -q "https://packages.microsoft.com/config/debian/$VERSION_ID/packages-microsoft-prod.deb" -O /tmp/microsoft.deb
+dpkg -i /tmp/microsoft.deb
+
 apt-get update
 # 1. General Packages
 # 2. General Libs and Essentials
@@ -68,8 +72,8 @@ apt-get update
 # 6. john Dependencies
 # 7. rbenv Dependencies
 DEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical apt-get --yes --quiet --option Dpkg::Options::="--force-confold" --option Dpkg::Options::="--force-confdef" install \
-    snapd playerctl forensics-all nmap sshuttle ffuf vim xinput zsh cherrytree lm-sensors keepassxc fzf rofi xclip jq xq htop remmina flameshot chromium tmux fd-find luarocks autorandr picom libreoffice bat ripgrep stow signal-desktop \
-    ruby nodejs npm libsecret-1-dev python3-venv libgssapi-krb5-2 build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3 scdoc python3-dev \
+    ftp whois wireshark powershell snapd playerctl forensics-all nmap sshuttle ffuf vim xinput zsh cherrytree lm-sensors keepassxc fzf rofi xclip jq xq htop remmina flameshot chromium tmux fd-find luarocks autorandr picom libreoffice bat ripgrep stow signal-desktop \
+    virt-manager libguestfs-tools ruby nodejs npm libsecret-1-dev python3-venv libgssapi-krb5-2 build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3 scdoc python3-dev \
     docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
     build-essential git cmake cmake-data pkg-config python3-sphinx python3-packaging libuv1-dev libcairo2-dev libxcb1-dev libxcb-util0-dev libxcb-randr0-dev libxcb-composite0-dev python3-xcbgen xcb-proto libxcb-image0-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-xkb-dev libxcb-xrm-dev libxcb-cursor-dev libasound2-dev libpulse-dev i3-wm libjsoncpp-dev libmpdclient-dev libcurl4-openssl-dev libnl-genl-3-dev \
     i3 nitrogen lxpolkit lxappearance udiskie picom brightnessctl alsa-utils dunst \
@@ -175,6 +179,8 @@ sudo -iu "$REAL_USER" uv tool install git+https://github.com/Pennyw0rth/NetExec
 sudo -iu "$REAL_USER" uv tool install impacket
 sudo -iu "$REAL_USER" uv tool install semgrep
 sudo -iu "$REAL_USER" uv tool install bloodhound
+sudo -iu "$REAL_USER" uv tool install bloodhound-ce
+sudo -iu "$REAL_USER" uv tool install certipy-ad --with setuptools
 sudo -iu "$REAL_USER" uv tool install bloodyad
 
 # install starship prompt
@@ -260,6 +266,7 @@ ln -sf "$OPT_DIR/enum4linux/enum4linux.pl" "$PREFIX/bin/enum4linux"
 git clone https://github.com/danielmiessler/SecLists "$OPT_DIR/seclists"
 git clone https://github.com/samratashok/nishang "$OPT_DIR/nishang"
 git clone https://github.com/Unic0rn28/hashcat-rules "$OPT_DIR/hashcat-rules"
+git clone https://gitlab.com/kalilinux/packages/webshells "$OPT_DIR/webshells"
 
 # Installing exploitdb
 git clone https://gitlab.com/exploit-database/exploitdb.git "$OPT_DIR/exploitdb"
