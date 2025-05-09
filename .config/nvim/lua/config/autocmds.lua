@@ -11,7 +11,7 @@ autocmd("FileType", {
   callback = function()
     vim.opt_local.wrap = true
     vim.opt_local.autowriteall = true
-    vim.opt_local.textwidth = 85
+    vim.opt_local.textwidth = 80
     vim.opt_local.spell = false
   end,
 })

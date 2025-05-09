@@ -4,6 +4,7 @@ return {
     manual_mode = false,
     detection_methods = { "pattern", "lsp" },
     patterns = {
+      ">my-workspace",
       ".git",
       "venv",
       ".venv",

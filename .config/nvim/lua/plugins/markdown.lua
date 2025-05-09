@@ -155,8 +155,4 @@ return {
       vim.cmd([[do FileType]])
     end,
   },
-  {
-    "lukas-reineke/headlines.nvim",
-    enabled = false,
-  },
 }

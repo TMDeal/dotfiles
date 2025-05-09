@@ -5,6 +5,9 @@ return {
       diagnostics = {
         virtual_text = {},
       },
+      inlay_hints = {
+        enabled = true,
+      },
     },
   },
 }

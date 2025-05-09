@@ -1,14 +1,14 @@
 return {
-  {
-    "linux-cultist/venv-selector.nvim",
-    opts = {
-      settings = {
-        options = {
-          notify_user_on_venv_activation = false,
-        },
-      },
-    },
-  },
+  -- {
+  --   "linux-cultist/venv-selector.nvim",
+  --   opts = {
+  --     settings = {
+  --       options = {
+  --         notify_user_on_venv_activation = false,
+  --       },
+  --     },
+  --   },
+  -- },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
@@ -38,7 +38,7 @@ return {
     "mfussenegger/nvim-lint",
     opts = {
       linters_by_ft = {
-        ["python"] = { "ruff" },
+        ["python"] = { "ruff", "mypy" },
         ["htmldjango"] = { "djlint" },
       },
     },

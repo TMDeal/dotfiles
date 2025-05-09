@@ -14,27 +14,9 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.filetype.add({
-  extension = {
-    gotmpl = "gotmpl",
-    jinja = "jinja",
-    jinja2 = "jinja",
-    j2 = "jinja",
-  },
-  pattern = {
-    [".*%.tmpl"] = "gotmpl",
-  },
-})
-
 require("lazy").setup({
   spec = {
-    {
-      "LazyVim/LazyVim",
-      import = "lazyvim.plugins",
-      opts = {
-        colorscheme = "nord",
-      },
-    },
+    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     { import = "plugins" },
   },
   defaults = {

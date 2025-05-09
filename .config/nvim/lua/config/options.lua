@@ -1,6 +1,7 @@
 local opt = vim.opt
 local g = vim.g
 
+g.root_spec = { ".projectroot", "lsp", ".git", "cwd" }
 opt.shell = "/bin/zsh"
 opt.inccommand = "split"
 opt.hlsearch = true
