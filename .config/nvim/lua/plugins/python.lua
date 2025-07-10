@@ -29,7 +29,7 @@ return {
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = {
-        ["python"] = { "ruff_format" },
+        ["python"] = { "ruff_fix", "ruff_format" },
         ["htmldjango"] = { "djlint" },
       },
     },
