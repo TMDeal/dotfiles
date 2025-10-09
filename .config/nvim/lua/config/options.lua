@@ -56,6 +56,7 @@ opt.termguicolors = true
 opt.spell = false
 opt.signcolumn = "auto"
 
+g.lazyvim_python_lsp = "pyright" -- Set to "basedpyright" to use basedpyright instead of pyright.
 g.mapleader = " " -- sets vim.g.mapleader
 g.autoformat_enabled = true -- enable or disable auto formatting at start (lsp.formatting.format_on_save must be enabled)
 g.cmp_enabled = true -- enable completion at start

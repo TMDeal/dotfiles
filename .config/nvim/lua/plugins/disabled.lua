@@ -4,7 +4,7 @@ return {
     enabled = false,
   },
   -- { "folke/noice.nvim", enabled = false },
-  { "echasnovski/mini.pairs", enabled = false },
-  { "echasnovski/mini.surround", enabled = false },
+  { "nvim-mini/mini.pairs", enabled = false },
+  { "nvim-mini/mini.surround", enabled = false },
   { "folke/flash.nvim", enabled = false },
 }
