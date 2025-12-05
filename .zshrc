@@ -200,6 +200,7 @@ alias sudop='sudo env "PATH=$PATH"'
 alias ipv4='curl -s -4 ifconfig.co/json | jq'
 alias ipv6='curl -s -6 ifconfig.co/json | jq'
 alias lg="lazygit"
+alias lss="ls"
 
 if $( command -v nvim > /dev/null ); then
    alias vim="nvim"
@@ -230,3 +231,5 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[ -f "/home/trent/.ghcup/env" ] && . "/home/trent/.ghcup/env" # ghcup-env
