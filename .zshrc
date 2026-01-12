@@ -201,6 +201,8 @@ alias ipv4='curl -s -4 ifconfig.co/json | jq'
 alias ipv6='curl -s -6 ifconfig.co/json | jq'
 alias lg="lazygit"
 alias lss="ls"
+alias upper="tr '[:lower:]' '[:upper:]'"
+alias lower="tr '[:upper:]' '[:lower:]'"
 
 if $( command -v nvim > /dev/null ); then
    alias vim="nvim"
